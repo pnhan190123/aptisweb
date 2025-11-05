@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptis Reading Practice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
+                <h1>Reading</h1>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <select id="part-selector" style="padding: 10px 20px; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; color: #2d3748; border: 2px solid rgba(255,255,255,0.3); cursor: pointer;">
+                        <option value="1">Part 1 - Sentence Completion</option>
+                        <option value="2">Part 2 - Text Cohesion</option>
+                        <option value="3">Part 3 - Text Cohesion</option>
+                        <option value="4">Part 4 - Opinion Matching</option>
+                        <option value="5">Part 5 - Long Text Comprehension</option>
+                    </select>
+                    <select id="exam-selector" style="padding: 10px 20px; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; color: #2d3748; border: 2px solid rgba(255,255,255,0.3); cursor: pointer;">
+                        <option value="0">Tất cả các đề</option>
+                        <option value="1">Đề 1</option>
+                        <option value="2">Đề 2</option>
+                        <option value="3">Đề 3</option>
+                        <option value="4">Đề 4</option>
+                        <option value="5">Đề 5</option>
+                        <option value="6">Đề 6</option>
+                        <option value="7">Đề 7</option>
+                        <option value="8">Đề 8</option>
+                        <option value="9">Đề 9</option>
+                        <option value="10">Đề 10</option>
+                    </select>
+                    <div id="mode-selector-container" style="display: none; gap: 10px; align-items: center;">
+                        <label style="color: white; font-weight: 600; font-size: 14px;">Chế độ:</label>
+                        <label style="color: white; cursor: pointer;">
+                            <input type="radio" name="practice-mode" value="by-exam" checked style="margin-right: 5px;">
+                            Giải theo đề
+                        </label>
+                        <label style="color: white; cursor: pointer;">
+                            <input type="radio" name="practice-mode" value="by-question" style="margin-right: 5px;">
+                            Giải theo câu hỏi
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-info">
+                <span id="question-counter">Question 1 of 5</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="question-section">
+            <div class="section-info" id="section-info">[Reading Part 1]</div>
+            
+            <!-- Part 1: Sentence Completion -->
+            <div id="part1" class="part active">
+                <div class="instructions">
+                    <p>Choose one word from the list for each gap. The first one is done for you.</p>
+                </div>
+                <div class="word-list" id="word-list1"></div>
+                <div class="sentences" id="sentences1"></div>
+                <div id="check-container1" style="margin-top: 20px;"></div>
+            </div>
+
+            <!-- Part 2: Text Cohesion (Select Order) -->
+            <div id="part2" class="part">
+                <div class="instructions">
+                    <p><strong>Put the sentences below in the right order. The first sentence is done for you.</strong></p>
+                </div>
+                <div class="passage-title" id="passage-title2"></div>
+                <div class="sentences-order-container" id="sentences2"></div>
+                <div id="check-container2" style="margin-top: 20px;"></div>
+            </div>
+
+            <!-- Part 3: Text Cohesion (Select Order) -->
+            <div id="part3" class="part">
+                <div class="instructions">
+                    <p><strong>Put the sentences below in the right order. The first sentence is done for you.</strong></p>
+                </div>
+                <div class="passage-title" id="passage-title3"></div>
+                <div class="sentences-order-container" id="sentences3"></div>
+                <div id="check-container3" style="margin-top: 20px;"></div>
+            </div>
+
+            <!-- Part 4: Opinion Matching -->
+            <div id="part4" class="part">
+                <div class="instructions">
+                    <p>Four people respond in the comments section of an online magazine article. Read the texts and then answer the questions below.</p>
+                </div>
+                <div class="opinions-container" id="opinions4"></div>
+                <div class="questions-container" id="questions4"></div>
+                <div id="check-container4" style="margin-top: 20px;"></div>
+            </div>
+
+            <!-- Part 5: Long Text Comprehension - Choose Heading -->
+            <div id="part5" class="part">
+                <div class="instructions">
+                    <p>Read the passage quickly. Choose a heading for each numbered paragraph (1-7). There is one more heading than you need.</p>
+                </div>
+                <div class="passage-title" id="passage-title5"></div>
+                <div class="paragraphs-container" id="paragraphs5"></div>
+                <div id="check-container5" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="load-btn" class="btn btn-info" style="margin-right: 10px;">Load</button>
+            <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
+            <button id="next-btn" class="btn btn-primary">Next</button>
+            <button id="submit-btn" class="btn btn-success" style="display: none;">Submit</button>
+        </div>
+
+        <div id="result-modal" class="modal">
+            <div class="modal-content">
+                <h2>Your Results</h2>
+                <div id="result-content"></div>
+                <button id="restart-btn" class="btn btn-primary">Restart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
