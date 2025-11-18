@@ -185,11 +185,11 @@ const exams = [
             passageTitle: "The famous singer",
             firstSentence: "Many people dream of becoming a famous singer, but only a few achieve it.",
             sentences: [
+                "He is a famous singer who is loved by many fans.",
                 "At the age of fifteen, he studied music at a special school.",
                 "Before becoming famous, he had to practice very hard every day.",
                 "With his unique style and clothes, he soon attracted attention.",
                 "Thanks to his talent and style, he became more and more famous and well-known.",
-                "He is a famous singer who is loved by many fans."
             ]
         },
         part3: {
@@ -280,9 +280,9 @@ const exams = [
             sentences: [
                 "Before writing about a place, you need to do some research on it.",
                 "It is important to learn about the people and the history there carefully.",
+                "Even if you cannot visit the place, your writing will still look similar to real experiences.",
                 "You should also compare that place with your own country.",
-                "Such comparisons will make your writing more interesting and meaningful.",
-                "Even if you cannot visit the place, your writing will still look similar to real experiences."
+                "Such comparisons will make your writing more interesting and meaningful."
             ]
         },
         part3: {
@@ -662,9 +662,9 @@ const exams = [
             passageTitle: "Tourism",
             firstSentence: "Tourism has changed significantly over time, from the way trips were planned in the past to the diverse experiences available today.",
             sentences: [
+                "Modern tourism now offers far more options than in the past.",
                 "In earlier times, travelers often relied mainly on guidebooks and paper maps.",
                 "However, limited technology back then also meant fewer booking options were available.",
-                "Modern tourism now offers far more options than in the past.",
                 "Today, online platforms make it much easier to plan carefully and book trips quickly.",
                 "In addition, local guides now offer personalized tours for visitors, creating more authentic experiences."
             ]
@@ -902,15 +902,15 @@ const exams = [
             ]
         },
         part3: {
-            title: `[Mai Hien key 6.0] - Reading plus - part 3 - Đề 10`,
-            passageTitle: "Healthy eating habits",
-            firstSentence: "Healthy eating is essential for maintaining good health and well-being.",
+            title: "[Mai Hien key 6.0] - Reading part 3 - Family Sport Day",
+            passageTitle: "Family Sport Day",
+            firstSentence: "It started early on Saturday morning with a ten-mile race for adults.",
             sentences: [
-                "A balanced diet includes a variety of fruits, vegetables, whole grains, and lean proteins.",
-                "It's important to limit processed foods and sugary drinks that can harm your health.",
-                "Regular meals and proper hydration help maintain energy levels throughout the day.",
-                "Planning meals ahead of time makes it easier to make healthy choices.",
-                "Remember, moderation is key - occasional treats are fine as part of a balanced lifestyle."
+                "It started early on Saturday morning with a ten-mile race for adults",
+                "Sixty men and women ran in this, and Ms Kamur won with a very fast time.",
+                "After receiving the prize, the children's activities and competitions began.",
+                "These activities included football, jumping, and swimming, and they had lots of fun.",
+                "They were all very hungry after all these, so they enjoyed tasty food and drinks with their parents."
             ]
         },
         part4: {
@@ -934,6 +934,165 @@ const exams = [
         },
         part5: {
             title: `[Mai Hien key 6.0] - Reading part 4 - Đề 10`,
+            passageTitle: "CULTURAL EXCHANGE",
+            instructions: "Read the passage quickly. Choose a heading for each numbered paragraph (1-7). There is one more heading than you need.",
+            headings: [
+                "Redefining global cultural understanding",
+                "Encouraging cross-cultural festivals",
+                "Promoting language exchange programs",
+                "Overemphasis on commercial tourism",
+                "Concerns about cultural preservation",
+                "Building mutual respect among communities",
+                "Focusing on authentic cultural experiences"
+            ],
+            paragraphs: [
+                { number: 1, text: "Cultural exchange has become increasingly important in our globalized world. As people from different backgrounds interact more frequently, there is a growing need to understand and appreciate diverse cultural perspectives. This understanding helps break down barriers and fosters international cooperation.", answer: "Redefining global cultural understanding" },
+                { number: 2, text: "Many communities organize festivals that celebrate their unique traditions while welcoming others to participate. These events provide opportunities for people to experience different foods, music, dances, and customs firsthand. Such celebrations create lasting memories and promote cross-cultural friendships.", answer: "Encouraging cross-cultural festivals" },
+                { number: 3, text: "Language is a key component of culture, and learning another language opens doors to understanding different worldviews. Many programs now connect native speakers with learners, allowing them to practice together and share cultural insights. These exchanges go beyond vocabulary and grammar, creating meaningful connections between people.", answer: "Promoting language exchange programs" },
+                { number: 4, text: "However, some critics argue that modern tourism often prioritizes profit over authentic cultural experiences. Tourist attractions may be overly commercialized, offering superficial representations of local culture designed to entertain rather than educate. This approach can distort the true essence of cultural traditions.", answer: "Overemphasis on commercial tourism" },
+                { number: 5, text: "There are legitimate concerns that rapid globalization might lead to the loss of unique cultural identities. As younger generations adopt global trends, traditional practices, languages, and customs risk being forgotten. Communities must find ways to preserve their heritage while embracing positive aspects of change.", answer: "Concerns about cultural preservation" },
+                { number: 6, text: "Successful cultural exchange requires mutual respect and open-mindedness. When people approach different cultures with genuine curiosity and respect, they build bridges rather than walls. This foundation of respect enables deeper understanding and creates harmonious relationships between diverse groups.", answer: "Building mutual respect among communities" },
+                { number: 7, text: "The most meaningful cultural exchanges happen when people engage with local communities in authentic settings. Instead of just visiting tourist sites, travelers are encouraged to participate in daily life, learn traditional crafts, and share meals with local families. These genuine interactions provide rich, transformative experiences.", answer: "Focusing on authentic cultural experiences" }
+            ]
+        }
+    },
+    // Đề 11
+    {
+        part1: {
+            title: `[Mai Hien key 6.0] - Reading part 1 - Đề 11`,
+            instructions: "Choose one word from the list for each gap. The first one is done for you.",
+            wordList: ["clear", "sun", "working", "enjoyable", "read"],
+            sentences: [
+                { text: "The water is so", gap: "clear", answer: "clear", after: "and I can see the fish." },
+                { text: "The", gap: "sun", answer: "sun", after: "is always out and it's very hot." },
+                { text: "After", gap: "working", answer: "working", after: "so hard, I need to rest." },
+                { text: "I am having an", gap: "enjoyable", answer: "enjoyable", after: "holiday." },
+                { text: "Hope to", gap: "read", answer: "read", after: "a letter from you soon." }
+            ]
+        },
+        part2: {
+            title: "[Mai Hien key 6.0] - Reading part 2 - End Term projects",
+            passageTitle: "End Term projects",
+            firstSentence: "For end of term project, you need to choose at least 2 of these.",
+            sentences: [
+                "It needs to include relevant images and your own text about the topic.",
+                "Then you need to use images and written work to create a presentation.",
+                "Your presentation offer your key points and you have around 5 minutes to talk.",
+                "After this time, other students are able to ask questions and you need to answer them."
+            ]
+        },
+        part3: {
+            title: "[Mai Hien key 6.0] - Reading part 2 - College Welcoming Day",
+            passageTitle: "College Welcoming Day",
+            firstSentence: "The day starts at 10 a.m in the morning with a short presentation.",
+            sentences: [
+                "The day starts at 10 a.m in the morning with a short presentation.",
+                "At the end of this talk, you will meet the heads of departments and teachers.",
+                "These staff members will give you a guided tour in the buildings and our sport facilities in small groups.",
+                "During this visit, you will need to stay with these students until lunch break.",
+                "This meal will be provided on the second floor of the engineering building."
+            ]
+        },
+        part4: {
+            title: `[Mai Hien key 6.0] - Reading part 3 - Đề 11`,
+            instructions: "Four people respond in the comments section of an online magazine article about childhood memories. Read the texts and then answer the questions below.",
+            opinions: [
+                { person: "Person A", text: "Growing up, I loved listening to my grandfather's folktales by the fireplace. Those stories taught me the value of imagination. Nowadays, I share stories with my nieces using interactive storybooks on tablets. I appreciate how tradition blends with modern technology for intergenerational storytelling." },
+                { person: "Person B", text: "I remember riding my bike through the village with friends, feeling free and independent. Those adventures were unforgettable. Today's children spend more time indoors with screens. I miss those carefree outdoor days and the value of friendship and the outdoors." },
+                { person: "Person C", text: "As a child, I was passionate about sketching animals, trees, and landscapes with crayons and pencils. That passion evolved into my career as a graphic designer. Now I use digital tools for precision, but the creative feeling remains the same. Drawing has always been my source of happiness and expression." },
+                { person: "Person D", text: "Growing up, I loved camping trips in the countryside with my family. We set up tents, cooked outdoors, and spent hours staring at the stars. Those experiences made me feel close to nature and gave me lasting memories. Of course, bad weather sometimes forced us to stay indoors, which always left me a little disappointed. Nowadays, instead of outdoor adventures, I enjoy visiting museums and exhibitions. Learning about history through artifacts and stories gives me the same sense of wonder, but in a calmer and more comfortable environment." }
+            ],
+            questions: [
+                { question: "Who loved camping as a child?", answer: "Person D" },
+                { question: "Who enjoys storytelling with family?", answer: "Person A" },
+                { question: "Who loved drawing as a child?", answer: "Person C" },
+                { question: "Who loved bike riding as a child?", answer: "Person B" },
+                { question: "Who now enjoys graphic design?", answer: "Person C" },
+                { question: "Who finds modern books more engaging?", answer: "Person A" },
+                { question: "Who now prefers museum visits?", answer: "Person D" }
+            ]
+        },
+        part5: {
+            title: `[Mai Hien key 6.0] - Reading part 4 - Đề 11`,
+            passageTitle: "CULTURAL EXCHANGE",
+            instructions: "Read the passage quickly. Choose a heading for each numbered paragraph (1-7). There is one more heading than you need.",
+            headings: [
+                "Redefining global cultural understanding",
+                "Encouraging cross-cultural festivals",
+                "Promoting language exchange programs",
+                "Overemphasis on commercial tourism",
+                "Concerns about cultural preservation",
+                "Building mutual respect among communities",
+                "Focusing on authentic cultural experiences"
+            ],
+            paragraphs: [
+                { number: 1, text: "Cultural exchange has become increasingly important in our globalized world. As people from different backgrounds interact more frequently, there is a growing need to understand and appreciate diverse cultural perspectives. This understanding helps break down barriers and fosters international cooperation.", answer: "Redefining global cultural understanding" },
+                { number: 2, text: "Many communities organize festivals that celebrate their unique traditions while welcoming others to participate. These events provide opportunities for people to experience different foods, music, dances, and customs firsthand. Such celebrations create lasting memories and promote cross-cultural friendships.", answer: "Encouraging cross-cultural festivals" },
+                { number: 3, text: "Language is a key component of culture, and learning another language opens doors to understanding different worldviews. Many programs now connect native speakers with learners, allowing them to practice together and share cultural insights. These exchanges go beyond vocabulary and grammar, creating meaningful connections between people.", answer: "Promoting language exchange programs" },
+                { number: 4, text: "However, some critics argue that modern tourism often prioritizes profit over authentic cultural experiences. Tourist attractions may be overly commercialized, offering superficial representations of local culture designed to entertain rather than educate. This approach can distort the true essence of cultural traditions.", answer: "Overemphasis on commercial tourism" },
+                { number: 5, text: "There are legitimate concerns that rapid globalization might lead to the loss of unique cultural identities. As younger generations adopt global trends, traditional practices, languages, and customs risk being forgotten. Communities must find ways to preserve their heritage while embracing positive aspects of change.", answer: "Concerns about cultural preservation" },
+                { number: 6, text: "Successful cultural exchange requires mutual respect and open-mindedness. When people approach different cultures with genuine curiosity and respect, they build bridges rather than walls. This foundation of respect enables deeper understanding and creates harmonious relationships between diverse groups.", answer: "Building mutual respect among communities" },
+                { number: 7, text: "The most meaningful cultural exchanges happen when people engage with local communities in authentic settings. Instead of just visiting tourist sites, travelers are encouraged to participate in daily life, learn traditional crafts, and share meals with local families. These genuine interactions provide rich, transformative experiences.", answer: "Focusing on authentic cultural experiences" }
+            ]
+        }
+    },
+    // Đề 12
+    {
+        part1: {
+            title: "[Mai Hien key 6.0] - Reading part 1 - Đề 12",
+            instructions: "Choose one word from the list for each gap. The first one is done for you.",
+            wordList: ["station", "stops", "green", "dinner", "films"],
+            sentences: [
+                { text: "Tomorrow, I have to go to the main bus", gap: "station", answer: "station", after: "to meet my cousin." },
+                { text: "Luckily, one of the bus", gap: "stops", answer: "stops", after: "is very close to my house." },
+                { text: "My house is easy to find - it's", gap: "green", answer: "green", after: "and stands out from the others." },
+                { text: "This evening I'll make some eggs for", gap: "dinner", answer: "dinner", after: "because it's quick and simple." },
+                { text: "After that, we can relax and watch some", gap: "films", answer: "films", after: "together on TV." }
+            ]
+        },
+        part2: {
+            title: "[Mai Hien key 6.0] - Reading part 2 - Music show at the park",
+            passageTitle: "Music show at the park",
+            firstSentence: "The local authority planned, sponsored, and paid for everything.",
+            sentences: [
+                "Because of this, it was free and five thousand people attended it.",
+                "Many of them arrived early and visited nearby shops while they were waiting for it to begin.",
+                "The staff there had a busy day, but they were able to close early and watch the famous singer perform.",
+                "He performed for two hours and everyone had great fun."
+            ]
+        },
+        part3: {
+            title: "[Mai Hien key 6.0] - Reading part 2 - A singer",
+            passageTitle: "A singer",
+            firstSentence: "Before becoming famous at a young age, he studied art and music at high school.",
+            sentences: [
+                "During this education, he started to perform on stage.",
+                "During his performances on stage, he likes to wear colorful clothes and paint his face.",
+                "This strange ways of dressing and his songs attracted people's attention.",
+                "They started to follow him on social media and he is now very famous."
+            ]
+        },
+        part4: {
+            title: `[Mai Hien key 6.0] - Reading part 3 - Đề 12`,
+            instructions: "Four people respond in the comments section of an online magazine article about childhood memories. Read the texts and then answer the questions below.",
+            opinions: [
+                { person: "Person A", text: "Growing up, I loved listening to my grandfather's folktales by the fireplace. Those stories taught me the value of imagination. Nowadays, I share stories with my nieces using interactive storybooks on tablets. I appreciate how tradition blends with modern technology for intergenerational storytelling." },
+                { person: "Person B", text: "I remember riding my bike through the village with friends, feeling free and independent. Those adventures were unforgettable. Today's children spend more time indoors with screens. I miss those carefree outdoor days and the value of friendship and the outdoors." },
+                { person: "Person C", text: "As a child, I was passionate about sketching animals, trees, and landscapes with crayons and pencils. That passion evolved into my career as a graphic designer. Now I use digital tools for precision, but the creative feeling remains the same. Drawing has always been my source of happiness and expression." },
+                { person: "Person D", text: "Growing up, I loved camping trips in the countryside with my family. We set up tents, cooked outdoors, and spent hours staring at the stars. Those experiences made me feel close to nature and gave me lasting memories. Of course, bad weather sometimes forced us to stay indoors, which always left me a little disappointed. Nowadays, instead of outdoor adventures, I enjoy visiting museums and exhibitions. Learning about history through artifacts and stories gives me the same sense of wonder, but in a calmer and more comfortable environment." }
+            ],
+            questions: [
+                { question: "Who loved camping as a child?", answer: "Person D" },
+                { question: "Who enjoys storytelling with family?", answer: "Person A" },
+                { question: "Who loved drawing as a child?", answer: "Person C" },
+                { question: "Who loved bike riding as a child?", answer: "Person B" },
+                { question: "Who now enjoys graphic design?", answer: "Person C" },
+                { question: "Who finds modern books more engaging?", answer: "Person A" },
+                { question: "Who now prefers museum visits?", answer: "Person D" }
+            ]
+        },
+        part5: {
+            title: `[Mai Hien key 6.0] - Reading part 4 - Đề 12`,
             passageTitle: "CULTURAL EXCHANGE",
             instructions: "Read the passage quickly. Choose a heading for each numbered paragraph (1-7). There is one more heading than you need.",
             headings: [

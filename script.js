@@ -5,6 +5,122 @@ let currentExam = 1;
 let practiceMode = 'by-exam'; // 'by-exam' or 'by-question'
 let allExamsMode = false;
 let currentItemIndex = 0; // For navigation in all exams mode
+let shuffleMode = false; // Trộn ngẫu nhiên
+let shuffledPartsOrder = [1, 2, 3, 4, 5]; // Thứ tự các part đã trộn
+let shuffledExamsOrder = []; // Thứ tự các đề đã trộn
+let currentPartIndex = 0; // Index trong mảng shuffledPartsOrder
+let currentExamIndex = 0; // Index trong mảng shuffledExamsOrder
+
+// Hàm hiển thị kết quả check trong modal
+function showCheckResults(partNumber, examData, examNumber, results) {
+    const modal = document.getElementById('result-modal');
+    const resultContent = document.getElementById('result-content');
+    
+    let correctCount = 0;
+    let totalCount = results.length;
+    results.forEach(r => { if (r.isCorrect) correctCount++; });
+    
+    const percentage = Math.round((correctCount / totalCount) * 100);
+    
+    // Calculate score by part
+    const partScores = {};
+    const partTotals = {};
+    results.forEach(result => {
+        if (!partScores[result.part]) {
+            partScores[result.part] = 0;
+            partTotals[result.part] = 0;
+        }
+        partTotals[result.part]++;
+        if (result.isCorrect) {
+            partScores[result.part]++;
+        }
+    });
+    
+    // Get grade
+    let grade = '';
+    let gradeColor = '';
+    if (percentage >= 90) {
+        grade = 'Excellent!';
+        gradeColor = '#48bb78';
+    } else if (percentage >= 80) {
+        grade = 'Very Good!';
+        gradeColor = '#38a169';
+    } else if (percentage >= 70) {
+        grade = 'Good!';
+        gradeColor = '#667eea';
+    } else if (percentage >= 60) {
+        grade = 'Fair';
+        gradeColor = '#f6ad55';
+    } else {
+        grade = 'Need Improvement';
+        gradeColor = '#fc8181';
+    }
+    
+    const examTitle = examNumber ? `<h2 style="margin-bottom: 20px; color: #2d3748;">Đề ${examNumber} - Part ${partNumber}</h2>` : `<h2 style="margin-bottom: 20px; color: #2d3748;">Part ${partNumber}</h2>`;
+    
+    resultContent.innerHTML = `
+        ${examTitle}
+        <div class="score-container">
+            <div class="score-main">
+                <div class="score-number">${correctCount} / ${totalCount}</div>
+                <div class="score-percentage">${percentage}%</div>
+                <div class="score-grade" style="color: ${gradeColor}">${grade}</div>
+            </div>
+            <div class="score-by-part">
+                <h3>Score by Part:</h3>
+                ${Object.keys(partScores).map(part => {
+                    const partScore = partScores[part];
+                    const partTotal = partTotals[part];
+                    const partPercent = Math.round((partScore / partTotal) * 100);
+                    return `
+                        <div class="part-score-item">
+                            <span class="part-label">Part ${part}:</span>
+                            <span class="part-score">${partScore}/${partTotal}</span>
+                            <span class="part-percent">(${partPercent}%)</span>
+                            <div class="part-progress-bar">
+                                <div class="part-progress-fill" style="width: ${partPercent}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+        <div class="results-detail">
+            <h3>Detailed Results:</h3>
+            <div class="results-list">
+                ${results.map(result => `
+                    <div class="result-item ${result.isCorrect ? 'correct' : 'incorrect'}">
+                        <div class="result-header">
+                            <span class="result-part">Part ${result.part}</span>
+                            <span class="result-status ${result.isCorrect ? 'correct-icon' : 'incorrect-icon'}">
+                                ${result.isCorrect ? '✓' : '✗'}
+                            </span>
+                        </div>
+                        <div class="result-question">${result.question}</div>
+                        <div class="result-answers">
+                            <div class="result-answer">
+                                <strong>Your answer:</strong> ${result.userAnswer}
+                            </div>
+                            ${!result.isCorrect ? `
+                                <div class="result-answer correct-answer">
+                                    <strong>Correct answer:</strong> ${result.correctAnswer}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    // Xóa nút Next Exam cũ nếu có (tránh trùng lặp)
+    const existingNextExamBtn = document.getElementById('next-exam-modal-btn');
+    if (existingNextExamBtn) {
+        existingNextExamBtn.remove();
+    }
+    
+    modal.classList.add('active');
+}
 
 // Helper function to create check button for a part
 function createCheckButton(partNumber, examData, examNumber, containerId) {
@@ -18,68 +134,127 @@ function createCheckButton(partNumber, examData, examNumber, containerId) {
     checkBtn.textContent = 'Check đáp án';
     checkBtn.style.cssText = 'width: 100%; padding: 12px; font-size: 16px;';
     
-    const checkResult = document.createElement('div');
-    checkResult.className = 'check-result';
-    checkResult.style.cssText = 'margin-top: 15px;';
-    
     checkBtn.addEventListener('click', function() {
-        let correctCount = 0;
-        let totalCount = 0;
-        let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
+        let results = [];
         
         if (partNumber === 1) {
-            const answerKey = examNumber ? `part1_exam${examNumber}` : 'part1';
+            const answerKey = examNumber ? `part1_exam${examNumber}` : `part1_exam${currentExam}`;
             examData.sentences.forEach((sentence, index) => {
-                totalCount++;
                 const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][index];
                 const isCorrect = userAnswer === sentence.answer;
-                if (isCorrect) correctCount++;
-                resultsHTML += `<li style="margin-bottom: 8px;">Câu ${index + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${sentence.answer})`}</li>`;
+                results.push({
+                    part: partNumber,
+                    examNumber: examNumber || currentExam,
+                    question: `${sentence.text} [${sentence.answer}] ${sentence.after}`,
+                    userAnswer: userAnswer || 'No answer',
+                    correctAnswer: sentence.answer,
+                    isCorrect
+                });
             });
         } else if (partNumber === 2 || partNumber === 3) {
-            const answerKey = examNumber ? `part${partNumber}_exam${examNumber}` : `part${partNumber}`;
+            const answerKey = examNumber ? `part${partNumber}_exam${examNumber}` : `part${partNumber}_exam${currentExam}`;
+            const container = document.getElementById(`sentences${partNumber}`);
+            const draggableItems = container.querySelectorAll('.draggable');
+            const currentOrder = {};
+            draggableItems.forEach((el, position) => {
+                const originalIndex = parseInt(el.dataset.originalIndex);
+                currentOrder[originalIndex] = position + 1;
+            });
+            
             examData.sentences.forEach((sentence, originalIndex) => {
-                totalCount++;
-                const userOrder = userAnswers[answerKey] && userAnswers[answerKey][originalIndex];
+                const userOrder = currentOrder[originalIndex];
                 const correctOrder = originalIndex + 1;
                 const isCorrect = userOrder === correctOrder;
-                if (isCorrect) correctCount++;
-                resultsHTML += `<li style="margin-bottom: 8px;">Câu ${originalIndex + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: Thứ tự ${correctOrder})`}</li>`;
+                results.push({
+                    part: partNumber,
+                    examNumber: examNumber || currentExam,
+                    question: `Sentence ${originalIndex + 1}: ${sentence}`,
+                    userAnswer: userOrder ? `Order ${userOrder}` : 'No answer',
+                    correctAnswer: `Order ${correctOrder}`,
+                    isCorrect
+                });
             });
         } else if (partNumber === 4) {
-            const answerKey = examNumber ? `part4_exam${examNumber}` : 'part4';
+            const answerKey = examNumber ? `part4_exam${examNumber}` : `part4_exam${currentExam}`;
             examData.questions.forEach((q, index) => {
-                totalCount++;
                 const userAnswer = userAnswers[answerKey] && (Array.isArray(userAnswers[answerKey]) ? userAnswers[answerKey][index] : userAnswers[answerKey][index]);
                 const isCorrect = userAnswer === q.answer;
-                if (isCorrect) correctCount++;
-                resultsHTML += `<li style="margin-bottom: 8px;">Câu ${index + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${q.answer})`}</li>`;
+                results.push({
+                    part: partNumber,
+                    examNumber: examNumber || currentExam,
+                    question: q.question,
+                    userAnswer: userAnswer || 'No answer',
+                    correctAnswer: q.answer,
+                    isCorrect
+                });
             });
         } else if (partNumber === 5) {
-            const answerKey = examNumber ? `part5_exam${examNumber}` : 'part5';
+            const answerKey = examNumber ? `part5_exam${examNumber}` : `part5_exam${currentExam}`;
             examData.paragraphs.forEach(para => {
-                totalCount++;
                 const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][para.number];
                 const isCorrect = userAnswer === para.answer;
-                if (isCorrect) correctCount++;
-                resultsHTML += `<li style="margin-bottom: 8px;">Paragraph ${para.number}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${para.answer})`}</li>`;
+                results.push({
+                    part: partNumber,
+                    examNumber: examNumber || currentExam,
+                    question: `Paragraph ${para.number}`,
+                    userAnswer: userAnswer || 'No answer',
+                    correctAnswer: para.answer,
+                    isCorrect
+                });
             });
         }
         
-        resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-        
-        checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-        checkResult.innerHTML = resultsHTML;
+        showCheckResults(partNumber, examData, examNumber || currentExam, results);
     });
     
     checkContainer.appendChild(checkBtn);
-    checkContainer.appendChild(checkResult);
+}
+
+// Page navigation functions
+function showHome() {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById('home-page').classList.add('active');
+}
+
+// Make showHome available globally for inline onclick handlers
+window.showHome = showHome;
+
+let readingInitialized = false;
+
+function showSkill(skill) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    const skillPage = document.getElementById(`${skill}-page`);
+    if (skillPage) {
+        skillPage.classList.add('active');
+        
+        // Initialize Reading page if not already initialized
+        if (skill === 'reading' && !readingInitialized) {
+            setupEventListeners();
+            generateShuffledOrder(); // Initialize shuffled order
+            loadExam(1);
+            readingInitialized = true;
+        }
+    }
 }
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-    setupEventListeners();
-    loadExam(1);
+    // Setup skill card navigation
+    document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const skill = this.getAttribute('data-skill');
+            showSkill(skill);
+        });
+    });
+
+    // Setup home button
+    const homeBtn = document.getElementById('home-btn');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', showHome);
+    }
+
+    // Show home page by default
+    showHome();
 });
 
 function loadExam(examNumber) {
@@ -97,17 +272,75 @@ function loadExam(examNumber) {
     const selectedPart = partSelector ? parseInt(partSelector.value) : 1;
     currentPart = selectedPart;
     document.getElementById('exam-selector').value = examNumber;
+    
+    // Generate shuffled order if needed
+    generateShuffledOrder();
+    
     loadPart(selectedPart);
 }
 
+// Hàm tạo thứ tự trộn ngẫu nhiên
+function generateShuffledOrder() {
+    // Luôn giữ thứ tự part 1-5, không trộn
+    shuffledPartsOrder = [1, 2, 3, 4, 5];
+    currentPartIndex = shuffledPartsOrder.indexOf(currentPart);
+    if (currentPartIndex === -1) currentPartIndex = 0;
+    
+    if (shuffleMode) {
+        // Chỉ trộn các đề khi ở all exams mode
+        if (allExamsMode) {
+            shuffledExamsOrder = Array.from({length: exams.length}, (_, i) => i + 1)
+                .sort(() => Math.random() - 0.5);
+            currentExamIndex = shuffledExamsOrder.indexOf(currentExam);
+            if (currentExamIndex === -1) currentExamIndex = 0;
+        }
+    } else {
+        // Không trộn - thứ tự bình thường
+        if (allExamsMode) {
+            shuffledExamsOrder = Array.from({length: exams.length}, (_, i) => i + 1);
+            currentExamIndex = shuffledExamsOrder.indexOf(currentExam);
+            if (currentExamIndex === -1) currentExamIndex = 0;
+        }
+    }
+}
+
 function setupEventListeners() {
-    document.getElementById('load-btn').addEventListener('click', function() {
-        loadPart(currentPart);
-    });
     document.getElementById('next-btn').addEventListener('click', nextPart);
     document.getElementById('prev-btn').addEventListener('click', prevPart);
     document.getElementById('submit-btn').addEventListener('click', submitAnswers);
     document.getElementById('restart-btn').addEventListener('click', restart);
+    
+    // Next Exam button
+    const nextExamBtn = document.getElementById('next-exam-btn');
+    if (nextExamBtn) {
+        nextExamBtn.addEventListener('click', function() {
+            if (currentExam < exams.length) {
+                const nextExam = currentExam + 1;
+                // Reset answers for new exam
+                userAnswers = {};
+                // Close modal if open
+                document.getElementById('result-modal').classList.remove('active');
+            // Load next exam
+            loadExam(nextExam);
+            // Reset to first part (luôn là Part 1)
+            currentPart = 1;
+            currentPartIndex = 0;
+            loadPart(currentPart);
+            }
+        });
+    }
+    
+    // Close modal button
+    document.getElementById('close-modal-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    document.getElementById('result-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
     document.getElementById('exam-selector').addEventListener('change', function() {
         const examValue = parseInt(this.value);
         const modeContainer = document.getElementById('mode-selector-container');
@@ -133,6 +366,8 @@ function setupEventListeners() {
         if (!isNaN(selectedPart) && selectedPart >= 1 && selectedPart <= 5) {
             if (selectedPart !== currentPart) {
                 currentPart = selectedPart;
+                // Update index (luôn giữ thứ tự part 1-5)
+                currentPartIndex = selectedPart - 1;
                 if (allExamsMode) {
                     currentItemIndex = 0;
                 }
@@ -150,6 +385,21 @@ function setupEventListeners() {
             }
         });
     });
+    
+    // Shuffle toggle
+    const shuffleToggle = document.getElementById('shuffle-toggle');
+    if (shuffleToggle) {
+        shuffleToggle.addEventListener('change', function() {
+            shuffleMode = this.checked;
+            generateShuffledOrder();
+            loadPart(currentPart);
+            if (allExamsMode) {
+                loadExam(0); // Reload all exams
+            } else {
+                loadExam(currentExam);
+            }
+        });
+    }
 }
 
 function loadPart(partNumber) {
@@ -218,12 +468,23 @@ function loadPart(partNumber) {
 
 function updateProgress() {
     if (allExamsMode) {
-        const totalItems = getAllExamItemsCount(currentPart);
-        const progress = totalItems > 0 ? ((currentItemIndex + 1) / totalItems) * 100 : 0;
-        document.getElementById('progress-fill').style.width = `${progress}%`;
-        const itemInfo = getCurrentItemInfo();
-        document.getElementById('question-counter').textContent = itemInfo || `Item ${currentItemIndex + 1} of ${totalItems}`;
+        if (shuffleMode && practiceMode === 'by-exam') {
+            // Trong chế độ trộn và giải theo đề (giữ thứ tự part 1-5)
+            const totalExams = shuffledExamsOrder.length;
+            const totalItems = totalExams * totalParts;
+            const currentItem = ((currentPart - 1) * totalExams) + currentExamIndex + 1;
+            const progress = totalItems > 0 ? (currentItem / totalItems) * 100 : 0;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('question-counter').textContent = `Đề ${currentExam} - Part ${currentPart} (${currentItem}/${totalItems})`;
+        } else {
+            const totalItems = getAllExamItemsCount(currentPart);
+            const progress = totalItems > 0 ? ((currentItemIndex + 1) / totalItems) * 100 : 0;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            const itemInfo = getCurrentItemInfo();
+            document.getElementById('question-counter').textContent = itemInfo || `Item ${currentItemIndex + 1} of ${totalItems}`;
+        }
     } else {
+        // Single exam mode - luôn giữ thứ tự part 1-5
         const progress = (currentPart / totalParts) * 100;
         document.getElementById('progress-fill').style.width = `${progress}%`;
         document.getElementById('question-counter').textContent = `Question ${currentPart} of ${totalParts}`;
@@ -390,21 +651,51 @@ function updateButtons() {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const submitBtn = document.getElementById('submit-btn');
+    const nextExamBtn = document.getElementById('next-exam-btn');
 
     if (allExamsMode) {
-        // Khi ở chế độ "Tất cả các đề", load tất cả cùng lúc nên luôn hiển thị Submit
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        submitBtn.style.display = 'inline-block';
+        if (shuffleMode && practiceMode === 'by-exam') {
+            // Chế độ trộn và giải theo đề (giữ thứ tự part 1-5)
+            const isFirst = currentPart === 1 && currentExamIndex === 0;
+            const isLast = currentPart === totalParts && 
+                         currentExamIndex === shuffledExamsOrder.length - 1;
+            
+            prevBtn.disabled = isFirst;
+            prevBtn.style.display = 'inline-block';
+            
+            if (isLast) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            }
+            nextExamBtn.style.display = 'none';
+        } else {
+            // Khi ở chế độ "Tất cả các đề" (không trộn hoặc giải theo câu hỏi), load tất cả cùng lúc nên luôn hiển thị Submit
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'inline-block';
+            nextExamBtn.style.display = 'none';
+        }
     } else {
-        // Chế độ một đề cụ thể
+        // Chế độ một đề cụ thể - luôn giữ thứ tự part 1-5
+        const hasNextExam = currentExam < exams.length;
+        
         prevBtn.disabled = currentPart === 1;
         if (currentPart === totalParts) {
             nextBtn.style.display = 'none';
-            submitBtn.style.display = 'inline-block';
+            if (hasNextExam) {
+                submitBtn.style.display = 'inline-block';
+                nextExamBtn.style.display = 'inline-block';
+            } else {
+                submitBtn.style.display = 'inline-block';
+                nextExamBtn.style.display = 'none';
+            }
         } else {
             nextBtn.style.display = 'inline-block';
             submitBtn.style.display = 'none';
+            nextExamBtn.style.display = 'none';
         }
     }
 }
@@ -535,33 +826,28 @@ function loadPart1() {
             checkBtn.style.cssText = 'margin-top: 20px; width: 100%; padding: 12px; font-size: 16px;';
             checkBtn.dataset.examNumber = examData.examNumber;
             
-            const checkResult = document.createElement('div');
-            checkResult.className = 'check-result';
-            checkResult.style.cssText = 'margin-top: 15px;';
-            
             checkBtn.addEventListener('click', function() {
                 const answerKey = `part1_exam${examData.examNumber}`;
-                let correctCount = 0;
-                let totalCount = examData.sentences.length;
-                let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
+                let results = [];
                 
                 examData.sentences.forEach((sentence, index) => {
                     const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][index];
                     const isCorrect = userAnswer === sentence.answer;
-                    if (isCorrect) correctCount++;
-                    
-                    resultsHTML += `<li style="margin-bottom: 8px;">Câu ${index + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${sentence.answer})`}</li>`;
+                    results.push({
+                        part: 1,
+                        examNumber: examData.examNumber,
+                        question: `${sentence.text} [${sentence.answer}] ${sentence.after}`,
+                        userAnswer: userAnswer || 'No answer',
+                        correctAnswer: sentence.answer,
+                        isCorrect
+                    });
                 });
                 
-                resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-                
-                checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-                checkResult.innerHTML = resultsHTML;
+                showCheckResults(1, examData, examData.examNumber, results);
             });
             
             const checkContainer = document.createElement('div');
             checkContainer.appendChild(checkBtn);
-            checkContainer.appendChild(checkResult);
             examSection.appendChild(checkContainer);
             
             sentencesContainer.appendChild(examSection);
@@ -626,13 +912,15 @@ function loadPart1() {
             gap.value = sentence.answer;
             gap.classList.add('filled');
             gap.disabled = true;
-            if (!userAnswers.part1) userAnswers.part1 = [];
-            userAnswers.part1[0] = sentence.answer;
+            const answerKey = `part1_exam${currentExam}`;
+            if (!userAnswers[answerKey]) userAnswers[answerKey] = [];
+            userAnswers[answerKey][0] = sentence.answer;
         }
         
         gap.addEventListener('change', function() {
-            if (!userAnswers.part1) userAnswers.part1 = [];
-            userAnswers.part1[index] = this.value;
+            const answerKey = `part1_exam${currentExam}`;
+            if (!userAnswers[answerKey]) userAnswers[answerKey] = [];
+            userAnswers[answerKey][index] = this.value;
             if (this.value) {
                 this.classList.add('filled');
             } else {
@@ -656,8 +944,9 @@ function loadPart1() {
     });
 
     // Load saved answers
-    if (userAnswers.part1) {
-        userAnswers.part1.forEach((answer, index) => {
+    const answerKey = `part1_exam${currentExam}`;
+    if (userAnswers[answerKey]) {
+        userAnswers[answerKey].forEach((answer, index) => {
             const select = document.querySelector(`#sentences1 .sentence-gap-select[data-index="${index}"]`);
             if (select && answer) {
                 select.value = answer;
@@ -681,30 +970,30 @@ function loadPart1() {
         checkResult.style.cssText = 'margin-top: 15px;';
         
         checkBtn.addEventListener('click', function() {
-            let correctCount = 0;
-            let totalCount = data.sentences.length;
-            let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
+            const answerKey = `part1_exam${currentExam}`;
+            let results = [];
             
             data.sentences.forEach((sentence, index) => {
-                const userAnswer = userAnswers.part1 && userAnswers.part1[index];
+                const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][index];
                 const isCorrect = userAnswer === sentence.answer;
-                if (isCorrect) correctCount++;
-                
-                resultsHTML += `<li style="margin-bottom: 8px;">Câu ${index + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${sentence.answer})`}</li>`;
+                results.push({
+                    part: 1,
+                    examNumber: currentExam,
+                    question: `${sentence.text} [${sentence.answer}] ${sentence.after}`,
+                    userAnswer: userAnswer || 'No answer',
+                    correctAnswer: sentence.answer,
+                    isCorrect
+                });
             });
             
-            resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-            
-            checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-            checkResult.innerHTML = resultsHTML;
+            showCheckResults(1, data, currentExam, results);
         });
         
         checkContainer.appendChild(checkBtn);
-        checkContainer.appendChild(checkResult);
     }
 }
 
-// Part 2: Text Cohesion (Select Order)
+// Part 2: Text Cohesion (Drag and Drop)
 function loadPart2() {
     const data = getPartData(2);
     if (!data) {
@@ -730,6 +1019,7 @@ function loadPart2() {
             examSection.appendChild(examTitle);
             
             const examContainer = document.createElement('div');
+            examContainer.className = 'drag-drop-container';
             
             // Add first sentence (fixed)
             const firstSentence = document.createElement('div');
@@ -747,48 +1037,34 @@ function loadPart2() {
                 correctOrder: index + 1
             })).sort(() => Math.random() - 0.5);
 
-            // Create sentence items with order selector
-            shuffledSentences.forEach((item) => {
+            // Create draggable sentence items
+            shuffledSentences.forEach((item, displayIndex) => {
                 const sentenceEl = document.createElement('div');
-                sentenceEl.className = 'sentence-order-item';
+                sentenceEl.className = 'sentence-order-item draggable';
+                sentenceEl.draggable = true;
                 sentenceEl.dataset.originalIndex = item.originalIndex;
                 sentenceEl.dataset.correctOrder = item.correctOrder;
-                
-                const select = document.createElement('select');
-                select.className = 'order-select';
-                select.dataset.originalIndex = item.originalIndex;
-                select.dataset.examNumber = examData.examNumber;
-                
-                for (let i = 1; i <= examData.sentences.length; i++) {
-                    const option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-                    select.appendChild(option);
-                }
-                
-                select.addEventListener('change', function() {
-                    const answerKey = `part2_exam${examData.examNumber}`;
-                    if (!userAnswers[answerKey]) userAnswers[answerKey] = {};
-                    userAnswers[answerKey][item.originalIndex] = parseInt(this.value);
-                });
+                sentenceEl.dataset.examNumber = examData.examNumber;
                 
                 sentenceEl.innerHTML = `
+                    <span class="drag-handle">☰</span>
+                    <span class="order-number">${displayIndex + 1}</span>
                     <span class="sentence-text">${item.sentence}</span>
                 `;
-                sentenceEl.appendChild(select);
+                
+                // Drag event handlers
+                sentenceEl.addEventListener('dragstart', handleDragStart);
+                sentenceEl.addEventListener('dragend', handleDragEnd);
+                sentenceEl.addEventListener('dragover', handleDragOver);
+                sentenceEl.addEventListener('drop', handleDrop);
+                sentenceEl.addEventListener('dragenter', handleDragEnter);
+                sentenceEl.addEventListener('dragleave', handleDragLeave);
+                
                 examContainer.appendChild(sentenceEl);
             });
 
-            // Load saved answers
-            const answerKey = `part2_exam${examData.examNumber}`;
-            if (userAnswers[answerKey]) {
-                Object.keys(userAnswers[answerKey]).forEach(originalIndex => {
-                    const select = examContainer.querySelector(`select[data-exam-number="${examData.examNumber}"][data-original-index="${originalIndex}"]`);
-                    if (select) {
-                        select.value = userAnswers[answerKey][originalIndex];
-                    }
-                });
-            }
+            // Update order numbers after initial render
+            updateOrderNumbers(examContainer);
             
             examSection.appendChild(examContainer);
             
@@ -799,30 +1075,34 @@ function loadPart2() {
             checkBtn.textContent = 'Check đáp án';
             checkBtn.style.cssText = 'margin-top: 20px; width: 100%; padding: 12px; font-size: 16px;';
             
-            const checkResult = document.createElement('div');
-            checkResult.className = 'check-result';
-            checkResult.style.cssText = 'margin-top: 15px;';
-            
             checkBtn.addEventListener('click', function() {
-                let correctCount = 0;
-                let totalCount = examData.sentences.length;
-                let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
-                
-                examData.sentences.forEach((sentence, originalIndex) => {
-                    const userOrder = userAnswers[answerKey] && userAnswers[answerKey][originalIndex];
-                    const correctOrder = originalIndex + 1;
-                    const isCorrect = userOrder === correctOrder;
-                    if (isCorrect) correctCount++;
-                    resultsHTML += `<li style="margin-bottom: 8px;">Câu ${originalIndex + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: Thứ tự ${correctOrder})`}</li>`;
+                // Get current order from DOM
+                const draggableItems = examContainer.querySelectorAll('.draggable');
+                const currentOrder = {};
+                draggableItems.forEach((el, position) => {
+                    const originalIndex = parseInt(el.dataset.originalIndex);
+                    currentOrder[originalIndex] = position + 1;
                 });
                 
-                resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-                checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-                checkResult.innerHTML = resultsHTML;
+                let results = [];
+                examData.sentences.forEach((sentence, originalIndex) => {
+                    const userOrder = currentOrder[originalIndex];
+                    const correctOrder = originalIndex + 1;
+                    const isCorrect = userOrder === correctOrder;
+                    results.push({
+                        part: 2,
+                        examNumber: examData.examNumber,
+                        question: `Sentence ${originalIndex + 1}: ${sentence}`,
+                        userAnswer: userOrder ? `Order ${userOrder}` : 'No answer',
+                        correctAnswer: `Order ${correctOrder}`,
+                        isCorrect
+                    });
+                });
+                
+                showCheckResults(2, examData, examData.examNumber, results);
             });
             
             checkContainerDiv.appendChild(checkBtn);
-            checkContainerDiv.appendChild(checkResult);
             examSection.appendChild(checkContainerDiv);
             
             container.appendChild(examSection);
@@ -837,6 +1117,8 @@ function loadPart2() {
         container.innerHTML = '<p>No sentences available.</p>';
         return;
     }
+
+    container.className = 'drag-drop-container';
 
     // Add first sentence (fixed)
     const firstSentence = document.createElement('div');
@@ -854,53 +1136,250 @@ function loadPart2() {
         correctOrder: index + 1
     })).sort(() => Math.random() - 0.5);
 
-    // Create sentence items with order selector
+    // Create draggable sentence items
     shuffledSentences.forEach((item, displayIndex) => {
         const sentenceEl = document.createElement('div');
-        sentenceEl.className = 'sentence-order-item';
+        sentenceEl.className = 'sentence-order-item draggable';
+        sentenceEl.draggable = true;
         sentenceEl.dataset.originalIndex = item.originalIndex;
         sentenceEl.dataset.correctOrder = item.correctOrder;
         
-        const select = document.createElement('select');
-        select.className = 'order-select';
-        select.dataset.originalIndex = item.originalIndex;
-        
-        // Add options 1-5
-        for (let i = 1; i <= data.sentences.length; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            select.appendChild(option);
-        }
-        
-        select.addEventListener('change', function() {
-            if (!userAnswers.part2) userAnswers.part2 = {};
-            userAnswers.part2[item.originalIndex] = parseInt(this.value);
-        });
-        
         sentenceEl.innerHTML = `
+            <span class="drag-handle">☰</span>
+            <span class="order-number">${displayIndex + 1}</span>
             <span class="sentence-text">${item.sentence}</span>
         `;
-        sentenceEl.appendChild(select);
+        
+        // Drag event handlers
+        sentenceEl.addEventListener('dragstart', handleDragStart);
+        sentenceEl.addEventListener('dragend', handleDragEnd);
+        sentenceEl.addEventListener('dragover', handleDragOver);
+        sentenceEl.addEventListener('drop', handleDrop);
+        sentenceEl.addEventListener('dragenter', handleDragEnter);
+        sentenceEl.addEventListener('dragleave', handleDragLeave);
+        
         container.appendChild(sentenceEl);
     });
-
-    // Load saved answers
-    if (userAnswers.part2) {
-        Object.keys(userAnswers.part2).forEach(originalIndex => {
-            const select = container.querySelector(`select[data-original-index="${originalIndex}"]`);
-            if (select) {
-                select.value = userAnswers.part2[originalIndex];
-            }
-        });
-    }
+    
+    // Update order numbers after initial render
+    updateOrderNumbers(container);
     
     // Thêm nút check cho Part 2 (single exam mode)
-    createCheckButton(2, data, null, 'check-container2');
+    const checkContainer = document.getElementById('check-container2');
+    if (checkContainer) {
+        checkContainer.innerHTML = '';
+        
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'btn btn-check';
+        checkBtn.textContent = 'Check đáp án';
+        checkBtn.style.cssText = 'width: 100%; padding: 12px; font-size: 16px;';
+        
+        const checkResult = document.createElement('div');
+        checkResult.className = 'check-result';
+        checkResult.style.cssText = 'margin-top: 15px;';
+        
+        checkBtn.addEventListener('click', function() {
+            // Get current order from DOM
+            const draggableItems = container.querySelectorAll('.draggable');
+            const currentOrder = {};
+            draggableItems.forEach((el, position) => {
+                const originalIndex = parseInt(el.dataset.originalIndex);
+                currentOrder[originalIndex] = position + 1;
+            });
+            
+            let results = [];
+            data.sentences.forEach((sentence, originalIndex) => {
+                const userOrder = currentOrder[originalIndex];
+                const correctOrder = originalIndex + 1;
+                const isCorrect = userOrder === correctOrder;
+                results.push({
+                    part: 2,
+                    examNumber: currentExam,
+                    question: `Sentence ${originalIndex + 1}: ${sentence}`,
+                    userAnswer: userOrder ? `Order ${userOrder}` : 'No answer',
+                    correctAnswer: `Order ${correctOrder}`,
+                    isCorrect
+                });
+            });
+            
+            showCheckResults(2, data, currentExam, results);
+        });
+        
+        checkContainer.appendChild(checkBtn);
+    }
+}
+
+// Drag and Drop handlers for Part 2
+let draggedElement = null;
+let draggedOverElement = null;
+let dropPosition = 'after'; // 'before' or 'after'
+
+function handleDragStart(e) {
+    draggedElement = this;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    this.classList.remove('drag-over');
+    this.classList.remove('drag-over-before');
+    this.classList.remove('drag-over-after');
+    // Remove drag-over class from all items
+    document.querySelectorAll('.sentence-order-item').forEach(item => {
+        item.classList.remove('drag-over', 'drag-over-before', 'drag-over-after');
+    });
+    draggedElement = null;
+    draggedOverElement = null;
+}
+
+function handleDragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    
+    if (this !== draggedElement && this.classList.contains('draggable')) {
+        e.dataTransfer.dropEffect = 'move';
+        
+        // Determine if drop is in top or bottom half of element
+        const rect = this.getBoundingClientRect();
+        const y = e.clientY - rect.top;
+        const midpoint = rect.height / 2;
+        
+        // Remove all drag-over classes first
+        this.classList.remove('drag-over-before', 'drag-over-after');
+        
+        if (y < midpoint) {
+            // Top half - insert before
+            this.classList.add('drag-over-before');
+            dropPosition = 'before';
+        } else {
+            // Bottom half - insert after
+            this.classList.add('drag-over-after');
+            dropPosition = 'after';
+        }
+    }
+    
+    return false;
+}
+
+function handleDragEnter(e) {
+    if (this !== draggedElement && this.classList.contains('draggable')) {
+        draggedOverElement = this;
+    }
+}
+
+function handleDragLeave(e) {
+    // Only remove if we're actually leaving the element (not entering a child)
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+        this.classList.remove('drag-over', 'drag-over-before', 'drag-over-after');
+    }
+}
+
+function handleDrop(e) {
+    if (e.stopPropagation) {
+        e.stopPropagation();
+    }
+    
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    
+    if (draggedElement !== this && this.classList.contains('draggable') && draggedElement) {
+        const container = this.parentElement;
+        const allItems = Array.from(container.querySelectorAll('.sentence-order-item.draggable'));
+        const draggedIndex = allItems.indexOf(draggedElement);
+        const targetIndex = allItems.indexOf(this);
+        
+        if (draggedIndex !== -1 && targetIndex !== -1 && draggedIndex !== targetIndex) {
+            // Store reference to dragged element's next sibling before removal
+            const draggedNextSibling = draggedElement.nextSibling;
+            
+            // Remove dragged element from current position
+            draggedElement.remove();
+            
+            // Insert at new position based on drop position
+            if (dropPosition === 'before') {
+                // Insert before target
+                container.insertBefore(draggedElement, this);
+            } else {
+                // Insert after target
+                if (this.nextSibling) {
+                    container.insertBefore(draggedElement, this.nextSibling);
+                } else {
+                    container.appendChild(draggedElement);
+                }
+            }
+            
+            // Update order numbers visually
+            updateOrderNumbers(container);
+        } else if (draggedIndex === targetIndex) {
+            // Same position, do nothing
+        }
+    }
+    
+    this.classList.remove('drag-over', 'drag-over-before', 'drag-over-after');
+    return false;
+}
+
+function updateOrderNumbers(container) {
+    const items = container.querySelectorAll('.sentence-order-item.draggable');
+    items.forEach((item, index) => {
+        const orderNumber = item.querySelector('.order-number');
+        if (orderNumber) {
+            orderNumber.textContent = index + 1;
+        }
+    });
+    
+    // Save answers to userAnswers
+    const containerId = container.id;
+    let partNumber = null;
+    let examNumber = null;
+    
+    if (containerId === 'sentences2' || containerId.startsWith('sentences2')) {
+        partNumber = 2;
+    } else if (containerId === 'sentences3' || containerId.startsWith('sentences3')) {
+        partNumber = 3;
+    }
+    
+    if (partNumber) {
+        // Check if this is in all exams mode (container is inside exam-section)
+        const examSection = container.closest('.exam-section');
+        if (examSection) {
+            // All exams mode - find exam number from data attribute or title
+            const examTitle = examSection.querySelector('h3');
+            if (examTitle) {
+                const match = examTitle.textContent.match(/Đề (\d+)/);
+                if (match) {
+                    examNumber = parseInt(match[1]);
+                }
+            }
+        } else {
+            // Single exam mode
+            examNumber = currentExam;
+        }
+        
+        if (examNumber) {
+            const answerKey = `part${partNumber}_exam${examNumber}`;
+            if (!userAnswers[answerKey]) userAnswers[answerKey] = {};
+            
+            items.forEach((item, position) => {
+                const originalIndex = parseInt(item.dataset.originalIndex);
+                if (!isNaN(originalIndex)) {
+                    userAnswers[answerKey][originalIndex] = position + 1;
+                }
+            });
+        }
+    }
 }
 
 
-// Part 3: Text Cohesion (Select Order)
+// Part 3: Text Cohesion (Drag and Drop) - Same as Part 2 - Updated v2
 function loadPart3() {
     const data = getPartData(3);
     if (!data) {
@@ -912,6 +1391,11 @@ function loadPart3() {
 
     titleEl.textContent = '';
     container.innerHTML = '';
+    // Force clear any old dropdowns or select elements
+    container.querySelectorAll('.order-select, select').forEach(el => el.remove());
+    // Remove old class and prepare for drag-drop
+    container.classList.remove('sentences-order-container');
+    container.className = '';
 
     if (allExamsMode && data.allExams) {
         // Load all exams
@@ -926,6 +1410,7 @@ function loadPart3() {
             examSection.appendChild(examTitle);
             
             const examContainer = document.createElement('div');
+            examContainer.className = 'drag-drop-container';
             
             // Add first sentence (fixed)
             const firstSentence = document.createElement('div');
@@ -943,48 +1428,58 @@ function loadPart3() {
                 correctOrder: index + 1
             })).sort(() => Math.random() - 0.5);
 
-            // Create sentence items with order selector
-            shuffledSentences.forEach((item) => {
+            // Create draggable sentence items
+            shuffledSentences.forEach((item, displayIndex) => {
                 const sentenceEl = document.createElement('div');
-                sentenceEl.className = 'sentence-order-item';
+                sentenceEl.className = 'sentence-order-item draggable';
+                sentenceEl.draggable = true;
                 sentenceEl.dataset.originalIndex = item.originalIndex;
                 sentenceEl.dataset.correctOrder = item.correctOrder;
-                
-                const select = document.createElement('select');
-                select.className = 'order-select';
-                select.dataset.originalIndex = item.originalIndex;
-                select.dataset.examNumber = examData.examNumber;
-                
-                for (let i = 1; i <= examData.sentences.length; i++) {
-                    const option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-                    select.appendChild(option);
-                }
-                
-                select.addEventListener('change', function() {
-                    const answerKey = `part3_exam${examData.examNumber}`;
-                    if (!userAnswers[answerKey]) userAnswers[answerKey] = {};
-                    userAnswers[answerKey][item.originalIndex] = parseInt(this.value);
-                });
+                sentenceEl.dataset.examNumber = examData.examNumber;
                 
                 sentenceEl.innerHTML = `
+                    <span class="drag-handle">☰</span>
+                    <span class="order-number">${displayIndex + 1}</span>
                     <span class="sentence-text">${item.sentence}</span>
                 `;
-                sentenceEl.appendChild(select);
+                
+                // Drag event handlers
+                sentenceEl.addEventListener('dragstart', handleDragStart);
+                sentenceEl.addEventListener('dragend', handleDragEnd);
+                sentenceEl.addEventListener('dragover', handleDragOver);
+                sentenceEl.addEventListener('drop', handleDrop);
+                sentenceEl.addEventListener('dragenter', handleDragEnter);
+                sentenceEl.addEventListener('dragleave', handleDragLeave);
+                
                 examContainer.appendChild(sentenceEl);
             });
 
-            // Load saved answers
-            const answerKey = `part3_exam${examData.examNumber}`;
-            if (userAnswers[answerKey]) {
-                Object.keys(userAnswers[answerKey]).forEach(originalIndex => {
-                    const select = examContainer.querySelector(`select[data-exam-number="${examData.examNumber}"][data-original-index="${originalIndex}"]`);
-                    if (select) {
-                        select.value = userAnswers[answerKey][originalIndex];
+            // Update order numbers after initial render
+            updateOrderNumbers(examContainer);
+            
+            // Force remove any remaining select/dropdown elements and verify drag handlers
+            setTimeout(() => {
+                // Remove any dropdowns
+                examContainer.querySelectorAll('select, .order-select').forEach(el => {
+                    el.remove();
+                });
+                // Verify and re-attach drag handlers if needed
+                examContainer.querySelectorAll('.draggable').forEach(el => {
+                    if (!el.draggable || el.draggable !== true) {
+                        el.draggable = true;
+                    }
+                    // Re-attach handlers if missing
+                    if (!el.hasAttribute('data-handlers-attached')) {
+                        el.addEventListener('dragstart', handleDragStart);
+                        el.addEventListener('dragend', handleDragEnd);
+                        el.addEventListener('dragover', handleDragOver);
+                        el.addEventListener('drop', handleDrop);
+                        el.addEventListener('dragenter', handleDragEnter);
+                        el.addEventListener('dragleave', handleDragLeave);
+                        el.setAttribute('data-handlers-attached', 'true');
                     }
                 });
-            }
+            }, 100);
             
             examSection.appendChild(examContainer);
             
@@ -995,30 +1490,34 @@ function loadPart3() {
             checkBtn.textContent = 'Check đáp án';
             checkBtn.style.cssText = 'margin-top: 20px; width: 100%; padding: 12px; font-size: 16px;';
             
-            const checkResult = document.createElement('div');
-            checkResult.className = 'check-result';
-            checkResult.style.cssText = 'margin-top: 15px;';
-            
             checkBtn.addEventListener('click', function() {
-                let correctCount = 0;
-                let totalCount = examData.sentences.length;
-                let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
-                
-                examData.sentences.forEach((sentence, originalIndex) => {
-                    const userOrder = userAnswers[answerKey] && userAnswers[answerKey][originalIndex];
-                    const correctOrder = originalIndex + 1;
-                    const isCorrect = userOrder === correctOrder;
-                    if (isCorrect) correctCount++;
-                    resultsHTML += `<li style="margin-bottom: 8px;">Câu ${originalIndex + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: Thứ tự ${correctOrder})`}</li>`;
+                // Get current order from DOM
+                const draggableItems = examContainer.querySelectorAll('.draggable');
+                const currentOrder = {};
+                draggableItems.forEach((el, position) => {
+                    const originalIndex = parseInt(el.dataset.originalIndex);
+                    currentOrder[originalIndex] = position + 1;
                 });
                 
-                resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-                checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-                checkResult.innerHTML = resultsHTML;
+                let results = [];
+                examData.sentences.forEach((sentence, originalIndex) => {
+                    const userOrder = currentOrder[originalIndex];
+                    const correctOrder = originalIndex + 1;
+                    const isCorrect = userOrder === correctOrder;
+                    results.push({
+                        part: 3,
+                        examNumber: examData.examNumber,
+                        question: `Sentence ${originalIndex + 1}: ${sentence}`,
+                        userAnswer: userOrder ? `Order ${userOrder}` : 'No answer',
+                        correctAnswer: `Order ${correctOrder}`,
+                        isCorrect
+                    });
+                });
+                
+                showCheckResults(3, examData, examData.examNumber, results);
             });
             
             checkContainerDiv.appendChild(checkBtn);
-            checkContainerDiv.appendChild(checkResult);
             examSection.appendChild(checkContainerDiv);
             
             container.appendChild(examSection);
@@ -1026,13 +1525,17 @@ function loadPart3() {
         return;
     }
     
-    // Single exam mode
+    // Single exam mode - Part 3
     titleEl.textContent = data.passageTitle || '';
     
     if (!data.sentences || data.sentences.length === 0) {
         container.innerHTML = '<p>No sentences available.</p>';
         return;
     }
+
+    // Clear and set container for drag-drop
+    container.innerHTML = '';
+    container.className = 'drag-drop-container';
 
     // Add first sentence (fixed)
     const firstSentence = document.createElement('div');
@@ -1050,49 +1553,101 @@ function loadPart3() {
         correctOrder: index + 1
     })).sort(() => Math.random() - 0.5);
 
-    // Create sentence items with order selector
+    // Create draggable sentence items - EXACTLY like Part 2
     shuffledSentences.forEach((item, displayIndex) => {
         const sentenceEl = document.createElement('div');
-        sentenceEl.className = 'sentence-order-item';
+        sentenceEl.className = 'sentence-order-item draggable';
+        sentenceEl.draggable = true;
         sentenceEl.dataset.originalIndex = item.originalIndex;
         sentenceEl.dataset.correctOrder = item.correctOrder;
         
-        const select = document.createElement('select');
-        select.className = 'order-select';
-        select.dataset.originalIndex = item.originalIndex;
-        
-        // Add options 1-5
-        for (let i = 1; i <= data.sentences.length; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            select.appendChild(option);
-        }
-        
-        select.addEventListener('change', function() {
-            if (!userAnswers.part3) userAnswers.part3 = {};
-            userAnswers.part3[item.originalIndex] = parseInt(this.value);
-        });
-        
         sentenceEl.innerHTML = `
+            <span class="drag-handle">☰</span>
+            <span class="order-number">${displayIndex + 1}</span>
             <span class="sentence-text">${item.sentence}</span>
         `;
-        sentenceEl.appendChild(select);
+        
+        // Drag event handlers - CRITICAL: Must be attached (same as Part 2)
+        sentenceEl.addEventListener('dragstart', handleDragStart);
+        sentenceEl.addEventListener('dragend', handleDragEnd);
+        sentenceEl.addEventListener('dragover', handleDragOver);
+        sentenceEl.addEventListener('drop', handleDrop);
+        sentenceEl.addEventListener('dragenter', handleDragEnter);
+        sentenceEl.addEventListener('dragleave', handleDragLeave);
+        
         container.appendChild(sentenceEl);
     });
 
-    // Load saved answers
-    if (userAnswers.part3) {
-        Object.keys(userAnswers.part3).forEach(originalIndex => {
-            const select = container.querySelector(`select[data-original-index="${originalIndex}"]`);
-            if (select) {
-                select.value = userAnswers.part3[originalIndex];
+    // Update order numbers after initial render
+    updateOrderNumbers(container);
+    
+    // Force remove any remaining select/dropdown elements and verify drag handlers
+    setTimeout(() => {
+        // Remove any dropdowns
+        container.querySelectorAll('select, .order-select').forEach(el => {
+            el.remove();
+        });
+        // Verify and re-attach drag handlers if needed
+        container.querySelectorAll('.draggable').forEach(el => {
+            if (!el.draggable || el.draggable !== true) {
+                el.draggable = true;
+            }
+            // Re-attach handlers if missing
+            if (!el.hasAttribute('data-handlers-attached')) {
+                el.addEventListener('dragstart', handleDragStart);
+                el.addEventListener('dragend', handleDragEnd);
+                el.addEventListener('dragover', handleDragOver);
+                el.addEventListener('drop', handleDrop);
+                el.addEventListener('dragenter', handleDragEnter);
+                el.addEventListener('dragleave', handleDragLeave);
+                el.setAttribute('data-handlers-attached', 'true');
             }
         });
-    }
+    }, 100);
     
     // Thêm nút check cho Part 3 (single exam mode)
-    createCheckButton(3, data, null, 'check-container3');
+    const checkContainer = document.getElementById('check-container3');
+    if (checkContainer) {
+        checkContainer.innerHTML = '';
+        
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'btn btn-check';
+        checkBtn.textContent = 'Check đáp án';
+        checkBtn.style.cssText = 'width: 100%; padding: 12px; font-size: 16px;';
+        
+        const checkResult = document.createElement('div');
+        checkResult.className = 'check-result';
+        checkResult.style.cssText = 'margin-top: 15px;';
+        
+        checkBtn.addEventListener('click', function() {
+            // Get current order from DOM
+            const draggableItems = container.querySelectorAll('.draggable');
+            const currentOrder = {};
+            draggableItems.forEach((el, position) => {
+                const originalIndex = parseInt(el.dataset.originalIndex);
+                currentOrder[originalIndex] = position + 1;
+            });
+            
+            let results = [];
+            data.sentences.forEach((sentence, originalIndex) => {
+                const userOrder = currentOrder[originalIndex];
+                const correctOrder = originalIndex + 1;
+                const isCorrect = userOrder === correctOrder;
+                results.push({
+                    part: 3,
+                    examNumber: currentExam,
+                    question: `Sentence ${originalIndex + 1}: ${sentence}`,
+                    userAnswer: userOrder ? `Order ${userOrder}` : 'No answer',
+                    correctAnswer: `Order ${correctOrder}`,
+                    isCorrect
+                });
+            });
+            
+            showCheckResults(3, data, currentExam, results);
+        });
+        
+        checkContainer.appendChild(checkBtn);
+    }
 }
 
 // Part 4: Opinion Matching
@@ -1120,6 +1675,10 @@ function loadPart4() {
             examTitle.textContent = `Đề ${examData.examNumber}`;
             examSection.appendChild(examTitle);
             
+            // Create 2-column layout for Part 4
+            const examLayout = document.createElement('div');
+            examLayout.className = 'part4-layout';
+            
             const examOpinions = document.createElement('div');
             examOpinions.className = 'opinions-container';
             examData.opinions.forEach(opinion => {
@@ -1131,7 +1690,7 @@ function loadPart4() {
                 `;
                 examOpinions.appendChild(opinionEl);
             });
-            examSection.appendChild(examOpinions);
+            examLayout.appendChild(examOpinions);
             
             const examQuestions = document.createElement('div');
             examQuestions.className = 'questions-container';
@@ -1181,7 +1740,8 @@ function loadPart4() {
                 });
             }
             
-            examSection.appendChild(examQuestions);
+            examLayout.appendChild(examQuestions);
+            examSection.appendChild(examLayout);
             
             // Thêm nút check cho toàn bộ exam section
             const checkContainerDiv = document.createElement('div');
@@ -1190,29 +1750,27 @@ function loadPart4() {
             checkBtn.textContent = 'Check đáp án';
             checkBtn.style.cssText = 'margin-top: 20px; width: 100%; padding: 12px; font-size: 16px;';
             
-            const checkResult = document.createElement('div');
-            checkResult.className = 'check-result';
-            checkResult.style.cssText = 'margin-top: 15px;';
-            
             checkBtn.addEventListener('click', function() {
-                let correctCount = 0;
-                let totalCount = examData.questions.length;
-                let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
+                const answerKey = `part4_exam${examData.examNumber}`;
+                let results = [];
                 
                 examData.questions.forEach((q, index) => {
-                    const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][index];
+                    const userAnswer = userAnswers[answerKey] && (Array.isArray(userAnswers[answerKey]) ? userAnswers[answerKey][index] : userAnswers[answerKey][index]);
                     const isCorrect = userAnswer === q.answer;
-                    if (isCorrect) correctCount++;
-                    resultsHTML += `<li style="margin-bottom: 8px;">Câu ${index + 1}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${q.answer})`}</li>`;
+                    results.push({
+                        part: 4,
+                        examNumber: examData.examNumber,
+                        question: q.question,
+                        userAnswer: userAnswer || 'No answer',
+                        correctAnswer: q.answer,
+                        isCorrect
+                    });
                 });
                 
-                resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-                checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-                checkResult.innerHTML = resultsHTML;
+                showCheckResults(4, examData, examData.examNumber, results);
             });
             
             checkContainerDiv.appendChild(checkBtn);
-            checkContainerDiv.appendChild(checkResult);
             examSection.appendChild(checkContainerDiv);
             
             opinionsContainer.appendChild(examSection);
@@ -1255,8 +1813,9 @@ function loadPart4() {
         });
 
         select.addEventListener('change', function() {
-            if (!userAnswers.part4) userAnswers.part4 = [];
-            userAnswers.part4[index] = this.value;
+            const answerKey = `part4_exam${currentExam}`;
+            if (!userAnswers[answerKey]) userAnswers[answerKey] = [];
+            userAnswers[answerKey][index] = this.value;
         });
 
         questionEl.innerHTML = `<div class="question-text">${q.question}</div>`;
@@ -1265,8 +1824,9 @@ function loadPart4() {
     });
 
     // Load saved answers
-    if (userAnswers.part4) {
-        userAnswers.part4.forEach((answer, index) => {
+    const answerKey = `part4_exam${currentExam}`;
+    if (userAnswers[answerKey]) {
+        userAnswers[answerKey].forEach((answer, index) => {
             const select = document.querySelector(`#questions4 select[data-index="${index}"]`);
             if (select && answer) {
                 select.value = answer;
@@ -1275,10 +1835,80 @@ function loadPart4() {
     }
     
     // Thêm nút check cho Part 4 (single exam mode)
-    createCheckButton(4, data, null, 'check-container4');
+    createCheckButton(4, data, currentExam, 'check-container4');
 }
 
 // Part 5: Long Text Comprehension - Choose Heading
+// Hàm tạo mẹo học thuộc nhanh vị trí 7 tiêu đề
+function createMnemonicBox() {
+    const mnemonicBox = document.createElement('div');
+    mnemonicBox.className = 'mnemonic-box';
+    mnemonicBox.style.cssText = `
+        background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size: 20px; font-weight: 700; margin-bottom: 15px; text-align: center;';
+    title.textContent = '🧠 MẸO HỌC THUỘC NHANH VỊ TRÍ 7 TIÊU ĐỀ';
+    mnemonicBox.appendChild(title);
+    
+    const mnemonicContent = document.createElement('div');
+    mnemonicContent.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;';
+    
+    const mnemonicPhrase = document.createElement('div');
+    mnemonicPhrase.style.cssText = 'font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 15px; line-height: 1.6;';
+    mnemonicPhrase.innerHTML = `
+        <div style="margin-bottom: 10px;">📝 <strong>MẸO NHỚ:</strong></div>
+        <div style="font-size: 24px; letter-spacing: 3px; margin: 10px 0;">P → A → P → P → R → S → R</div>
+        <div style="font-size: 16px; margin-top: 10px; font-style: italic;">
+            "Phải Ăn Phở Phở Rất Sướng Rồi"
+        </div>
+    `;
+    mnemonicContent.appendChild(mnemonicPhrase);
+    
+    const detailsList = document.createElement('div');
+    detailsList.style.cssText = 'font-size: 14px; line-height: 2;';
+    
+    const headings = [
+        { num: 1, keyword: 'Perception', letter: 'P', phrase: 'Our changing perceptions toward mountains' },
+        { num: 2, keyword: 'Achievement', letter: 'A', phrase: 'A unique sense of achievement' },
+        { num: 3, keyword: 'Publicity', letter: 'P', phrase: 'Publicising one\'s achievements' },
+        { num: 4, keyword: 'Priority', letter: 'P', phrase: 'A wrong priority' },
+        { num: 5, keyword: 'Revelation', letter: 'R', phrase: 'A disturbing revelation' },
+        { num: 6, keyword: 'Sustainability', letter: 'S', phrase: 'A new focus on sustainability' },
+        { num: 7, keyword: 'Relationship', letter: 'R', phrase: 'An intimate relationship' }
+    ];
+    
+    headings.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 6px;';
+        itemDiv.innerHTML = `
+            <span style="font-weight: 700; font-size: 18px; min-width: 30px;">${item.num}.</span>
+            <span style="font-weight: 700; font-size: 20px; min-width: 30px; text-align: center; background: rgba(255,255,255,0.3); padding: 4px 8px; border-radius: 4px;">${item.letter}</span>
+            <span style="flex: 1; font-weight: 600;">${item.keyword}</span>
+        `;
+        detailsList.appendChild(itemDiv);
+    });
+    
+    mnemonicContent.appendChild(detailsList);
+    mnemonicBox.appendChild(mnemonicContent);
+    
+    const tipBox = document.createElement('div');
+    tipBox.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.6;';
+    tipBox.innerHTML = `
+        <strong>💡 Gợi ý:</strong> Nhớ câu "Phải Ăn Phở Phở Rất Sướng Rồi" để nhớ thứ tự các chữ cái đầu: 
+        <strong>P-A-P-P-R-S-R</strong>. Mỗi chữ cái tương ứng với từ khóa chính của tiêu đề!
+    `;
+    mnemonicBox.appendChild(tipBox);
+    
+    return mnemonicBox;
+}
+
 function loadPart5() {
     const data = getPartData(5);
     if (!data) {
@@ -1302,6 +1932,12 @@ function loadPart5() {
             examTitle.style.cssText = 'margin-bottom: 20px; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; font-size: 20px; font-weight: 700;';
             examTitle.textContent = `Đề ${examData.examNumber} - ${examData.passageTitle || ''}`;
             examSection.appendChild(examTitle);
+            
+            // Thêm mẹo học thuộc cho đề MOUNTAINS AND HUMAN CONNECTIONS
+            if (examData.passageTitle && examData.passageTitle.includes('MOUNTAINS AND HUMAN CONNECTIONS')) {
+                const mnemonicBox = createMnemonicBox();
+                examSection.appendChild(mnemonicBox);
+            }
             
             const examParagraphs = document.createElement('div');
             examParagraphs.className = 'paragraphs-container';
@@ -1378,29 +2014,27 @@ function loadPart5() {
             checkBtn.textContent = 'Check đáp án';
             checkBtn.style.cssText = 'margin-top: 20px; width: 100%; padding: 12px; font-size: 16px;';
             
-            const checkResult = document.createElement('div');
-            checkResult.className = 'check-result';
-            checkResult.style.cssText = 'margin-top: 15px;';
-            
             checkBtn.addEventListener('click', function() {
-                let correctCount = 0;
-                let totalCount = examData.paragraphs.length;
-                let resultsHTML = '<div style="margin-top: 10px;"><strong>Kết quả:</strong><ul style="margin-top: 10px; padding-left: 20px;">';
+                const answerKey = `part5_exam${examData.examNumber}`;
+                let results = [];
                 
                 examData.paragraphs.forEach(para => {
                     const userAnswer = userAnswers[answerKey] && userAnswers[answerKey][para.number];
                     const isCorrect = userAnswer === para.answer;
-                    if (isCorrect) correctCount++;
-                    resultsHTML += `<li style="margin-bottom: 8px;">Paragraph ${para.number}: ${isCorrect ? '✓ Đúng' : `✗ Sai (Đáp án: ${para.answer})`}</li>`;
+                    results.push({
+                        part: 5,
+                        examNumber: examData.examNumber,
+                        question: `Paragraph ${para.number}`,
+                        userAnswer: userAnswer || 'No answer',
+                        correctAnswer: para.answer,
+                        isCorrect
+                    });
                 });
                 
-                resultsHTML += `</ul><div style="margin-top: 10px; font-weight: 700; font-size: 16px;">Tổng: ${correctCount}/${totalCount}</div></div>`;
-                checkResult.className = `check-result show ${correctCount === totalCount ? 'correct' : 'incorrect'}`;
-                checkResult.innerHTML = resultsHTML;
+                showCheckResults(5, examData, examData.examNumber, results);
             });
             
             checkContainerDiv.appendChild(checkBtn);
-            checkContainerDiv.appendChild(checkResult);
             examSection.appendChild(checkContainerDiv);
             
             paragraphsEl.appendChild(examSection);
@@ -1410,6 +2044,12 @@ function loadPart5() {
     
     // Single exam mode
     titleEl.textContent = data.passageTitle || '';
+    
+    // Thêm mẹo học thuộc cho đề MOUNTAINS AND HUMAN CONNECTIONS
+    if (data.passageTitle && data.passageTitle.includes('MOUNTAINS AND HUMAN CONNECTIONS')) {
+        const mnemonicBox = createMnemonicBox();
+        paragraphsEl.appendChild(mnemonicBox);
+    }
     
     if (!data.paragraphs || data.paragraphs.length === 0) {
         paragraphsEl.innerHTML = '<p>No paragraphs available.</p>';
@@ -1449,7 +2089,7 @@ function loadPart5() {
         });
 
         select.addEventListener('change', function() {
-            const answerKey = allExamsMode ? `part5_exam${currentExam}` : 'part5';
+            const answerKey = `part5_exam${currentExam}`;
             if (!userAnswers[answerKey]) userAnswers[answerKey] = {};
             userAnswers[answerKey][para.number] = this.value;
         });
@@ -1461,7 +2101,7 @@ function loadPart5() {
     });
 
     // Load saved answers
-    const answerKey = allExamsMode ? `part5_exam${currentExam}` : 'part5';
+    const answerKey = `part5_exam${currentExam}`;
     if (userAnswers[answerKey]) {
         Object.keys(userAnswers[answerKey]).forEach(number => {
             const select = document.querySelector(`#paragraphs5 select[data-number="${number}"]`);
@@ -1472,20 +2112,45 @@ function loadPart5() {
     }
     
     // Thêm nút check cho Part 5 (single exam mode)
-    createCheckButton(5, data, null, 'check-container5');
+    createCheckButton(5, data, currentExam, 'check-container5');
 }
 
 function nextPart() {
     if (allExamsMode) {
-        const totalItems = getAllExamItemsCount(currentPart);
-        if (currentItemIndex < totalItems - 1) {
-            currentItemIndex++;
-            // Reload current part with new item index, don't change part
-            loadPartContent(currentPart);
+        if (shuffleMode && practiceMode === 'by-exam') {
+            // Trong chế độ trộn và giải theo đề, chuyển sang đề tiếp theo
+            if (currentExamIndex < shuffledExamsOrder.length - 1) {
+                currentExamIndex++;
+                currentExam = shuffledExamsOrder[currentExamIndex];
+                currentItemIndex = 0;
+                loadPart(currentPart);
+            } else if (currentPart < totalParts) {
+                // Hết đề, chuyển sang part tiếp theo (giữ thứ tự 1-5)
+                currentPart++;
+                currentPartIndex = currentPart - 1;
+                currentExamIndex = 0;
+                currentExam = shuffledExamsOrder[0];
+                currentItemIndex = 0;
+                loadPart(currentPart);
+            }
+        } else {
+            const totalItems = getAllExamItemsCount(currentPart);
+            if (currentItemIndex < totalItems - 1) {
+                currentItemIndex++;
+                loadPartContent(currentPart);
+            } else if (currentPart < totalParts) {
+                // Hết items, chuyển sang part tiếp theo
+                currentPart++;
+                currentPartIndex = currentPart - 1;
+                currentItemIndex = 0;
+                loadPart(currentPart);
+            }
         }
     } else {
+        // Single exam mode - luôn giữ thứ tự part 1-5
         if (currentPart < totalParts) {
             currentPart++;
+            currentPartIndex = currentPart - 1;
             loadPart(currentPart);
         }
     }
@@ -1493,14 +2158,40 @@ function nextPart() {
 
 function prevPart() {
     if (allExamsMode) {
-        if (currentItemIndex > 0) {
-            currentItemIndex--;
-            // Reload current part with new item index, don't change part
-            loadPartContent(currentPart);
+        if (shuffleMode && practiceMode === 'by-exam') {
+            // Trong chế độ trộn và giải theo đề, quay lại đề trước
+            if (currentExamIndex > 0) {
+                currentExamIndex--;
+                currentExam = shuffledExamsOrder[currentExamIndex];
+                currentItemIndex = 0;
+                loadPart(currentPart);
+            } else if (currentPart > 1) {
+                // Về đề đầu tiên của part trước (giữ thứ tự 1-5)
+                currentPart--;
+                currentPartIndex = currentPart - 1;
+                currentExamIndex = shuffledExamsOrder.length - 1;
+                currentExam = shuffledExamsOrder[currentExamIndex];
+                currentItemIndex = 0;
+                loadPart(currentPart);
+            }
+        } else {
+            if (currentItemIndex > 0) {
+                currentItemIndex--;
+                loadPartContent(currentPart);
+            } else if (currentPart > 1) {
+                // Về item cuối của part trước
+                currentPart--;
+                currentPartIndex = currentPart - 1;
+                const totalItems = getAllExamItemsCount(currentPart);
+                currentItemIndex = Math.max(0, totalItems - 1);
+                loadPart(currentPart);
+            }
         }
     } else {
+        // Single exam mode - luôn giữ thứ tự part 1-5
         if (currentPart > 1) {
             currentPart--;
+            currentPartIndex = currentPart - 1;
             loadPart(currentPart);
         }
     }
@@ -1648,7 +2339,90 @@ function submitSingleExamAnswers(examNumber) {
         });
     }
 
+    // Calculate part scores for saving
+    const partScores = {};
+    const partTotals = {};
+    results.forEach(result => {
+        if (!partScores[result.part]) {
+            partScores[result.part] = 0;
+            partTotals[result.part] = 0;
+        }
+        partTotals[result.part]++;
+        if (result.isCorrect) {
+            partScores[result.part]++;
+        }
+    });
+    
+    // Convert to percentage format
+    const partScoresData = {};
+    Object.keys(partScores).forEach(part => {
+        partScoresData[part] = {
+            score: partScores[part],
+            total: partTotals[part],
+            percentage: Math.round((partScores[part] / partTotals[part]) * 100)
+        };
+    });
+
+    // Save results to localStorage
+    saveExamResult(examNumber, score, total, results, partScoresData);
+    
     showResults(score, total, results, examNumber);
+}
+
+// Hàm lưu kết quả vào localStorage
+function saveExamResult(examNumber, score, total, results, partScores = null) {
+    try {
+        const resultData = {
+            examNumber: examNumber,
+            score: score,
+            total: total,
+            percentage: Math.round((score / total) * 100),
+            timestamp: new Date().toISOString(),
+            date: new Date().toLocaleString('vi-VN'),
+            partScores: partScores || {},
+            results: results.map(r => ({
+                part: r.part,
+                question: r.question,
+                userAnswer: r.userAnswer,
+                correctAnswer: r.correctAnswer,
+                isCorrect: r.isCorrect
+            }))
+        };
+        
+        // Lấy danh sách kết quả đã lưu
+        const savedResults = JSON.parse(localStorage.getItem('aptis_exam_results') || '[]');
+        
+        // Thêm kết quả mới vào đầu danh sách
+        savedResults.unshift(resultData);
+        
+        // Giới hạn lưu tối đa 100 kết quả
+        if (savedResults.length > 100) {
+            savedResults.splice(100);
+        }
+        
+        // Lưu lại vào localStorage
+        localStorage.setItem('aptis_exam_results', JSON.stringify(savedResults));
+        
+        console.log('Kết quả đã được lưu:', resultData);
+    } catch (error) {
+        console.error('Lỗi khi lưu kết quả:', error);
+    }
+}
+
+// Hàm lấy danh sách kết quả đã lưu
+function getSavedResults() {
+    try {
+        return JSON.parse(localStorage.getItem('aptis_exam_results') || '[]');
+    } catch (error) {
+        console.error('Lỗi khi đọc kết quả:', error);
+        return [];
+    }
+}
+
+// Hàm xóa tất cả kết quả đã lưu
+function clearSavedResults() {
+    localStorage.removeItem('aptis_exam_results');
+    console.log('Đã xóa tất cả kết quả');
 }
 
 function submitAllExamsAnswers() {
@@ -1807,6 +2581,8 @@ function showResults(score, total, results, examNumber = null) {
     
     const examTitle = examNumber ? `<h2 style="margin-bottom: 20px; color: #2d3748;">Đề ${examNumber}</h2>` : '';
     
+    const hasNextExam = examNumber && examNumber < exams.length;
+    
     resultContent.innerHTML = `
         ${examTitle}
         <div class="score-container">
@@ -1861,6 +2637,37 @@ function showResults(score, total, results, examNumber = null) {
             </div>
         </div>
     `;
+    
+    // Add Next Exam button to modal if available
+    const restartBtn = document.getElementById('restart-btn');
+    // Xóa nút Next Exam cũ nếu có (tránh trùng lặp)
+    const existingNextExamBtn = document.getElementById('next-exam-modal-btn');
+    if (existingNextExamBtn) {
+        existingNextExamBtn.remove();
+    }
+    
+    if (restartBtn && hasNextExam) {
+        const nextExamModalBtn = document.createElement('button');
+        nextExamModalBtn.id = 'next-exam-modal-btn';
+        nextExamModalBtn.className = 'btn btn-info';
+        nextExamModalBtn.textContent = 'Đề tiếp theo →';
+        nextExamModalBtn.style.cssText = 'margin-left: 10px; background: #4299e1; color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600;';
+        nextExamModalBtn.addEventListener('click', function() {
+            const nextExam = examNumber + 1;
+            // Reset answers for new exam
+            userAnswers = {};
+            // Close modal
+            modal.classList.remove('active');
+            // Load next exam
+            loadExam(nextExam);
+            // Reset to first part (luôn là Part 1)
+            currentPart = 1;
+            currentPartIndex = 0;
+            loadPart(currentPart);
+        });
+        // Insert before restart button
+        restartBtn.parentNode.insertBefore(nextExamModalBtn, restartBtn);
+    }
     
     modal.classList.add('active');
 }
@@ -1995,3 +2802,4 @@ function restart() {
     loadPart(currentPart);
 }
 
+// Force reload Tue Nov 18 11:53:57 +07 2025

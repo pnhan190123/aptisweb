@@ -3,15 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aptis Reading Practice</title>
+    <title>Aptis Practice</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
-                <h1>Reading</h1>
-                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <div class="home-container">
+            <div class="home-header">
+                <h1 class="home-title">Aptis Practice</h1>
+                <p class="home-subtitle">Chọn kỹ năng bạn muốn luyện tập</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="reading">
+                    <div class="skill-icon">📖</div>
+                    <h2>Reading</h2>
+                    <p>Luyện tập kỹ năng đọc hiểu</p>
+                </div>
+                <div class="skill-card" data-skill="writing">
+                    <div class="skill-icon">✍️</div>
+                    <h2>Writing</h2>
+                    <p>Luyện tập kỹ năng viết</p>
+                </div>
+                <div class="skill-card" data-skill="speaking">
+                    <div class="skill-icon">🎤</div>
+                    <h2>Speaking</h2>
+                    <p>Luyện tập kỹ năng nói</p>
+                </div>
+                <div class="skill-card" data-skill="listening">
+                    <div class="skill-icon">🎧</div>
+                    <h2>Listening</h2>
+                    <p>Luyện tập kỹ năng nghe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reading Page -->
+    <div id="reading-page" class="page">
+        <div class="container">
+            <header>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button id="home-btn" class="btn btn-home" onclick="showHome()" title="Về trang chủ">🏠 Home</button>
+                        <h1>Reading</h1>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                     <select id="part-selector" style="padding: 10px 20px; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; color: #2d3748; border: 2px solid rgba(255,255,255,0.3); cursor: pointer;">
                         <option value="1">Part 1 - Sentence Completion</option>
                         <option value="2">Part 2 - Text Cohesion</option>
@@ -31,6 +68,8 @@
                         <option value="8">Đề 8</option>
                         <option value="9">Đề 9</option>
                         <option value="10">Đề 10</option>
+                        <option value="11">Đề 11</option>
+                        <option value="12">Đề 12</option>
                     </select>
                     <div id="mode-selector-container" style="display: none; gap: 10px; align-items: center;">
                         <label style="color: white; font-weight: 600; font-size: 14px;">Chế độ:</label>
@@ -43,6 +82,10 @@
                             Giải theo câu hỏi
                         </label>
                     </div>
+                    <label style="color: white; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px;">
+                        <input type="checkbox" id="shuffle-toggle" style="width: 18px; height: 18px; cursor: pointer;">
+                        🔀 Trộn ngẫu nhiên
+                    </label>
                 </div>
             </div>
             <div class="progress-info">
@@ -91,8 +134,10 @@
                 <div class="instructions">
                     <p>Four people respond in the comments section of an online magazine article. Read the texts and then answer the questions below.</p>
                 </div>
-                <div class="opinions-container" id="opinions4"></div>
-                <div class="questions-container" id="questions4"></div>
+                <div class="part4-layout">
+                    <div class="opinions-container" id="opinions4"></div>
+                    <div class="questions-container" id="questions4"></div>
+                </div>
                 <div id="check-container4" style="margin-top: 20px;"></div>
             </div>
 
@@ -108,17 +153,82 @@
         </div>
 
         <div class="controls">
-            <button id="load-btn" class="btn btn-info" style="margin-right: 10px;">Load</button>
             <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
             <button id="next-btn" class="btn btn-primary">Next</button>
             <button id="submit-btn" class="btn btn-success" style="display: none;">Submit</button>
+            <button id="next-exam-btn" class="btn btn-info" style="display: none;">Next Exam →</button>
         </div>
 
-        <div id="result-modal" class="modal">
-            <div class="modal-content">
-                <h2>Your Results</h2>
-                <div id="result-content"></div>
-                <button id="restart-btn" class="btn btn-primary">Restart</button>
+            <div id="result-modal" class="modal">
+                <div class="modal-content">
+                    <button id="close-modal-btn" class="modal-close-btn" aria-label="Close">×</button>
+                    <h2>Your Results</h2>
+                    <div id="result-content"></div>
+                    <button id="restart-btn" class="btn btn-primary" style="background: #667eea; color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600;">Làm lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Writing Page -->
+    <div id="writing-page" class="page">
+        <div class="container">
+            <header>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="btn btn-home" onclick="showHome()" title="Về trang chủ">🏠 Home</button>
+                        <h1>Writing</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="question-section">
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">✍️</div>
+                    <h2>Writing Practice</h2>
+                    <p>Tính năng đang được phát triển. Sẽ sớm có mặt!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Speaking Page -->
+    <div id="speaking-page" class="page">
+        <div class="container">
+            <header>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="btn btn-home" onclick="showHome()" title="Về trang chủ">🏠 Home</button>
+                        <h1>Speaking</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="question-section">
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">🎤</div>
+                    <h2>Speaking Practice</h2>
+                    <p>Tính năng đang được phát triển. Sẽ sớm có mặt!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listening Page -->
+    <div id="listening-page" class="page">
+        <div class="container">
+            <header>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="btn btn-home" onclick="showHome()" title="Về trang chủ">🏠 Home</button>
+                        <h1>Listening</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="question-section">
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">🎧</div>
+                    <h2>Listening Practice</h2>
+                    <p>Tính năng đang được phát triển. Sẽ sớm có mặt!</p>
+                </div>
             </div>
         </div>
     </div>
