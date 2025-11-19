@@ -975,6 +975,7 @@ const exams = [
             passageTitle: "End Term projects",
             firstSentence: "For end of term project, you need to choose at least 2 of these.",
             sentences: [
+                "For end of term project, you need to choose at least 2 of these.",
                 "It needs to include relevant images and your own text about the topic.",
                 "Then you need to use images and written work to create a presentation.",
                 "Your presentation offer your key points and you have around 5 minutes to talk.",
@@ -1066,6 +1067,7 @@ const exams = [
             passageTitle: "A singer",
             firstSentence: "Before becoming famous at a young age, he studied art and music at high school.",
             sentences: [
+                "Before becoming famous at a young age, he studied art and music at high school.",
                 "During this education, he started to perform on stage.",
                 "During his performances on stage, he likes to wear colorful clothes and paint his face.",
                 "This strange ways of dressing and his songs attracted people's attention.",
