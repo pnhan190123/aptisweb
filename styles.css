@@ -509,6 +509,77 @@ header h1 {
     font-weight: 400;
 }
 
+/* Mobile controls for drag and drop */
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.move-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.move-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(102, 126, 234, 0.3);
+}
+
+.move-btn:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.move-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Hide mobile controls on desktop */
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none;
+    }
+}
+
+/* Show mobile controls on mobile */
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+    }
+    
+    .sentence-order-item {
+        padding: 20px 16px;
+        min-height: 60px;
+    }
+    
+    .sentence-order-item.draggable {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .drag-handle {
+        display: none;
+    }
+}
+
 .order-select {
     min-width: 100px;
     padding: 12px 40px 12px 18px;
@@ -1247,26 +1318,28 @@ header h1 {
     }
 
     .sentence-order-item {
-        padding: 15px;
+        padding: 20px 16px;
         gap: 12px;
         flex-wrap: wrap;
+        min-height: 60px;
     }
 
     .order-number {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        flex-shrink: 0;
     }
 
     .drag-handle {
-        width: 28px;
-        height: 28px;
-        font-size: 18px;
+        display: none;
     }
 
     .sentence-text {
         font-size: 15px;
         line-height: 1.6;
+        flex: 1;
+        min-width: 0;
         width: 100%;
     }
 

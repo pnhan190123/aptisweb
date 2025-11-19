@@ -1050,15 +1050,28 @@ function loadPart2() {
                     <span class="drag-handle">☰</span>
                     <span class="order-number">${displayIndex + 1}</span>
                     <span class="sentence-text">${item.sentence}</span>
+                    <div class="mobile-controls">
+                        <button class="move-btn move-up" aria-label="Move up">↑</button>
+                        <button class="move-btn move-down" aria-label="Move down">↓</button>
+                    </div>
                 `;
                 
-                // Drag event handlers
+                // Drag event handlers (desktop)
                 sentenceEl.addEventListener('dragstart', handleDragStart);
                 sentenceEl.addEventListener('dragend', handleDragEnd);
                 sentenceEl.addEventListener('dragover', handleDragOver);
                 sentenceEl.addEventListener('drop', handleDrop);
                 sentenceEl.addEventListener('dragenter', handleDragEnter);
                 sentenceEl.addEventListener('dragleave', handleDragLeave);
+                
+                // Touch event handlers (mobile)
+                addTouchHandlers(sentenceEl, examContainer);
+                
+                // Mobile button handlers
+                const moveUpBtn = sentenceEl.querySelector('.move-up');
+                const moveDownBtn = sentenceEl.querySelector('.move-down');
+                moveUpBtn.addEventListener('click', () => moveSentenceUp(sentenceEl, examContainer));
+                moveDownBtn.addEventListener('click', () => moveSentenceDown(sentenceEl, examContainer));
                 
                 examContainer.appendChild(sentenceEl);
             });
@@ -1148,15 +1161,28 @@ function loadPart2() {
             <span class="drag-handle">☰</span>
             <span class="order-number">${displayIndex + 1}</span>
             <span class="sentence-text">${item.sentence}</span>
+            <div class="mobile-controls">
+                <button class="move-btn move-up" aria-label="Move up">↑</button>
+                <button class="move-btn move-down" aria-label="Move down">↓</button>
+            </div>
         `;
         
-        // Drag event handlers
+        // Drag event handlers (desktop)
         sentenceEl.addEventListener('dragstart', handleDragStart);
         sentenceEl.addEventListener('dragend', handleDragEnd);
         sentenceEl.addEventListener('dragover', handleDragOver);
         sentenceEl.addEventListener('drop', handleDrop);
         sentenceEl.addEventListener('dragenter', handleDragEnter);
         sentenceEl.addEventListener('dragleave', handleDragLeave);
+        
+        // Touch event handlers (mobile)
+        addTouchHandlers(sentenceEl, container);
+        
+        // Mobile button handlers
+        const moveUpBtn = sentenceEl.querySelector('.move-up');
+        const moveDownBtn = sentenceEl.querySelector('.move-down');
+        moveUpBtn.addEventListener('click', () => moveSentenceUp(sentenceEl, container));
+        moveDownBtn.addEventListener('click', () => moveSentenceDown(sentenceEl, container));
         
         container.appendChild(sentenceEl);
     });
@@ -1327,6 +1353,129 @@ function handleDrop(e) {
     return false;
 }
 
+// Mobile touch handlers
+let touchStartY = null;
+let touchElement = null;
+
+function addTouchHandlers(element, container) {
+    element.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        touchElement = this;
+        this.classList.add('dragging');
+        e.preventDefault();
+    }, { passive: false });
+    
+    element.addEventListener('touchmove', function(e) {
+        if (!touchElement || touchElement !== this) return;
+        e.preventDefault();
+        
+        const touchY = e.touches[0].clientY;
+        const deltaY = touchY - touchStartY;
+        
+        // Visual feedback
+        this.style.transform = `translateY(${deltaY}px)`;
+        this.style.opacity = '0.7';
+        
+        // Find element below touch point
+        const elementsBelow = Array.from(container.querySelectorAll('.sentence-order-item.draggable'));
+        const currentIndex = elementsBelow.indexOf(this);
+        
+        elementsBelow.forEach((el, index) => {
+            if (el === this) return;
+            const rect = el.getBoundingClientRect();
+            const elCenter = rect.top + rect.height / 2;
+            
+            if (touchY >= rect.top && touchY <= rect.bottom) {
+                if (touchY < elCenter) {
+                    el.classList.add('drag-over-before');
+                    el.classList.remove('drag-over-after');
+                } else {
+                    el.classList.add('drag-over-after');
+                    el.classList.remove('drag-over-before');
+                }
+            } else {
+                el.classList.remove('drag-over-before', 'drag-over-after');
+            }
+        });
+    }, { passive: false });
+    
+    element.addEventListener('touchend', function(e) {
+        if (!touchElement || touchElement !== this) return;
+        e.preventDefault();
+        
+        const touchY = e.changedTouches[0].clientY;
+        const elementsBelow = Array.from(container.querySelectorAll('.sentence-order-item.draggable'));
+        const currentIndex = elementsBelow.indexOf(this);
+        
+        // Find target element
+        let targetElement = null;
+        let insertBefore = false;
+        
+        for (let el of elementsBelow) {
+            if (el === this) continue;
+            const rect = el.getBoundingClientRect();
+            if (touchY >= rect.top && touchY <= rect.bottom) {
+                targetElement = el;
+                const elCenter = rect.top + rect.height / 2;
+                insertBefore = touchY < elCenter;
+                break;
+            }
+        }
+        
+        // Reset visual state
+        this.style.transform = '';
+        this.style.opacity = '';
+        this.classList.remove('dragging');
+        elementsBelow.forEach(el => {
+            el.classList.remove('drag-over-before', 'drag-over-after');
+        });
+        
+        // Move element if target found
+        if (targetElement && targetElement !== this) {
+            if (insertBefore) {
+                container.insertBefore(this, targetElement);
+            } else {
+                if (targetElement.nextSibling) {
+                    container.insertBefore(this, targetElement.nextSibling);
+                } else {
+                    container.appendChild(this);
+                }
+            }
+            updateOrderNumbers(container);
+        }
+        
+        touchStartY = null;
+        touchElement = null;
+    }, { passive: false });
+}
+
+// Mobile button handlers
+function moveSentenceUp(element, container) {
+    const allItems = Array.from(container.querySelectorAll('.sentence-order-item.draggable'));
+    const currentIndex = allItems.indexOf(element);
+    
+    if (currentIndex > 0) {
+        const prevItem = allItems[currentIndex - 1];
+        container.insertBefore(element, prevItem);
+        updateOrderNumbers(container);
+    }
+}
+
+function moveSentenceDown(element, container) {
+    const allItems = Array.from(container.querySelectorAll('.sentence-order-item.draggable'));
+    const currentIndex = allItems.indexOf(element);
+    
+    if (currentIndex < allItems.length - 1) {
+        const nextItem = allItems[currentIndex + 1];
+        if (nextItem.nextSibling) {
+            container.insertBefore(element, nextItem.nextSibling);
+        } else {
+            container.appendChild(element);
+        }
+        updateOrderNumbers(container);
+    }
+}
+
 function updateOrderNumbers(container) {
     const items = container.querySelectorAll('.sentence-order-item.draggable');
     items.forEach((item, index) => {
@@ -1441,15 +1590,28 @@ function loadPart3() {
                     <span class="drag-handle">☰</span>
                     <span class="order-number">${displayIndex + 1}</span>
                     <span class="sentence-text">${item.sentence}</span>
+                    <div class="mobile-controls">
+                        <button class="move-btn move-up" aria-label="Move up">↑</button>
+                        <button class="move-btn move-down" aria-label="Move down">↓</button>
+                    </div>
                 `;
                 
-                // Drag event handlers
+                // Drag event handlers (desktop)
                 sentenceEl.addEventListener('dragstart', handleDragStart);
                 sentenceEl.addEventListener('dragend', handleDragEnd);
                 sentenceEl.addEventListener('dragover', handleDragOver);
                 sentenceEl.addEventListener('drop', handleDrop);
                 sentenceEl.addEventListener('dragenter', handleDragEnter);
                 sentenceEl.addEventListener('dragleave', handleDragLeave);
+                
+                // Touch event handlers (mobile)
+                addTouchHandlers(sentenceEl, examContainer);
+                
+                // Mobile button handlers
+                const moveUpBtn = sentenceEl.querySelector('.move-up');
+                const moveDownBtn = sentenceEl.querySelector('.move-down');
+                moveUpBtn.addEventListener('click', () => moveSentenceUp(sentenceEl, examContainer));
+                moveDownBtn.addEventListener('click', () => moveSentenceDown(sentenceEl, examContainer));
                 
                 examContainer.appendChild(sentenceEl);
             });
@@ -1476,6 +1638,18 @@ function loadPart3() {
                         el.addEventListener('drop', handleDrop);
                         el.addEventListener('dragenter', handleDragEnter);
                         el.addEventListener('dragleave', handleDragLeave);
+                        
+                        // Re-attach mobile handlers
+                        addTouchHandlers(el, examContainer);
+                        const moveUpBtn = el.querySelector('.move-up');
+                        const moveDownBtn = el.querySelector('.move-down');
+                        if (moveUpBtn) {
+                            moveUpBtn.addEventListener('click', () => moveSentenceUp(el, examContainer));
+                        }
+                        if (moveDownBtn) {
+                            moveDownBtn.addEventListener('click', () => moveSentenceDown(el, examContainer));
+                        }
+                        
                         el.setAttribute('data-handlers-attached', 'true');
                     }
                 });
@@ -1565,15 +1739,28 @@ function loadPart3() {
             <span class="drag-handle">☰</span>
             <span class="order-number">${displayIndex + 1}</span>
             <span class="sentence-text">${item.sentence}</span>
+            <div class="mobile-controls">
+                <button class="move-btn move-up" aria-label="Move up">↑</button>
+                <button class="move-btn move-down" aria-label="Move down">↓</button>
+            </div>
         `;
         
-        // Drag event handlers - CRITICAL: Must be attached (same as Part 2)
+        // Drag event handlers (desktop)
         sentenceEl.addEventListener('dragstart', handleDragStart);
         sentenceEl.addEventListener('dragend', handleDragEnd);
         sentenceEl.addEventListener('dragover', handleDragOver);
         sentenceEl.addEventListener('drop', handleDrop);
         sentenceEl.addEventListener('dragenter', handleDragEnter);
         sentenceEl.addEventListener('dragleave', handleDragLeave);
+        
+        // Touch event handlers (mobile)
+        addTouchHandlers(sentenceEl, container);
+        
+        // Mobile button handlers
+        const moveUpBtn = sentenceEl.querySelector('.move-up');
+        const moveDownBtn = sentenceEl.querySelector('.move-down');
+        moveUpBtn.addEventListener('click', () => moveSentenceUp(sentenceEl, container));
+        moveDownBtn.addEventListener('click', () => moveSentenceDown(sentenceEl, container));
         
         container.appendChild(sentenceEl);
     });
@@ -1600,6 +1787,18 @@ function loadPart3() {
                 el.addEventListener('drop', handleDrop);
                 el.addEventListener('dragenter', handleDragEnter);
                 el.addEventListener('dragleave', handleDragLeave);
+                
+                // Re-attach mobile handlers
+                addTouchHandlers(el, container);
+                const moveUpBtn = el.querySelector('.move-up');
+                const moveDownBtn = el.querySelector('.move-down');
+                if (moveUpBtn) {
+                    moveUpBtn.addEventListener('click', () => moveSentenceUp(el, container));
+                }
+                if (moveDownBtn) {
+                    moveDownBtn.addEventListener('click', () => moveSentenceDown(el, container));
+                }
+                
                 el.setAttribute('data-handlers-attached', 'true');
             }
         });
