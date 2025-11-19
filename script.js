@@ -3322,7 +3322,7 @@ function createListeningQuestionCard(question, examKey) {
                 question.options.forEach(opt => {
                     const option = document.createElement('option');
                     option.value = opt.letter;
-                    option.textContent = `${opt.letter}. ${opt.text}${opt.vietnamese ? ` (${opt.vietnamese})` : ''}`;
+                    option.textContent = `${opt.text}${opt.vietnamese ? ` (${opt.vietnamese})` : ''}`;
                     select.appendChild(option);
                 });
             } else {
