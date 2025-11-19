@@ -3155,6 +3155,18 @@ function restart() {
 let listeningPracticeMode = false;
 let listeningUserAnswers = {};
 let listeningChecked = false; // Track if answers have been checked
+let listeningQuestionChecked = {}; // Track questions checked individually
+const perQuestionCheckExams = new Set(['examPractice14', 'examPractice15', 'examPractice16']);
+
+function shouldShowPerQuestionCheck(examKey) {
+    return perQuestionCheckExams.has(examKey);
+}
+
+function isQuestionChecked(examKey, questionNumber) {
+    if (listeningChecked) return true;
+    if (!listeningQuestionChecked[examKey]) return false;
+    return listeningQuestionChecked[examKey][questionNumber] === true;
+}
 
 function loadListening() {
     const examSelector = document.getElementById('listening-exam-selector');
@@ -3192,6 +3204,9 @@ function loadListeningExam(examKey) {
     // Initialize userAnswers for this exam if not exists
     if (!listeningUserAnswers[examKey]) {
         listeningUserAnswers[examKey] = {};
+    }
+    if (!listeningQuestionChecked[examKey]) {
+        listeningQuestionChecked[examKey] = {};
     }
     
     // Don't reset checked state when reloading (only reset when explicitly requested)
@@ -3243,6 +3258,7 @@ function loadListeningExam(examKey) {
         resetBtn.addEventListener('click', function() {
             listeningUserAnswers[examKey] = {};
             listeningChecked = false;
+            listeningQuestionChecked[examKey] = {};
             loadListeningExam(examKey);
         });
         
@@ -3258,6 +3274,7 @@ function createListeningQuestionCard(question, examKey) {
     const card = document.createElement('div');
     card.style.cssText = 'background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);';
     card.dataset.questionNumber = question.number;
+    const questionChecked = isQuestionChecked(examKey, question.number);
     
     // Question number and header
     const header = document.createElement('div');
@@ -3308,7 +3325,7 @@ function createListeningQuestionCard(question, examKey) {
             select.dataset.subQuestionIndex = idx;
             
             // Disable if checked or not in practice mode
-            if (!listeningPracticeMode || listeningChecked) {
+            if (!listeningPracticeMode || questionChecked) {
                 select.disabled = true;
             }
             
@@ -3346,7 +3363,7 @@ function createListeningQuestionCard(question, examKey) {
                 }
                 
                 select.addEventListener('change', function() {
-                    if (!listeningChecked) {
+                    if (!questionChecked) {
                         if (!listeningUserAnswers[examKey]) listeningUserAnswers[examKey] = {};
                         listeningUserAnswers[examKey][answerKey] = this.value;
                     }
@@ -3359,7 +3376,7 @@ function createListeningQuestionCard(question, examKey) {
             subQDiv.appendChild(select);
             
             // Show result after check (practice mode) or always show (view mode)
-            if ((listeningPracticeMode && listeningChecked) || !listeningPracticeMode) {
+            if ((listeningPracticeMode && questionChecked) || !listeningPracticeMode) {
                 const isCorrect = listeningPracticeMode ? (savedAnswer === subQ.answer) : true;
                 const resultDiv = document.createElement('div');
                 resultDiv.style.cssText = `margin-top: 10px; padding: 10px; border-radius: 6px; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; border-left: 3px solid ${isCorrect ? '#48bb78' : '#fc8181'};`;
@@ -3412,7 +3429,7 @@ function createListeningQuestionCard(question, examKey) {
                 select.style.cssText = 'width: 100%; padding: 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; cursor: pointer;';
                 select.dataset.questionNumber = question.number;
                 select.dataset.subQuestionIndex = idx;
-                select.disabled = listeningChecked;
+                select.disabled = questionChecked;
                 
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
@@ -3441,7 +3458,7 @@ function createListeningQuestionCard(question, examKey) {
                 subQDiv.appendChild(select);
                 
                 // Show result after check
-                if (listeningChecked) {
+                if (questionChecked) {
                     const isCorrect = savedAnswer === subQ.answer;
                     const resultDiv = document.createElement('div');
                     resultDiv.style.cssText = `margin-top: 10px; padding: 10px; border-radius: 6px; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; border-left: 3px solid ${isCorrect ? '#48bb78' : '#fc8181'};`;
@@ -3505,7 +3522,7 @@ function createListeningQuestionCard(question, examKey) {
                 
                 const isUserCorrect = isSelected && isCorrect;
                 
-                if (listeningChecked) {
+                if (questionChecked) {
                     // After check: show result
                     if (isCorrect) {
                         optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f0fff4; border: 2px solid #48bb78;';
@@ -3565,13 +3582,13 @@ function createListeningQuestionCard(question, examKey) {
                 isCorrect = opt.letter === question.answer;
             }
             
-            const showCheckmark = listeningPracticeMode && listeningChecked && (isCorrect || (isSelected && !isCorrect));
+            const showCheckmark = listeningPracticeMode && questionChecked && (isCorrect || (isSelected && !isCorrect));
             
-            const showExplanation = listeningPracticeMode && listeningChecked && opt.explanation;
+            const showExplanation = listeningPracticeMode && questionChecked && opt.explanation;
             
             optDiv.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-weight: 700; color: ${(listeningPracticeMode && listeningChecked && isCorrect) ? '#48bb78' : (!listeningPracticeMode && (opt.letter === question.answer || opt.isCorrect)) ? '#48bb78' : '#4a5568'}; min-width: 30px;">${opt.letter}.</span>
+                    <span style="font-weight: 700; color: ${(listeningPracticeMode && questionChecked && isCorrect) ? '#48bb78' : (!listeningPracticeMode && (opt.letter === question.answer || opt.isCorrect)) ? '#48bb78' : '#4a5568'}; min-width: 30px;">${opt.letter}.</span>
                     <div style="flex: 1;">
                         <div style="font-weight: 600; color: #2d3748;">${opt.text}</div>
                         ${opt.vietnamese ? `<div style="font-size: 14px; color: #718096; margin-top: 4px;">${opt.vietnamese}</div>` : ''}
@@ -3640,8 +3657,20 @@ function createListeningQuestionCard(question, examKey) {
     resultDiv.style.cssText = 'display: none; margin-top: 15px; padding: 15px; border-radius: 8px;';
     card.appendChild(resultDiv);
     
+    if (listeningPracticeMode && !listeningChecked && shouldShowPerQuestionCheck(examKey)) {
+        const singleCheckBtn = document.createElement('button');
+        singleCheckBtn.className = 'btn btn-check';
+        singleCheckBtn.textContent = questionChecked ? 'Đã check câu này' : 'Check đáp án câu này';
+        singleCheckBtn.style.cssText = 'margin-top: 15px; width: 100%; padding: 12px; font-weight: 700;';
+        singleCheckBtn.disabled = questionChecked;
+        singleCheckBtn.addEventListener('click', function() {
+            checkSingleListeningQuestion(examKey, question.number);
+        });
+        card.appendChild(singleCheckBtn);
+    }
+    
     // Explanation section (only show after check in practice mode)
-    if (listeningPracticeMode && listeningChecked && question.explanation) {
+    if (listeningPracticeMode && questionChecked && question.explanation) {
         const explanationDiv = document.createElement('div');
         explanationDiv.style.cssText = 'background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%); border-radius: 8px; padding: 15px; margin-top: 15px; border-left: 4px solid #667eea;';
         explanationDiv.innerHTML = `
@@ -3657,6 +3686,12 @@ function createListeningQuestionCard(question, examKey) {
     }
     
     return card;
+}
+
+function checkSingleListeningQuestion(examKey, questionNumber) {
+    if (!listeningQuestionChecked[examKey]) listeningQuestionChecked[examKey] = {};
+    listeningQuestionChecked[examKey][questionNumber] = true;
+    loadListeningExam(examKey);
 }
 
 function checkListeningAnswers(examKey, exam) {

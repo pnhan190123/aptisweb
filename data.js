@@ -1295,43 +1295,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "Travel to work",
-                question: "đi làm như thế nào? Chọn đúng/sai cho từng câu",
+                topic: "Running preferences",
+                question: "Four people are talking about running. Complete the sentences below.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "walk with a friend", vietnamese: "đi bộ với 1 người bạn" },
-                    { letter: "B", text: "drive to work", vietnamese: "lái xe đi làm" },
-                    { letter: "C", text: "walk alone", vietnamese: "đi bộ 1 mình" },
-                    { letter: "D", text: "travel by bus", vietnamese: "đi bằng xe buýt" }
+                    { letter: "A", text: "prefer running in the street", vietnamese: "thích chạy trên đường phố" },
+                    { letter: "B", text: "prefer running at the seaside", vietnamese: "thích chạy ở bờ biển" },
+                    { letter: "C", text: "prefer running on the running track", vietnamese: "thích chạy trên đường đua" },
+                    { letter: "D", text: "prefer running in the fitness center", vietnamese: "thích chạy trong phòng gym" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ prefer running in the street.",
                         answer: "A",
-                        isCorrect: false,
-                        explanation: "Sai vì trong bài nghe không đề cập đến việc đi bộ với bạn"
+                        explanation: "Người nói thích sự nhộn nhịp của đường phố, dừng đèn đỏ và quan sát mọi người giúp họ tỉnh táo."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ at the seaside.",
                         answer: "B",
-                        isCorrect: false,
-                        explanation: "Sai vì người nói không lái xe đi làm"
+                        explanation: "Người nói thích không khí trong lành, cát, tiếng sóng và có thể nhảy xuống biển sau khi chạy."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ on the running track.",
                         answer: "C",
-                        isCorrect: false,
-                        explanation: "Sai vì không phải đi bộ một mình"
+                        explanation: "Đường chạy giúp họ theo dõi quãng đường, mặt phẳng mịn tốt cho đầu gối và có thể chạy mọi lúc."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ in the fitness center.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì trong bài nghe có đề cập đến việc đi bằng xe buýt"
+                        explanation: "Chạy trên máy trong phòng tập giúp họ tránh thời tiết xấu, điều chỉnh độ dốc/tốc độ và theo dõi nhịp tim."
                     }
                 ],
-                tip: "Nhớ: D = travel by bus (đi bằng xe buýt) là đúng, các câu khác đều sai",
-                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Sai, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Trong đoạn nghe, người nói đề cập rõ ràng đến việc sử dụng xe buýt làm phương tiện đi lại đến nơi làm việc."
+                tip: "Nhớ các từ khóa: street (đường phố), seaside (bờ biển), track (đường chạy), fitness centre (phòng gym).",
+                explanation: "Ghép từng người với nơi họ thích chạy: A-street, B-seaside, C-track, D-fitness centre."
             },
             {
                 number: 15,
@@ -1609,43 +1605,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "Online shopping",
-                question: "mua sắm trực tuyến có ưu điểm gì? Chọn đúng/sai cho từng câu",
+                topic: "Study habits",
+                question: "Four people are sharing their study habits. Complete the sentences below.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "There are more choices", vietnamese: "có nhiều lựa chọn hơn" },
-                    { letter: "B", text: "It saves time", vietnamese: "tiết kiệm thời gian" },
-                    { letter: "C", text: "It is cheaper", vietnamese: "rẻ hơn" },
-                    { letter: "D", text: "The products are delivered", vietnamese: "sản phẩm được giao tận nhà" }
+                    { letter: "A", text: "study at various places", vietnamese: "học ở nhiều nơi khác nhau" },
+                    { letter: "B", text: "study in a quiet place", vietnamese: "học ở nơi yên tĩnh" },
+                    { letter: "C", text: "study with music", vietnamese: "học cùng âm nhạc" },
+                    { letter: "D", text: "study late at night", vietnamese: "học vào đêm muộn" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ study at various places.",
                         answer: "A",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là một trong những ưu điểm của mua sắm trực tuyến"
+                        explanation: "Người nói thay đổi địa điểm học (thư viện, quán cà phê, công viên) để giữ sự tập trung."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ in a quiet place.",
                         answer: "B",
-                        isCorrect: true,
-                        explanation: "Đúng vì mua sắm trực tuyến tiết kiệm thời gian"
+                        explanation: "Họ thích phòng yên tĩnh ở nhà hoặc thư viện để không bị xao nhãng."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ with music.",
                         answer: "C",
-                        isCorrect: true,
-                        explanation: "Đúng vì thường rẻ hơn so với mua tại cửa hàng"
+                        explanation: "Âm nhạc nhẹ giúp họ duy trì năng lượng và động lực khi học."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ late at night.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì sản phẩm được giao tận nhà"
+                        explanation: "Ban đêm yên tĩnh giúp họ tập trung và làm việc hiệu quả nhất."
                     }
                 ],
-                tip: "Nhớ: Tất cả A, B, C, D đều đúng - nhiều lựa chọn, tiết kiệm thời gian, rẻ hơn, giao hàng",
-                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các ưu điểm đều được đề cập trong bài nghe."
+                tip: "Liên hệ từ khóa: various places, quiet place, music, late night.",
+                explanation: "A: đổi địa điểm học; B: cần sự yên tĩnh; C: thích âm nhạc nền; D: học khuya."
             },
             {
                 number: 15,
@@ -1925,43 +1917,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "Outdoor activities",
-                question: "hoạt động ngoài trời nào được đề cập? Chọn đúng/sai cho từng câu",
+                topic: "Internet purposes",
+                question: "Listen to four people talking about why they use the internet. Complete the sentences.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "Horse riding", vietnamese: "cưỡi ngựa" },
-                    { letter: "B", text: "Going for a run", vietnamese: "chạy bộ" },
-                    { letter: "C", text: "Climbing", vietnamese: "leo núi" },
-                    { letter: "D", text: "Mountain biking", vietnamese: "đạp xe leo núi" }
+                    { letter: "A", text: "use the internet to watch films", vietnamese: "dùng internet để xem phim" },
+                    { letter: "B", text: "use the internet to communicate with friends", vietnamese: "dùng internet để nói chuyện với bạn bè" },
+                    { letter: "C", text: "use the internet to complete school assignments", vietnamese: "dùng internet để làm bài tập" },
+                    { letter: "D", text: "use the internet to find transport information", vietnamese: "dùng internet để tìm thông tin phương tiện" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ watch films.",
                         answer: "A",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là một trong những hoạt động ngoài trời được đề cập"
+                        explanation: "Người nói thích xem phim trực tuyến để thư giãn mà không cần mua DVD."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ communicate with friends.",
                         answer: "B",
-                        isCorrect: true,
-                        explanation: "Đúng vì chạy bộ cũng là hoạt động ngoài trời được đề cập"
+                        explanation: "Họ dùng mạng xã hội, gọi video để giữ liên lạc với bạn bè ở xa."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ complete school assignments.",
                         answer: "C",
-                        isCorrect: true,
-                        explanation: "Đúng vì leo núi là hoạt động ngoài trời được đề cập"
+                        explanation: "Internet giúp họ nghiên cứu, tải tài liệu và nộp bài."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ find transport information.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì đạp xe leo núi là hoạt động ngoài trời được đề cập"
+                        explanation: "Họ tra lịch tàu xe, mua vé và xem cập nhật chậm trễ."
                     }
                 ],
-                tip: "Nhớ: Tất cả A, B, C, D đều đúng - cưỡi ngựa, chạy bộ, leo núi, đạp xe leo núi",
-                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các hoạt động ngoài trời đều được đề cập trong bài nghe."
+                tip: "Từ khóa: films, friends, assignments, transport.",
+                explanation: "A xem phim, B liên lạc bạn bè, C làm bài, D tìm thông tin di chuyển."
             },
             {
                 number: 15,
@@ -2241,43 +2229,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "Do exercise",
-                question: "tập thể dục như thế nào? Chọn đúng/sai cho từng câu",
+                topic: "Listening to music",
+                question: "Listen to the opinions of four people about when they listen to music. Complete the sentences.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "Hate exercising", vietnamese: "ghét tập thể dục" },
-                    { letter: "B", text: "Help improve work performance", vietnamese: "giúp cải thiện hiệu suất công việc" },
-                    { letter: "C", text: "Find exercise tiring", vietnamese: "thấy tập thể dục mệt mỏi" },
-                    { letter: "D", text: "Has fun when exercising with friends", vietnamese: "vui khi tập thể dục với bạn bè" }
+                    { letter: "A", text: "listen to music to relax", vietnamese: "nghe nhạc để thư giãn" },
+                    { letter: "B", text: "listen to music while studying", vietnamese: "nghe nhạc khi học" },
+                    { letter: "C", text: "listen to music while singing", vietnamese: "nghe nhạc khi hát" },
+                    { letter: "D", text: "listen to music after waking up", vietnamese: "nghe nhạc sau khi thức dậy" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ to relax.",
                         answer: "A",
-                        isCorrect: false,
-                        explanation: "Sai vì không có đề cập đến việc ghét tập thể dục"
+                        explanation: "Âm nhạc nhẹ giúp họ thư giãn sau ngày dài, thoát khỏi ồn ào cuộc sống."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ while studying.",
                         answer: "B",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là một trong những lợi ích của tập thể dục được đề cập"
+                        explanation: "Nhạc không lời giúp họ tập trung và có động lực khi làm bài dài."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ while singing.",
                         answer: "C",
-                        isCorrect: false,
-                        explanation: "Sai vì không có đề cập đến việc thấy mệt mỏi"
+                        explanation: "Họ nghe nhạc để luyện giọng, hát theo và thậm chí ghi âm lại."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ after waking up.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là một trong những trải nghiệm được đề cập"
+                        explanation: "Ngay khi thức dậy họ bật playlist sôi động để có năng lượng cho ngày mới."
                     }
                 ],
-                tip: "Nhớ: B và D đều đúng - cải thiện hiệu suất công việc, vui khi tập với bạn",
-                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Đúng, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Tập thể dục giúp cải thiện hiệu suất công việc, và người nói cảm thấy vui vẻ khi tập thể dục cùng bạn bè."
+                tip: "Ghi nhớ bốn thời điểm: thư giãn, khi học, khi hát, sau khi thức dậy.",
+                explanation: "A-thư giãn, B-học bài, C-luyện hát, D-mở nhạc buổi sáng."
             },
             {
                 number: 15,
@@ -2552,43 +2536,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "The place to run",
-                question: "nơi nào để chạy? Chọn đúng/sai cho từng câu",
+                topic: "Internet purposes",
+                question: "Listen to the opinions of four people about why they use the internet. Choose the correct answer.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "In the fitness centre", vietnamese: "trong trung tâm thể dục" },
-                    { letter: "B", text: "At the seaside", vietnamese: "ở bờ biển" },
-                    { letter: "C", text: "In the street", vietnamese: "trên đường phố" },
-                    { letter: "D", text: "On the running track", vietnamese: "trên đường chạy" }
+                    { letter: "A", text: "use the internet to watch films", vietnamese: "dùng internet để xem phim" },
+                    { letter: "B", text: "use the internet to complete assignments", vietnamese: "dùng internet để làm bài tập" },
+                    { letter: "C", text: "use the internet to communicate with friends", vietnamese: "dùng internet để trò chuyện với bạn bè" },
+                    { letter: "D", text: "use the internet to find transport information", vietnamese: "dùng internet để tìm thông tin di chuyển" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ watch films.",
                         answer: "A",
-                        isCorrect: false,
-                        explanation: "Sai vì không phải trung tâm thể dục"
+                        explanation: "Là sinh viên mê phim, họ xem miễn phí tại nhà để tiết kiệm tiền và thời gian."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ complete assignments.",
                         answer: "B",
-                        isCorrect: false,
-                        explanation: "Sai vì không phải bờ biển"
+                        explanation: "Internet giúp họ tra cứu tài liệu, tìm câu trả lời nhanh khi làm bài cùng bạn."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ communicate with friends.",
                         answer: "C",
-                        isCorrect: false,
-                        explanation: "Sai vì không phải trên đường phố"
+                        explanation: "Họ dùng mạng xã hội, gọi video để giữ liên lạc với người thân ở xa."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ find transport information.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì trong bài nghe nói rõ là trên đường chạy"
+                        explanation: "Người nói dùng internet để tìm đường, phương tiện công cộng và tránh lạc đường."
                     }
                 ],
-                tip: "Nhớ: D = On the running track (trên đường chạy) là đúng, các câu khác đều sai",
-                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Sai, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Trong đoạn nghe, người nói đề cập rằng họ thích chạy trên đường chạy chuyên dụng."
+                tip: "Ghi nhớ: phim, bài tập, liên lạc, thông tin di chuyển.",
+                explanation: "A-xem phim, B-làm bài, C-liên lạc, D-tìm đường/xe."
             },
             {
                 number: 15,
@@ -2863,43 +2843,39 @@ const listeningData = {
             },
             {
                 number: 14,
-                topic: "Environmental problem",
-                question: "cách giải quyết vấn đề môi trường? Chọn đúng/sai cho từng câu",
+                topic: "Listening to music",
+                question: "Listen to opinions of four people A-D about when they like listening to music.",
                 multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "Buy environmentally friendly products", vietnamese: "mua sản phẩm thân thiện môi trường" },
-                    { letter: "B", text: "Give away used items", vietnamese: "tặng đồ dùng đã qua sử dụng" },
-                    { letter: "C", text: "Does not use commercial cleaning products", vietnamese: "không sử dụng sản phẩm tẩy rửa thương mại" },
-                    { letter: "D", text: "Reuse containers for storing food", vietnamese: "tái sử dụng hộp đựng thức ăn" }
+                    { letter: "A", text: "listen to music to relax", vietnamese: "nghe nhạc để thư giãn" },
+                    { letter: "B", text: "listen to music while studying", vietnamese: "nghe nhạc khi học" },
+                    { letter: "C", text: "listen to music while singing", vietnamese: "nghe nhạc khi hát" },
+                    { letter: "D", text: "listen to music after waking up", vietnamese: "nghe nhạc sau khi thức dậy" }
                 ],
                 subQuestions: [
                     {
-                        text: "A",
+                        text: "Speaker A _____ to relax.",
                         answer: "A",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là lời khuyên đầu tiên"
+                        explanation: "Người nói nghe nhạc nhẹ để thư giãn, nằm trên ghế sofa hay đi dạo đều bật nhạc."
                     },
                     {
-                        text: "B",
+                        text: "Speaker B _____ while studying.",
                         answer: "B",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là lời khuyên thứ hai"
+                        explanation: "Âm nhạc nền giúp họ tập trung khi làm bài dài hoặc ôn thi."
                     },
                     {
-                        text: "C",
+                        text: "Speaker C _____ while singing.",
                         answer: "C",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là lời khuyên thứ ba"
+                        explanation: "Họ nghe nhạc để hát theo, luyện giọng và ghi âm lại để kiểm tra."
                     },
                     {
-                        text: "D",
+                        text: "Speaker D _____ after waking up.",
                         answer: "D",
-                        isCorrect: true,
-                        explanation: "Đúng vì đây là lời khuyên thứ tư"
+                        explanation: "Ngay sau khi thức dậy họ bật playlist vui nhộn để có năng lượng bắt đầu ngày mới."
                     }
                 ],
-                tip: "Nhớ: Tất cả A, B, C, D đều đúng - mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa, tái sử dụng hộp",
-                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các biện pháp đều đúng: mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa thương mại và tái sử dụng hộp đựng."
+                tip: "Nhớ bốn thời điểm: thư giãn, học bài, luyện hát, buổi sáng sau khi thức dậy.",
+                explanation: "A nghe để thư giãn, B vừa học vừa nghe, C luyện hát, D bật nhạc ngay khi thức dậy."
             },
             {
                 number: 15,
@@ -2965,6 +2941,1140 @@ const listeningData = {
                 answer: "A",
                 tip: "Nhớ: A và B đều đúng",
                 explanation: "Đáp án đúng là A và B. Hãy theo dõi chi tiêu hàng tuần và xin lời khuyên của người có kinh nghiệm."
+            }
+        ]
+    },
+    examPractice14: {
+        title: "LISTENING PRACTICE - PART 4 QUESTION 14",
+        questions: [
+            {
+                number: 1,
+                topic: "Outdoor exercise set 1",
+                question: "Speakers A-D talk about where they like to exercise outdoors. Match each speaker with the activity they mention.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Mountain biking", vietnamese: "đạp xe leo núi" },
+                    { letter: "B", text: "Going for a run", vietnamese: "chạy bộ" },
+                    { letter: "C", text: "Walking", vietnamese: "đi bộ" },
+                    { letter: "D", text: "Horse riding", vietnamese: "cưỡi ngựa" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A nói về việc khám phá những con đường dốc bằng xe đạp leo núi." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B thích cảm giác nhịp nhàng khi chạy bộ." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C nhấn mạnh việc đi bộ thư giãn." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D mô tả trải nghiệm cưỡi ngựa." }
+                ],
+                tip: "Nhớ: A-bike trail, B-run, C-walk, D-horse.",
+                explanation: "Thứ tự đúng: A = Mountain biking, B = Going for a run, C = Walking, D = Horse riding."
+            },
+            {
+                number: 2,
+                topic: "Feelings about exercise",
+                question: "Speakers A-D describe how they feel about exercising. Match each speaker to the opinion mentioned.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Improve work performance", vietnamese: "cải thiện hiệu suất công việc" },
+                    { letter: "B", text: "Find exercise tiring", vietnamese: "thấy tập luyện rất mệt" },
+                    { letter: "C", text: "Have fun exercising with others", vietnamese: "vui khi tập cùng người khác" },
+                    { letter: "D", text: "Hate exercising", vietnamese: "ghét tập luyện" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A tin rằng tập luyện giúp họ làm việc hiệu quả hơn." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B than mệt mỗi khi phải tập." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C thích sự vui vẻ khi tập cùng bạn bè." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D thẳng thắn nói rằng họ ghét luyện tập." }
+                ],
+                tip: "Hai cảm xúc tích cực (A,C) và hai tiêu cực (B,D).",
+                explanation: "A = cải thiện hiệu suất, B = mệt, C = vui với người khác, D = ghét."
+            },
+            {
+                number: 3,
+                topic: "Protecting the environment",
+                question: "Speakers A-D talk about how they protect the environment. Match each speaker with their action.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "using less electricity", vietnamese: "dùng ít điện hơn" },
+                    { letter: "B", text: "not driving to work", vietnamese: "không lái xe đi làm" },
+                    { letter: "C", text: "shopping online", vietnamese: "mua sắm trực tuyến" },
+                    { letter: "D", text: "using less water", vietnamese: "dùng ít nước hơn" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A protects the environment by _____", answer: "A", explanation: "Giảm điện năng tiêu thụ giúp giảm khí thải." },
+                    { text: "Speaker B protects the environment by _____", answer: "B", explanation: "Đi bộ hay đi xe công cộng thay cho lái xe cá nhân." },
+                    { text: "Speaker C protects the environment by _____", answer: "C", explanation: "Mua sắm online để giảm di chuyển và bao bì." },
+                    { text: "Speaker D protects the environment by _____", answer: "D", explanation: "Tiết kiệm nước trong sinh hoạt." }
+                ],
+                tip: "Nhớ 4 hành động: điện, xe, mua sắm, nước.",
+                explanation: "A=less electricity, B=không lái xe, C=shopping online, D=less water."
+            },
+            {
+                number: 4,
+                topic: "Approach to arts",
+                question: "Speakers A-D explain how they engage with arts. Match each speaker to the statement.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Doing arts as a social activity", vietnamese: "làm nghệ thuật như một hoạt động xã hội" },
+                    { letter: "B", text: "Doing arts with children", vietnamese: "làm nghệ thuật cùng trẻ em" },
+                    { letter: "C", text: "Doing arts as part of the job", vietnamese: "làm nghệ thuật trong công việc" },
+                    { letter: "D", text: "Doing arts alone", vietnamese: "làm nghệ thuật một mình" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A coi nghệ thuật là dịp giao lưu với bạn bè." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B hướng dẫn trẻ em tham gia nghệ thuật." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C dùng nghệ thuật trong nghề nghiệp chính." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D thích sáng tạo một mình." }
+                ],
+                tip: "A-xã hội, B-trẻ em, C-công việc, D-một mình.",
+                explanation: "Thứ tự đúng lần lượt theo mô tả."
+            },
+            {
+                number: 5,
+                topic: "Online shopping benefits set 1",
+                question: "Match each speaker with the benefit of online shopping they mention.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "It saves time", vietnamese: "tiết kiệm thời gian" },
+                    { letter: "B", text: "It is cheaper", vietnamese: "rẻ hơn" },
+                    { letter: "C", text: "Products are delivered", vietnamese: "hàng được giao tận nơi" },
+                    { letter: "D", text: "There are more choices", vietnamese: "có nhiều lựa chọn" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A thích đặt hàng nhanh không tốn thời gian đi lại." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B nhấn mạnh giá rẻ." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C thích hàng giao tận nhà." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D nói về kho lựa chọn phong phú." }
+                ],
+                tip: "Thứ tự: thời gian, tiền, giao hàng, lựa chọn.",
+                explanation: "A=save time, B=cheaper, C=delivered, D=more options."
+            },
+            {
+                number: 6,
+                topic: "Study preferences set 1",
+                question: "Speakers A-D talk about how they prefer to study. Match each speaker with the preference.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Prefer to study late at night", vietnamese: "thích học vào đêm khuya" },
+                    { letter: "B", text: "Prefer to study at various places", vietnamese: "thích đổi địa điểm học" },
+                    { letter: "C", text: "Prefer to study with music (calm playlist)", vietnamese: "thích học với nhạc nhẹ" },
+                    { letter: "D", text: "Prefer to study with music (energetic playlist)", vietnamese: "thích học với nhạc sôi động" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A cảm thấy đêm khuya yên tĩnh nhất để học." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B thay đổi không gian học để giữ sự hứng thú." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C thích nhạc nhẹ giúp tập trung." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D cần nhạc sôi động để giữ năng lượng." }
+                ],
+                tip: "Hai lựa chọn về nhạc: C=nhạc nhẹ, D=nhạc mạnh.",
+                explanation: "A=late night, B=various places, C/D=nhạc khác nhau."
+            },
+            {
+                number: 7,
+                topic: "Commuting choices",
+                question: "Speakers A-D talk about how they travel to work. Match each speaker with their method.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Walk with friends", vietnamese: "đi bộ với bạn" },
+                    { letter: "B", text: "Go by bus", vietnamese: "đi bằng xe buýt" },
+                    { letter: "C", text: "Walk alone", vietnamese: "đi bộ một mình" },
+                    { letter: "D", text: "Drive car", vietnamese: "lái ô tô" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A thích tán gẫu với bạn khi đi bộ." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B chọn xe buýt vì tiện." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C đi bộ một mình để suy nghĩ." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D lái xe cho nhanh." }
+                ],
+                tip: "Hai lựa chọn đi bộ và hai lựa chọn phương tiện.",
+                explanation: "A=walk with friends, B=bus, C=walk alone, D=drive."
+            },
+            {
+                number: 8,
+                topic: "Online shopping benefits set 2",
+                question: "Một nhóm người khác nói về mua sắm trực tuyến. Ghép mỗi người với lợi ích họ nêu.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Products are delivered", vietnamese: "giao hàng tận nơi" },
+                    { letter: "B", text: "It is cheaper", vietnamese: "rẻ hơn" },
+                    { letter: "C", text: "It saves time", vietnamese: "tiết kiệm thời gian" },
+                    { letter: "D", text: "It has more choices", vietnamese: "nhiều lựa chọn hơn" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A đề cao việc không cần ra ngoài vì có giao hàng." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B luôn săn ưu đãi rẻ." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C đặt hàng để tiết kiệm thời gian." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D thích sự đa dạng sản phẩm." }
+                ],
+                tip: "Thứ tự khác với bộ 1 để luyện phản xạ.",
+                explanation: "A=delivered, B=cheaper, C=save time, D=more choices."
+            },
+            {
+                number: 9,
+                topic: "Green lifestyle actions",
+                question: "Match each speaker with the eco-friendly habit they mention.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "give away used items", vietnamese: "tặng đồ đã dùng" },
+                    { letter: "B", text: "buy environmentally friendly products", vietnamese: "mua sản phẩm thân thiện môi trường" },
+                    { letter: "C", text: "reuse containers for storing food", vietnamese: "tái sử dụng hộp đựng thức ăn" },
+                    { letter: "D", text: "not buy commercial cleaning products", vietnamese: "không mua chất tẩy rửa thương mại" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A tặng lại đồ cũ." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B ưu tiên sản phẩm xanh." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C giữ hộp để dùng lại." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D tự làm dung dịch vệ sinh thay vì mua." }
+                ],
+                tip: "Nhớ: A-tặng, B-mua xanh, C-tái sử dụng, D-không mua chất tẩy.",
+                explanation: "Thứ tự như mô tả."
+            },
+            {
+                number: 10,
+                topic: "Running preferences set 2",
+                question: "Speakers A-D chia sẻ nơi họ thích chạy. Ghép mỗi người với lựa chọn đúng.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "prefer running in the street", vietnamese: "thích chạy trên đường phố" },
+                    { letter: "B", text: "prefer running at the seaside", vietnamese: "thích chạy ở bờ biển" },
+                    { letter: "C", text: "prefer running on the running track", vietnamese: "thích chạy trên đường chạy" },
+                    { letter: "D", text: "prefer running in the fitness center", vietnamese: "thích chạy trong phòng gym" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A thích cảnh nhộn nhịp của đường phố." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B nói về gió biển và cát." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C nhắc đến vòng chạy chuẩn xác." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D chọn máy chạy trong phòng gym." }
+                ],
+                tip: "Giống đề thật: street, seaside, track, gym.",
+                explanation: "A-street, B-seaside, C-track, D-gym."
+            },
+            {
+                number: 11,
+                topic: "Study preferences set 2",
+                question: "Match each speaker with their preferred study environment.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "At various places", vietnamese: "ở nhiều nơi khác nhau" },
+                    { letter: "B", text: "In a quiet place", vietnamese: "ở nơi yên tĩnh" },
+                    { letter: "C", text: "With music", vietnamese: "nghe nhạc khi học" },
+                    { letter: "D", text: "Late at night", vietnamese: "học vào đêm muộn" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A đổi chỗ học liên tục." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B cần sự yên tĩnh." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C luôn bật nhạc." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D thích đêm khuya." }
+                ],
+                tip: "Trật tự quen thuộc: nhiều nơi, yên tĩnh, nhạc, đêm.",
+                explanation: "A=various places, B=quiet, C=music, D=late night."
+            },
+            {
+                number: 12,
+                topic: "Internet purposes set 1",
+                question: "Người A-D nói về mục đích dùng internet. Ghép với lựa chọn đúng.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "watch films", vietnamese: "xem phim" },
+                    { letter: "B", text: "communicate with friends", vietnamese: "nói chuyện với bạn bè" },
+                    { letter: "C", text: "complete school assignments", vietnamese: "làm bài tập" },
+                    { letter: "D", text: "find transport information", vietnamese: "tìm thông tin phương tiện" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A xem phim trên mạng." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B dùng mạng để trò chuyện." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C tìm tài liệu học." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D tra cứu lịch trình đi lại." }
+                ],
+                tip: "Bài luyện chuẩn: phim, bạn bè, bài tập, phương tiện.",
+                explanation: "Thứ tự A-D như mô tả."
+            },
+            {
+                number: 13,
+                topic: "Music listening moments",
+                question: "Speakers A-D chia sẻ khi nào họ nghe nhạc. Ghép với thời điểm phù hợp.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "To relax", vietnamese: "để thư giãn" },
+                    { letter: "B", text: "While studying", vietnamese: "khi học bài" },
+                    { letter: "C", text: "While singing", vietnamese: "khi luyện hát" },
+                    { letter: "D", text: "After waking up", vietnamese: "sau khi thức dậy" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A nghe nhạc để xả stress." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B bật nhạc khi học." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C nghe nhạc để hát theo." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D bật playlist ngay khi thức giấc." }
+                ],
+                tip: "4 thời điểm: relax, study, sing, wake up.",
+                explanation: "A=relax, B=study, C=sing, D=after waking."
+            },
+            {
+                number: 14,
+                topic: "Internet purposes set 2",
+                question: "Một nhóm khác nói về mục đích dùng internet. Ghép mỗi người với lựa chọn đúng.",
+                multiChoiceSubType: true,
+                options: [
+                    { letter: "A", text: "Watch films", vietnamese: "xem phim" },
+                    { letter: "B", text: "Complete assignments", vietnamese: "làm bài tập" },
+                    { letter: "C", text: "Communicate with friends", vietnamese: "trò chuyện với bạn bè" },
+                    { letter: "D", text: "Find transport information", vietnamese: "tìm phương tiện di chuyển" }
+                ],
+                subQuestions: [
+                    { text: "Speaker A _____", answer: "A", explanation: "Người A mê xem phim mới." },
+                    { text: "Speaker B _____", answer: "B", explanation: "Người B dùng internet để hoàn thành bài tập." },
+                    { text: "Speaker C _____", answer: "C", explanation: "Người C duy trì liên lạc bạn bè." },
+                    { text: "Speaker D _____", answer: "D", explanation: "Người D tra cứu phương tiện và mua vé." }
+                ],
+                tip: "Sắp xếp khác với bộ 1 để luyện phản ứng.",
+                explanation: "A=watch films, B=assignments, C=communicate, D=transport."
+            }
+        ]
+    },
+    examPractice15: {
+        title: "LISTENING PRACTICE - PART 5 QUESTION 15",
+        questions: [
+            {
+                number: 1,
+                topic: "Internet opinions (Man/Woman)",
+                question: "Match each statement to the correct speaker: Woman (W), Man (M), or Both (B).",
+                mnemonic: "W-B-M-B",
+                mnemonicPhrase: "Woman - Both - Man - Both",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "There is too much information on the Internet.",
+                        answer: "W",
+                        explanation: "Người nữ nhận xét rằng lượng thông tin trên Internet quá nhiều nên khó chọn lọc."
+                    },
+                    {
+                        text: "Finding information on the Internet requires skills.",
+                        answer: "B",
+                        explanation: "Cả hai người đều đồng ý rằng cần kỹ năng để tìm thông tin chính xác."
+                    },
+                    {
+                        text: "The use of Internet affects the way we think.",
+                        answer: "M",
+                        explanation: "Người nam nói rằng Internet đang thay đổi cách chúng ta suy nghĩ."
+                    },
+                    {
+                        text: "The Internet makes young people less patient.",
+                        answer: "B",
+                        explanation: "Cả nam và nữ đều nhận thấy giới trẻ kém kiên nhẫn hơn vì Internet."
+                    }
+                ],
+                tip: "Ghi nhớ chuỗi W-B-M-B để phân biệt phát biểu.",
+                explanation: "Thứ tự phát biểu: Nữ nói về quá nhiều thông tin, cả hai nói cần kỹ năng, nam nói ảnh hưởng cách nghĩ, cả hai nói giới trẻ thiếu kiên nhẫn."
+            },
+            {
+                number: 2,
+                topic: "Politics opinions (Man/Woman)",
+                question: "Match each statement about politics to the correct speaker: Woman (W), Man (M), or Both (B).",
+                mnemonic: "B-W-M-B",
+                mnemonicPhrase: "Both - Woman - Man - Both",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Young people are more into politics.",
+                        answer: "B",
+                        explanation: "Cả hai người đều đồng ý rằng giới trẻ ngày càng quan tâm đến chính trị."
+                    },
+                    {
+                        text: "Social media change politics.",
+                        answer: "W",
+                        explanation: "Người nữ nhấn mạnh vai trò của mạng xã hội trong việc thay đổi chính trị."
+                    },
+                    {
+                        text: "People are now better informed on politics.",
+                        answer: "M",
+                        explanation: "Người nam cho rằng hiện nay mọi người nắm thông tin chính trị tốt hơn."
+                    },
+                    {
+                        text: "More women pursue politics.",
+                        answer: "B",
+                        explanation: "Cả hai đều ghi nhận số lượng phụ nữ tham gia chính trị tăng lên."
+                    }
+                ],
+                tip: "Chuỗi nhớ: B-W-M-B.",
+                explanation: "Câu 1 & 4 = Both, câu 2 = Woman, câu 3 = Man."
+            },
+            {
+                number: 3,
+                topic: "University life opinions",
+                question: "Match each statement about university life to Woman (W), Man (M), or Both (B).",
+                mnemonic: "B-M-W-M",
+                mnemonicPhrase: "Both - Man - Woman - Man",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "The internet makes education more accessible.",
+                        answer: "B",
+                        explanation: "Cả hai người đều đồng ý Internet giúp tiếp cận giáo dục dễ hơn."
+                    },
+                    {
+                        text: "Social interactions are essential to university life.",
+                        answer: "M",
+                        explanation: "Người nam nhấn mạnh vai trò của giao tiếp xã hội khi học đại học."
+                    },
+                    {
+                        text: "A diverse curriculum is not always a good thing.",
+                        answer: "W",
+                        explanation: "Người nữ cảnh báo rằng chương trình quá đa dạng có thể gây quá tải."
+                    },
+                    {
+                        text: "Competitions between universities should be encouraged.",
+                        answer: "M",
+                        explanation: "Người nam tin rằng cạnh tranh giữa các trường mang lại đổi mới."
+                    }
+                ],
+                tip: "Nhớ chuỗi B-M-W-M để gán từng câu.",
+                explanation: "1=Both, 2=Man, 3=Woman, 4=Man."
+            },
+            {
+                number: 4,
+                topic: "Urban farming opinions (set 1)",
+                question: "Match each statement about farming space to the correct speaker.",
+                mnemonic: "W-B-M-B",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Living space is more important than farming space.",
+                        answer: "W",
+                        explanation: "Người nữ ưu tiên không gian sống hơn khu trồng trọt."
+                    },
+                    {
+                        text: "Farming space is appealing.",
+                        answer: "B",
+                        explanation: "Cả hai đều thấy mô hình nông nghiệp đô thị hấp dẫn."
+                    },
+                    {
+                        text: "Farming space will benefit the urban economy.",
+                        answer: "M",
+                        explanation: "Người nam tin rằng kinh tế đô thị sẽ hưởng lợi."
+                    },
+                    {
+                        text: "Farming space is in need of more food.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý rằng khu nông nghiệp giúp đáp ứng nhu cầu thực phẩm."
+                    }
+                ],
+                tip: "W-B-M-B: nữ ưu tiên không gian sống, nam nói lợi ích kinh tế.",
+                explanation: "Theo mô tả: 1=W,2=B,3=M,4=B."
+            },
+            {
+                number: 5,
+                topic: "Culture & festivals opinions",
+                question: "Match each statement about culture to Woman (W), Man (M), or Both (B).",
+                mnemonic: "M-B-W-W",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Exhibitions should be different and diverse.",
+                        answer: "M",
+                        explanation: "Người nam muốn các triển lãm phải đa dạng, mới mẻ."
+                    },
+                    {
+                        text: "Traditional customs are gradually losing their significance.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý rằng phong tục đang mai một."
+                    },
+                    {
+                        text: "Local festivals will disappear in the near future.",
+                        answer: "W",
+                        explanation: "Người nữ lo lắng lễ hội địa phương sẽ biến mất."
+                    },
+                    {
+                        text: "Schools are important in shaping future generations.",
+                        answer: "W",
+                        explanation: "Người nữ nhấn mạnh vai trò của trường học."
+                    }
+                ],
+                tip: "M-B-W-W: triển lãm (M), phong tục (B), lễ hội/trường học (W).",
+                explanation: "Theo bài nói: 1=M,2=B,3=W,4=W."
+            },
+            {
+                number: 6,
+                topic: "Urban farming opinions (set 2)",
+                question: "Một nhóm khác bàn về không gian nông nghiệp. Gán câu cho đúng người.",
+                mnemonic: "M-W-W-B",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Living space is more important than farming space.",
+                        answer: "M",
+                        explanation: "Người nam cho rằng ưu tiên nhà ở."
+                    },
+                    {
+                        text: "Farming space is appealing.",
+                        answer: "W",
+                        explanation: "Người nữ bị thu hút bởi nông nghiệp đô thị."
+                    },
+                    {
+                        text: "Farming space will benefit the urban economy.",
+                        answer: "W",
+                        explanation: "Người nữ tin rằng kinh tế thành phố sẽ hưởng lợi."
+                    },
+                    {
+                        text: "Farming space is in need of more food.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý cần thêm thực phẩm từ khu trồng trọt."
+                    }
+                ],
+                tip: "M-W-W-B để phân biệt góc nhìn khác.",
+                explanation: "1=M, 2=W, 3=W, 4=B."
+            },
+            {
+                number: 7,
+                topic: "Actors and performance",
+                question: "Match each opinion about acting to Woman (W), Man (M), or Both (B).",
+                mnemonic: "W-B-B",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Actors tend to respond best to strong and engaging scripts.",
+                        answer: "W",
+                        explanation: "Người nữ cho rằng kịch bản tốt giúp diễn viên diễn hay."
+                    },
+                    {
+                        text: "Theater acting and screen acting are quite different from each other.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý sân khấu và điện ảnh đòi kỹ năng khác nhau."
+                    },
+                    {
+                        text: "Actors should be praised and recognized as much as possible.",
+                        answer: "B",
+                        explanation: "Cả hai cho rằng diễn viên cần được ghi nhận."
+                    }
+                ],
+                tip: "W-B-B theo đúng ba ý kiến nêu ra.",
+                explanation: "Trật tự: W (kịch bản), B (sân khấu vs màn ảnh), B (khen ngợi)."
+            },
+            {
+                number: 8,
+                topic: "Building community",
+                question: "Gán nhận định về cộng đồng cho W/M/B.",
+                mnemonic: "M-W-B",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Creating community can take time.",
+                        answer: "M",
+                        explanation: "Người nam nhấn mạnh việc xây cộng đồng mất thời gian."
+                    },
+                    {
+                        text: "Work communities and social communities are the same.",
+                        answer: "W",
+                        explanation: "Người nữ cho rằng hai loại cộng đồng giống nhau."
+                    },
+                    {
+                        text: "Technology has changed how community forms.",
+                        answer: "B",
+                        explanation: "Cả hai thừa nhận công nghệ đổi cách hình thành cộng đồng."
+                    }
+                ],
+                tip: "M-W-B: thời gian (M), định nghĩa (W), công nghệ (B).",
+                explanation: "Theo phát biểu: 1=M,2=W,3=B."
+            },
+            {
+                number: 9,
+                topic: "Workplace priorities",
+                question: "Match each workplace statement to W/M/B.",
+                mnemonic: "M-W-B-M",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Continuity is very important in the workplace.",
+                        answer: "M",
+                        explanation: "Người nam đề cao tính liên tục."
+                    },
+                    {
+                        text: "Job security cannot always be guaranteed.",
+                        answer: "W",
+                        explanation: "Người nữ cho rằng không thể đảm bảo an toàn việc làm."
+                    },
+                    {
+                        text: "Job satisfaction is an important motivator.",
+                        answer: "B",
+                        explanation: "Cả hai đều xem sự hài lòng là động lực."
+                    },
+                    {
+                        text: "Technology is good for the entire economy.",
+                        answer: "M",
+                        explanation: "Người nam tin công nghệ tốt cho kinh tế."
+                    }
+                ],
+                tip: "M-W-B-M trùng với chuỗi ghi nhớ.",
+                explanation: "1=M,2=W,3=B,4=M."
+            },
+            {
+                number: 10,
+                topic: "Technology concerns",
+                question: "Match each technology statement to W/M/B.",
+                mnemonic: "M-W-W-B",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Future generations fail to cope with technology information.",
+                        answer: "M",
+                        explanation: "Người nam lo giới trẻ không xử lý nổi thông tin."
+                    },
+                    {
+                        text: "Technology revolution is good for the economy.",
+                        answer: "W",
+                        explanation: "Người nữ ủng hộ cuộc cách mạng công nghệ."
+                    },
+                    {
+                        text: "No computer is superior to the human brain.",
+                        answer: "W",
+                        explanation: "Người nữ khẳng định máy tính không vượt não người."
+                    },
+                    {
+                        text: "More should be done to protect individual privacy.",
+                        answer: "B",
+                        explanation: "Cả hai mong muốn bảo vệ quyền riêng tư."
+                    }
+                ],
+                tip: "M-W-W-B đúng thứ tự.",
+                explanation: "1=M,2=W,3=W,4=B."
+            },
+            {
+                number: 11,
+                topic: "Arts funding opinions",
+                question: "Gán mỗi câu về nghệ thuật cho đúng người.",
+                mnemonic: "M-W-B-W",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Art is only suitable for the privileged few.",
+                        answer: "M",
+                        explanation: "Người nam cho rằng nghệ thuật thuộc về số ít."
+                    },
+                    {
+                        text: "The government should invest more in art.",
+                        answer: "W",
+                        explanation: "Người nữ kêu gọi nhà nước đầu tư."
+                    },
+                    {
+                        text: "Children should be exposed to art early.",
+                        answer: "B",
+                        explanation: "Cả hai cùng đồng ý."
+                    },
+                    {
+                        text: "In the future, art will become more accessible.",
+                        answer: "W",
+                        explanation: "Người nữ tin nghệ thuật sẽ phổ biến hơn."
+                    }
+                ],
+                tip: "M-W-B-W theo thứ tự phát biểu.",
+                explanation: "1=M,2=W,3=B,4=W."
+            },
+            {
+                number: 12,
+                topic: "Beauty perspectives",
+                question: "Match each statement about beauty to W/M/B.",
+                mnemonic: "M-W-B-W",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "People share similar ideas about beauty.",
+                        answer: "M",
+                        explanation: "Người nam nghĩ mọi người có quan điểm giống nhau."
+                    },
+                    {
+                        text: "Ideas about beauty change over time.",
+                        answer: "W",
+                        explanation: "Người nữ tin rằng chuẩn đẹp thay đổi."
+                    },
+                    {
+                        text: "Beauty can be found in unlikely places.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý vẻ đẹp có khắp nơi."
+                    },
+                    {
+                        text: "Traditional ideas about beauty are going to change.",
+                        answer: "W",
+                        explanation: "Người nữ dự đoán quan niệm truyền thống sẽ thay đổi."
+                    }
+                ],
+                tip: "Chuỗi M-W-B-W như mô tả.",
+                explanation: "1=M,2=W,3=B,4=W."
+            },
+            {
+                number: 13,
+                topic: "Music opinions",
+                question: "Match each statement about music to Woman (W), Man (M), or Both (B).",
+                mnemonic: "W-B-M-B",
+                mnemonicPhrase: "Woman - Both - Man - Both",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Singers can be good models for the young.",
+                        answer: "W",
+                        explanation: "Người nữ tin rằng ca sĩ có thể làm gương cho giới trẻ."
+                    },
+                    {
+                        text: "Taste in music is a highly personal thing.",
+                        answer: "B",
+                        explanation: "Cả hai đồng ý sở thích âm nhạc mang tính cá nhân."
+                    },
+                    {
+                        text: "Music is a universal language.",
+                        answer: "M",
+                        explanation: "Người nam cho rằng âm nhạc là ngôn ngữ chung."
+                    },
+                    {
+                        text: "Music can be used to manipulate people's feelings.",
+                        answer: "B",
+                        explanation: "Cả hai nhận định âm nhạc có thể điều khiển cảm xúc."
+                    }
+                ],
+                tip: "Nhớ chuỗi W-B-M-B.",
+                explanation: "1=W, 2=B, 3=M, 4=B theo mô tả."
+            }
+        ]
+    },
+    examPractice16: {
+        title: "LISTENING PRACTICE - QUESTION BANK 16",
+        questions: [
+            {
+                number: 1,
+                topic: "New novel review",
+                question: "What does the announcer say about the new novel?",
+                options: [
+                    { letter: "A", text: "It is different from his earlier works", explanation: "Đáp án đúng: cuốn mới khác hẳn các tác phẩm trước đây." },
+                    { letter: "B", text: "It is romantic and soft", explanation: "Sai: không mô tả là lãng mạn, mềm mại." },
+                    { letter: "C", text: "It is less famous than his earlier works", explanation: "Sai: không nhắc đến mức độ nổi tiếng." }
+                ],
+                answer: "A",
+                tip: "Nhớ từ khóa announcer nói: 'a departure from his earlier works'.",
+                explanation: "Announcer nhấn mạnh rằng tiểu thuyết mới khác biệt hoàn toàn so với các tác phẩm trước của tác giả, nên đáp án A là đúng."
+            },
+            {
+                number: 2,
+                topic: "Advice for the writer",
+                question: "What does the announcer say the writer should do in the future?",
+                options: [
+                    { letter: "A", text: "Continue to write this genre", explanation: "Sai: announcer không khuyên tiếp tục thể loại này." },
+                    { letter: "B", text: "Go back to his original genre", explanation: "Sai: cũng không khuyên quay lại thể loại cũ." },
+                    { letter: "C", text: "Listen to critics before writing the next work", explanation: "Đúng: announcer khuyên nên nghe phản hồi của giới phê bình trước khi viết tiếp." }
+                ],
+                answer: "C",
+                tip: "Ghi nhớ câu 'he should listen to critics before diving into the next project'.",
+                explanation: "Announcer đề xuất tác giả nên lắng nghe ý kiến phê bình trước khi bắt đầu tác phẩm mới, do đó chọn C."
+            },
+            {
+                number: 3,
+                topic: "Writing process",
+                question: "What does the writer believe helps her the most in her writing process?",
+                options: [
+                    { letter: "A", text: "Writing every day for 15-20 minutes", explanation: "Sai: cô không nhấn mạnh viết 15-20 phút mỗi ngày." },
+                    { letter: "B", text: "Creating dedicated periods for writing", explanation: "Đúng: cô tin việc dành các giai đoạn tập trung giúp viết tốt nhất." },
+                    { letter: "C", text: "Finding a quiet space to work", explanation: "Sai: không đề cập là yếu tố quan trọng nhất." }
+                ],
+                answer: "B",
+                tip: "Nhớ cụm 'blocked off time' = dành khung giờ riêng cho viết.",
+                explanation: "Tác giả cho rằng việc đặt lịch thời gian dành riêng cho viết giúp cô giữ nhịp sáng tác hiệu quả nhất."
+            },
+            {
+                number: 4,
+                topic: "Writer's block regret",
+                question: "What does the writer regret doing during her experience with writer's block?",
+                options: [
+                    { letter: "A", text: "Refusing to seek advice of others", explanation: "Đúng: cô hối tiếc vì không nhờ người khác tư vấn." },
+                    { letter: "B", text: "Ignoring feedback from editors", explanation: "Sai: cô không nhắc đến việc bỏ qua biên tập viên." },
+                    { letter: "C", text: "Writing without a plan", explanation: "Sai: không phải điều cô hối tiếc." }
+                ],
+                answer: "A",
+                tip: "Nhớ: writer's block -> nên hỏi lời khuyên, cô đã không làm.",
+                explanation: "Trong lúc bí ý tưởng, cô đã từ chối nhận lời khuyên nên sau đó cảm thấy hối hận."
+            },
+            {
+                number: 5,
+                topic: "Working at home",
+                question: "What does she say about working at home?",
+                options: [
+                    { letter: "A", text: "There are no distractions", explanation: "Sai: cô không nói hoàn toàn không xao nhãng." },
+                    { letter: "B", text: "It is not as good as expected", explanation: "Đúng: cô thất vọng vì làm ở nhà không như kỳ vọng." },
+                    { letter: "C", text: "Video calls are superior to face-to-face conversation", explanation: "Sai: cô không so sánh video call và gặp trực tiếp theo hướng này." }
+                ],
+                answer: "B",
+                tip: "Làm việc tại nhà => 'not as good as I expected'.",
+                explanation: "Cô nói rằng làm ở nhà không tốt như dự đoán nên đáp án B chính xác."
+            },
+            {
+                number: 6,
+                topic: "Remote work perspective",
+                question: "According to the author, working from home:",
+                options: [
+                    { letter: "A", text: "Needs a big home office", explanation: "Sai: không yêu cầu văn phòng lớn." },
+                    { letter: "B", text: "Does not require self-motivation", explanation: "Sai: cô nhấn mạnh cần tự giác." },
+                    { letter: "C", text: "Depends on your situation and personality", explanation: "Đúng: cô cho rằng hiệu quả tùy thuộc cá nhân." }
+                ],
+                answer: "C",
+                tip: "Remote work => 'depends on your situation and personality'.",
+                explanation: "Cô kết luận rằng làm việc tại nhà phù hợp hay không còn tùy vào hoàn cảnh và tính cách từng người."
+            },
+            {
+                number: 7,
+                topic: "TV series reception",
+                question: "What happened to the TV series?",
+                options: [
+                    { letter: "A", text: "It didn't receive enough investment in the early stage", explanation: "Sai: không đề cập thiếu đầu tư ban đầu." },
+                    { letter: "B", text: "It was overlooked by critics", explanation: "Sai: không bị giới phê bình bỏ qua." },
+                    { letter: "C", text: "It caught the audience's attention from the start", explanation: "Đúng: phim thu hút khán giả ngay lập tức." }
+                ],
+                answer: "C",
+                tip: "Nhớ cụm 'grabbed audiences from day one'.",
+                explanation: "MC cho biết series thu hút người xem ngay từ khi ra mắt nên đáp án C đúng."
+            },
+            {
+                number: 8,
+                topic: "Series potential",
+                question: "According to the expert, what is the series' potential?",
+                options: [
+                    { letter: "A", text: "New seasons will be produced due to great demand", explanation: "Sai trong bối cảnh này." },
+                    { letter: "B", text: "It inspires young filmmakers to follow a new style", explanation: "Sai: không nhấn mạnh ảnh hưởng phong cách." },
+                    { letter: "C", text: "It can help reach new customers", explanation: "Đúng: chuyên gia tin series mở rộng tệp khách hàng." }
+                ],
+                answer: "C",
+                tip: "Potential = cơ hội chạm tới khách hàng mới.",
+                explanation: "Chuyên gia cho rằng thành công của series giúp hãng tiếp cận thêm khán giả/khách hàng nên chọn C."
+            },
+            {
+                number: 9,
+                topic: "Movie disappointment",
+                question: "What part of the movie is disappointing?",
+                options: [
+                    { letter: "A", text: "The dialogues seem unrealistic", explanation: "Đúng: lời thoại thiếu chân thực gây thất vọng." },
+                    { letter: "B", text: "The settings don't make sense", explanation: "Sai: bối cảnh không phải vấn đề chính." },
+                    { letter: "C", text: "The original cast was replaced", explanation: "Sai: không đề cập thay diễn viên." }
+                ],
+                answer: "A",
+                tip: "Nhớ: 'dialogues felt unnatural'.",
+                explanation: "Nhà phê bình phàn nàn rằng lời thoại nghe giả tạo nên A là đáp án đúng."
+            },
+            {
+                number: 10,
+                topic: "Movie industry comment",
+                question: "What is the expert comment on the movie industry?",
+                options: [
+                    { letter: "A", text: "Technology will soon replace human actors", explanation: "Sai: không nói công nghệ thay diễn viên." },
+                    { letter: "B", text: "The new industry demand is negatively influencing script production", explanation: "Đúng: nhu cầu thị trường khiến kịch bản đi xuống." },
+                    { letter: "C", text: "New story plots should be invented to capture audiences", explanation: "Sai: không phải nhận xét chính." }
+                ],
+                answer: "B",
+                tip: "Keyword: industry demand hurting scripts.",
+                explanation: "Chuyên gia nhận xét áp lực thị trường mới đang làm chất lượng kịch bản giảm, nên B đúng."
+            },
+            {
+                number: 11,
+                topic: "Authors' past work",
+                question: "What was the lecturer's opinion about both authors' past work?",
+                options: [
+                    { letter: "A", text: "They have both been overlooked by academics", explanation: "Đúng: giảng viên cho rằng giới học thuật bỏ qua họ." },
+                    { letter: "B", text: "They make reference to each other's work", explanation: "Sai: không đề cập tới việc trích dẫn nhau." },
+                    { letter: "C", text: "One was less successful than the other", explanation: "Sai: không so sánh thành công." }
+                ],
+                answer: "A",
+                tip: "Nhớ cụm 'overlooked by academics'.",
+                explanation: "Giảng viên nói cả hai tác giả từng bị giới học thuật lãng quên nên chọn A."
+            },
+            {
+                number: 12,
+                topic: "Authors' interpretation",
+                question: "What did the lecturer say about both authors?",
+                options: [
+                    { letter: "A", text: "Their reputation goes beyond their target audience", explanation: "Sai: không nhấn mạnh danh tiếng vượt đối tượng." },
+                    { letter: "B", text: "They should have been more popular", explanation: "Sai: không phải trọng tâm." },
+                    { letter: "C", text: "It is not always easy for the meanings to be identified", explanation: "Đúng: giảng viên nói ý nghĩa tác phẩm khó giải mã." }
+                ],
+                answer: "C",
+                tip: "Keywords: 'meanings are hard to identify'.",
+                explanation: "Ông cho rằng việc hiểu thông điệp của cả hai tác giả không đơn giản nên C đúng."
+            },
+            {
+                number: 13,
+                topic: "TV series reception (set 2)",
+                question: "What happened to the TV series?",
+                options: [
+                    { letter: "A", text: "It didn't receive enough investment at the early stage", explanation: "Sai: không bị thiếu đầu tư." },
+                    { letter: "B", text: "It was overlooked by critics", explanation: "Sai: giới phê bình chú ý đến nó." },
+                    { letter: "C", text: "It caught the audience's attention from the start", explanation: "Đúng: giống câu trước, thu hút khán giả ngay." }
+                ],
+                answer: "C",
+                tip: "Lặp ý: audience attention from start.",
+                explanation: "Người dẫn nhắc lại series được chú ý ngay khi phát sóng nên chọn C."
+            },
+            {
+                number: 14,
+                topic: "Series future demand",
+                question: "According to the expert, what is the series' potential?",
+                options: [
+                    { letter: "A", text: "New seasons will be produced due to great demand", explanation: "Đúng: chuyên gia tin sẽ có mùa mới vì nhu cầu lớn." },
+                    { letter: "B", text: "It inspires young filmmakers to follow a new style", explanation: "Sai trong ngữ cảnh này." },
+                    { letter: "C", text: "Series are damaged by overexposure", explanation: "Sai: nhưng không phải quan điểm ở đây." }
+                ],
+                answer: "A",
+                tip: "Từ khóa: 'already planning new seasons'.",
+                explanation: "Chuyên gia dự đoán hãng sẽ làm thêm mùa mới vì lượng người xem cao, nên A đúng."
+            },
+            {
+                number: 15,
+                topic: "Regional plan criticism",
+                question: "What is one of the main criticisms of the Regional Development Plan?",
+                options: [
+                    { letter: "A", text: "It doesn't provide enough alternatives to driving", explanation: "Đúng: kế hoạch thiếu lựa chọn thay thế việc lái xe." },
+                    { letter: "B", text: "It places too much emphasis on public transportation", explanation: "Sai: không phải phàn nàn chính." },
+                    { letter: "C", text: "It is too expensive to implement", explanation: "Sai: chi phí không phải trọng tâm." }
+                ],
+                answer: "A",
+                tip: "Key: 'not enough alternatives to driving'.",
+                explanation: "Người phỏng vấn nhắc kế hoạch bị chê vì không khuyến khích phương tiện khác xe hơi, nên A chuẩn."
+            },
+            {
+                number: 16,
+                topic: "Regional plan challenge",
+                question: "What challenge is the Regional Development Plan likely to face?",
+                options: [
+                    { letter: "A", text: "It may be delayed due to funding issues", explanation: "Sai: không đề cập thiếu ngân sách." },
+                    { letter: "B", text: "It could face difficulties in gaining government approval", explanation: "Sai: phê duyệt không phải trở ngại chính." },
+                    { letter: "C", text: "It is likely to meet resistance from local communities", explanation: "Đúng: người dân địa phương có thể phản đối." }
+                ],
+                answer: "C",
+                tip: "Remember: community resistance.",
+                explanation: "Bản kế hoạch có thể bị cộng đồng địa phương phản đối nên C đúng."
+            },
+            {
+                number: 17,
+                topic: "Post-university life",
+                question: "How does life change for graduates after university?",
+                options: [
+                    { letter: "A", text: "They feel more stressed about job seeking", explanation: "Sai: không nhấn mạnh stress tăng." },
+                    { letter: "B", text: "They are likely to stick to their academic routines", explanation: "Sai: họ không giữ nếp học cũ." },
+                    { letter: "C", text: "They are likely to be more flexible and open-minded", explanation: "Đúng: cuộc sống khiến họ linh hoạt, cởi mở hơn." }
+                ],
+                answer: "C",
+                tip: "Graduates -> flexibility.",
+                explanation: "Diễn giả cho rằng sau đại học, người trẻ trở nên linh hoạt và cởi mở, nên C đúng."
+            },
+            {
+                number: 18,
+                topic: "Job market trait",
+                question: "What is a common characteristic of the job market after university?",
+                options: [
+                    { letter: "A", text: "More opportunities for networking", explanation: "Sai: không nhắc đến networking." },
+                    { letter: "B", text: "It is more competitive", explanation: "Đúng: thị trường việc làm cạnh tranh hơn." },
+                    { letter: "C", text: "Many jobs offer great benefits", explanation: "Sai: không phải đặc điểm chính." }
+                ],
+                answer: "B",
+                tip: "Job market -> competition.",
+                explanation: "Diễn giả nhấn mạnh thị trường việc làm sau tốt nghiệp rất cạnh tranh, chọn B."
+            },
+            {
+                number: 19,
+                topic: "Saving money strategy",
+                question: "How does the speaker recommend saving money effectively?",
+                options: [
+                    { letter: "A", text: "Saving a large amount only on a daily basis", explanation: "Sai: không khuyên mỗi ngày tiết kiệm số lớn." },
+                    { letter: "B", text: "Organizing their resources more effectively", explanation: "Đúng: bố trí nguồn lực hợp lý giúp tiết kiệm." },
+                    { letter: "C", text: "Using credit cards to manage expenses", explanation: "Sai: không đề nghị dùng thẻ tín dụng." }
+                ],
+                answer: "B",
+                tip: "Key phrase: organize resources.",
+                explanation: "Người nói đề xuất kiểm soát tài nguyên để tiết kiệm tiền, do đó B chính xác."
+            },
+            {
+                number: 20,
+                topic: "Successful savers",
+                question: "Who does the speaker believe can save money most successfully?",
+                options: [
+                    { letter: "A", text: "Those who get advice from people with experience", explanation: "Đúng: người tìm lời khuyên từ người có kinh nghiệm tiết kiệm tốt hơn." },
+                    { letter: "B", text: "Those who keep all savings in a single account", explanation: "Sai: không phải chiến lược được khuyên." },
+                    { letter: "C", text: "Those who avoid long-term financial plans", explanation: "Sai: tránh kế hoạch dài hạn không giúp tiết kiệm." }
+                ],
+                answer: "A",
+                tip: "Advice từ người giàu kinh nghiệm.",
+                explanation: "Theo diễn giả, người biết nhờ tư vấn sẽ tiết kiệm hiệu quả, nên A đúng."
+            },
+            {
+                number: 21,
+                topic: "Managing personal finances",
+                question: "What does the speaker say about managing personal finances?",
+                options: [
+                    { letter: "A", text: "Spend less on non-essential items", explanation: "Sai: không phải trọng tâm chính." },
+                    { letter: "B", text: "Organize their resources more effectively", explanation: "Đúng: tiếp tục nhấn mạnh việc tổ chức nguồn lực." },
+                    { letter: "C", text: "Rely on online budgeting tools", explanation: "Sai: không nhắc đến công cụ trực tuyến." }
+                ],
+                answer: "B",
+                tip: "Trùng thông điệp: organize resources.",
+                explanation: "Người nói lặp lại rằng quản lý tài chính tức biết sắp xếp nguồn lực, nên chọn B."
+            },
+            {
+                number: 22,
+                topic: "Improving financial management",
+                question: "What does the speaker suggest for improving financial management?",
+                options: [
+                    { letter: "A", text: "Invest in more financial apps", explanation: "Sai: không khuyên đầu tư app." },
+                    { letter: "B", text: "Avoid talking about money with friends", explanation: "Sai: không đề nghị tránh trò chuyện tiền bạc." },
+                    { letter: "C", text: "Seek advice from someone who is experienced", explanation: "Đúng: nên hỏi người có kinh nghiệm." }
+                ],
+                answer: "C",
+                tip: "Advice từ người có kinh nghiệm (lặp logic).",
+                explanation: "Ông khuyên nên hỏi người có kinh nghiệm để quản lý tài chính tốt hơn, nên C đúng."
+            },
+            {
+                number: 23,
+                topic: "Novel future advice",
+                question: "What does the announcer say about the new novel?",
+                options: [
+                    { letter: "A", text: "It is different from his earlier works", explanation: "Sai trong câu hỏi này, vì trọng tâm là lời khuyên tiếp theo." },
+                    { letter: "B", text: "It is romantic and soft", explanation: "Sai: không nói là lãng mạn." },
+                    { letter: "C", text: "He should listen to critics before writing his next work", explanation: "Đúng: announcer nhắc lại lời khuyên cho tác giả." }
+                ],
+                answer: "C",
+                tip: "Dù câu hỏi nhắc 'new novel', đáp án là lời khuyên: listen to critics.",
+                explanation: "Announcer liên hệ phản hồi cho tiểu thuyết mới và khuyên tác giả nên nghe giới phê bình, nên chọn C."
+            },
+            {
+                number: 24,
+                topic: "Happiness research coverage",
+                question: "What does the radio MC say about how the research on happiness has been covered by the media?",
+                options: [
+                    { letter: "A", text: "It has been accurately reported by the media", explanation: "Sai: MC cho rằng truyền thông đưa tin không chính xác." },
+                    { letter: "B", text: "It has not been accurately reported by the media", explanation: "Đúng: ông nói tin tức bị bóp méo." },
+                    { letter: "C", text: "It has been ignored completely by the media", explanation: "Sai: nghiên cứu vẫn được nhắc tới." }
+                ],
+                answer: "B",
+                tip: "Key: 'media misrepresented the findings'.",
+                explanation: "MC nói truyền thông không phản ánh chính xác nghiên cứu nên B đúng."
+            },
+            {
+                number: 25,
+                topic: "Happiness research outcome",
+                question: "According to the radio MC, what is unlikely regarding the research on happiness?",
+                options: [
+                    { letter: "A", text: "To find personal happiness", explanation: "Sai: không bàn về cá nhân." },
+                    { letter: "B", text: "To find a conclusive answer", explanation: "Đúng: khó có kết luận dứt khoát." },
+                    { letter: "C", text: "To discuss happiness in the media", explanation: "Sai: truyền thông vẫn bàn tới." }
+                ],
+                answer: "B",
+                tip: "Nhớ: kết quả nghiên cứu về hạnh phúc khó 'conclusive'.",
+                explanation: "MC nói không thể kỳ vọng tìm ra câu trả lời cuối cùng, nên chọn B."
+            },
+            {
+                number: 26,
+                topic: "Short-term goals",
+                question: "What does the speaker say about short-term goals?",
+                options: [
+                    { letter: "A", text: "They allow you to be more flexible", explanation: "Đúng: mục tiêu ngắn hạn giúp linh hoạt." },
+                    { letter: "B", text: "They create pressure and limit creativity", explanation: "Sai: người nói không chê áp lực." },
+                    { letter: "C", text: "They only apply to specific situations", explanation: "Sai: không giới hạn hoàn cảnh." }
+                ],
+                answer: "A",
+                tip: "Short-term = flexibility.",
+                explanation: "Theo diễn giả, đặt mục tiêu ngắn hạn giúp điều chỉnh linh hoạt nên A đúng."
+            },
+            {
+                number: 27,
+                topic: "Goal setting opinion",
+                question: "What is the speaker's opinion about goal setting?",
+                options: [
+                    { letter: "A", text: "It can lead to confusion and distraction", explanation: "Sai: không nói gây rối." },
+                    { letter: "B", text: "It can prevent you from making mistakes", explanation: "Đúng: mục tiêu rõ ràng giúp tránh sai lầm." },
+                    { letter: "C", text: "It can bring about opportunities for individuals", explanation: "Sai: không phải luận điểm chính." }
+                ],
+                answer: "B",
+                tip: "Goal setting -> tránh mắc lỗi.",
+                explanation: "Diễn giả nhấn mạnh đặt mục tiêu giúp tránh sai sót, do đó B đúng."
+            },
+            {
+                number: 28,
+                topic: "Guidebook features",
+                question: "What does this guidebook offer to its audience?",
+                options: [
+                    { letter: "A", text: "It focuses solely on historical landmarks", explanation: "Sai: không chỉ nhắc địa danh lịch sử." },
+                    { letter: "B", text: "It creates an adventure", explanation: "Đúng: sách biến chuyến đi thành cuộc phiêu lưu." },
+                    { letter: "C", text: "It is difficult to navigate", explanation: "Sai: không khó dùng." }
+                ],
+                answer: "B",
+                tip: "Guidebook -> 'turns trip into adventure'.",
+                explanation: "Diễn giả nói sách hướng dẫn tạo trải nghiệm phiêu lưu nên chọn B."
+            },
+            {
+                number: 29,
+                topic: "Guidebook suitability",
+                question: "What is the speaker's opinion about this guidebook?",
+                options: [
+                    { letter: "A", text: "It caters only to seasoned travelers", explanation: "Sai: không giới hạn người nhiều kinh nghiệm." },
+                    { letter: "B", text: "It is outdated and irrelevant", explanation: "Sai: không chê lỗi thời." },
+                    { letter: "C", text: "It is suitable for particular generations", explanation: "Đúng: sách phù hợp với vài thế hệ nhất định." }
+                ],
+                answer: "C",
+                tip: "Key phrase: 'tailored for certain generations'.",
+                explanation: "Người nói cho rằng sách phù hợp với một số thế hệ nên đáp án C chính xác."
             }
         ]
     }
