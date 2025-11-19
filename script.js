@@ -1839,7 +1839,7 @@ function loadPart4() {
 }
 
 // Part 5: Long Text Comprehension - Choose Heading
-// Hàm tạo mẹo học thuộc nhanh vị trí 7 tiêu đề
+// Hàm tạo mẹo học thuộc nhanh vị trí 7 tiêu đề (cho đề MOUNTAINS AND HUMAN CONNECTIONS - giữ lại để tương thích)
 function createMnemonicBox() {
     const mnemonicBox = document.createElement('div');
     mnemonicBox.className = 'mnemonic-box';
@@ -1909,6 +1909,151 @@ function createMnemonicBox() {
     return mnemonicBox;
 }
 
+// Hàm tạo mẹo học thuộc nhanh cho bất kỳ đề Part 5 nào
+function createMnemonicBoxForExam(examData) {
+    if (!examData || !examData.paragraphs || !examData.headings) {
+        return null;
+    }
+    
+    // Sắp xếp paragraphs theo số thứ tự
+    const sortedParagraphs = [...examData.paragraphs].sort((a, b) => a.number - b.number);
+    
+    // Tạo danh sách headings với keywords và chữ cái đầu
+    const headingInfo = sortedParagraphs.map(para => {
+        const heading = para.answer;
+        // Lấy từ khóa chính (từ quan trọng nhất trong heading)
+        const words = heading.split(' ').filter(w => w.trim().length > 0);
+        let keyword = '';
+        let firstLetter = '';
+        
+        // Tìm từ khóa chính (thường là danh từ quan trọng, bỏ qua các từ như "a", "an", "the", "of", "on", "in", etc.)
+        const skipWords = ['a', 'an', 'the', 'of', 'on', 'in', 'at', 'to', 'for', 'with', 'by', 'about', 'toward', 'towards', 'and', 'or', 'but'];
+        
+        // Ưu tiên tìm từ khóa quan trọng (danh từ, tính từ quan trọng)
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i].toLowerCase().replace(/[^a-z]/g, '');
+            if (word && !skipWords.includes(word) && word.length > 2) {
+                // Lấy từ gốc (bỏ dấu câu)
+                const cleanWord = words[i].replace(/[^a-zA-Z]/g, '');
+                if (cleanWord.length > 0) {
+                    keyword = cleanWord.charAt(0).toUpperCase() + cleanWord.slice(1).toLowerCase();
+                    firstLetter = keyword.charAt(0).toUpperCase();
+                    break;
+                }
+            }
+        }
+        
+        // Nếu không tìm thấy, lấy từ đầu tiên có ý nghĩa
+        if (!keyword && words.length > 0) {
+            for (let i = 0; i < words.length; i++) {
+                const cleanWord = words[i].replace(/[^a-zA-Z]/g, '');
+                if (cleanWord.length > 0) {
+                    keyword = cleanWord.charAt(0).toUpperCase() + cleanWord.slice(1).toLowerCase();
+                    firstLetter = keyword.charAt(0).toUpperCase();
+                    break;
+                }
+            }
+        }
+        
+        return {
+            num: para.number,
+            keyword: keyword,
+            letter: firstLetter,
+            fullHeading: heading
+        };
+    });
+    
+    // Tạo chuỗi chữ cái để nhớ
+    const letterSequence = headingInfo.map(h => h.letter).join(' → ');
+    const letterString = headingInfo.map(h => h.letter).join('-');
+    
+    // Tạo câu mẹo nhớ (cố gắng tạo câu có nghĩa từ các chữ cái)
+    const mnemonicPhrases = {
+        'R-E-P-C-B-F': 'Rất Em Phải Cố Bền Phấn',
+        'A-B-U-U-D-A-A': 'Anh Bạn Ưu Ưu Đạt Anh Anh',
+        'O-A-P-C-B-F': 'Ở Anh Phải Cố Bền Phấn',
+        'R-E-P-O-C-B-F': 'Rất Em Phải Ở Cố Bền Phấn',
+        'A-L-O-A-U-D-D': 'Anh Làm Ở Anh Ưu Đạt Đạt',
+        'R-D-E-P-O-C-B': 'Rất Đạt Em Phải Ở Cố Bền',
+        'R-E-P-O-C-B-F': 'Rất Em Phải Ở Cố Bền Phấn'
+    };
+    
+    // Tạo câu mẹo tự động nếu không có sẵn
+    let mnemonicSentence = '';
+    if (mnemonicPhrases[letterString]) {
+        mnemonicSentence = mnemonicPhrases[letterString];
+    } else {
+        // Tạo câu mẹo đơn giản từ các chữ cái
+        const vietnameseWords = {
+            'A': 'Ăn', 'B': 'Bạn', 'C': 'Cố', 'D': 'Đạt', 'E': 'Em', 'F': 'Phấn',
+            'G': 'Gặp', 'H': 'Học', 'I': 'Ít', 'J': 'J', 'K': 'Kỳ', 'L': 'Làm',
+            'M': 'Mình', 'N': 'Nên', 'O': 'Ở', 'P': 'Phải', 'Q': 'Qua', 'R': 'Rất',
+            'S': 'Sẽ', 'T': 'Tốt', 'U': 'Ưu', 'V': 'Vui', 'W': 'W', 'X': 'X',
+            'Y': 'Yêu', 'Z': 'Z'
+        };
+        mnemonicSentence = headingInfo.map(h => vietnameseWords[h.letter] || h.letter).join(' ');
+    }
+    
+    const mnemonicBox = document.createElement('div');
+    mnemonicBox.className = 'mnemonic-box';
+    mnemonicBox.style.cssText = `
+        background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size: 20px; font-weight: 700; margin-bottom: 15px; text-align: center;';
+    title.textContent = '🧠 MẸO HỌC THUỘC NHANH VỊ TRÍ CÁC TIÊU ĐỀ';
+    mnemonicBox.appendChild(title);
+    
+    const mnemonicContent = document.createElement('div');
+    mnemonicContent.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;';
+    
+    const mnemonicPhrase = document.createElement('div');
+    mnemonicPhrase.style.cssText = 'font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 15px; line-height: 1.6;';
+    mnemonicPhrase.innerHTML = `
+        <div style="margin-bottom: 10px;">📝 <strong>MẸO NHỚ:</strong></div>
+        <div style="font-size: 24px; letter-spacing: 3px; margin: 10px 0;">${letterSequence}</div>
+        ${mnemonicSentence ? `
+        <div style="font-size: 16px; margin-top: 10px; font-style: italic;">
+            "${mnemonicSentence}"
+        </div>
+        ` : ''}
+    `;
+    mnemonicContent.appendChild(mnemonicPhrase);
+    
+    const detailsList = document.createElement('div');
+    detailsList.style.cssText = 'font-size: 14px; line-height: 2;';
+    
+    headingInfo.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 6px;';
+        itemDiv.innerHTML = `
+            <span style="font-weight: 700; font-size: 18px; min-width: 30px;">${item.num}.</span>
+            <span style="font-weight: 700; font-size: 20px; min-width: 30px; text-align: center; background: rgba(255,255,255,0.3); padding: 4px 8px; border-radius: 4px;">${item.letter}</span>
+            <span style="flex: 1; font-weight: 600; font-size: 13px;">${item.fullHeading}</span>
+        `;
+        detailsList.appendChild(itemDiv);
+    });
+    
+    mnemonicContent.appendChild(detailsList);
+    mnemonicBox.appendChild(mnemonicContent);
+    
+    const tipBox = document.createElement('div');
+    tipBox.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.6;';
+    tipBox.innerHTML = `
+        <strong>💡 Gợi ý:</strong> Nhớ chuỗi chữ cái <strong>${letterString}</strong> để nhớ thứ tự các tiêu đề. 
+        ${mnemonicSentence ? `Câu mẹo: "${mnemonicSentence}"` : 'Mỗi chữ cái tương ứng với từ khóa chính của tiêu đề!'}
+    `;
+    mnemonicBox.appendChild(tipBox);
+    
+    return mnemonicBox;
+}
+
 function loadPart5() {
     const data = getPartData(5);
     if (!data) {
@@ -1933,9 +2078,9 @@ function loadPart5() {
             examTitle.textContent = `Đề ${examData.examNumber} - ${examData.passageTitle || ''}`;
             examSection.appendChild(examTitle);
             
-            // Thêm mẹo học thuộc cho đề MOUNTAINS AND HUMAN CONNECTIONS
-            if (examData.passageTitle && examData.passageTitle.includes('MOUNTAINS AND HUMAN CONNECTIONS')) {
-                const mnemonicBox = createMnemonicBox();
+            // Thêm mẹo học thuộc cho tất cả các đề Part 5
+            const mnemonicBox = createMnemonicBoxForExam(examData);
+            if (mnemonicBox) {
                 examSection.appendChild(mnemonicBox);
             }
             
@@ -2045,9 +2190,9 @@ function loadPart5() {
     // Single exam mode
     titleEl.textContent = data.passageTitle || '';
     
-    // Thêm mẹo học thuộc cho đề MOUNTAINS AND HUMAN CONNECTIONS
-    if (data.passageTitle && data.passageTitle.includes('MOUNTAINS AND HUMAN CONNECTIONS')) {
-        const mnemonicBox = createMnemonicBox();
+    // Thêm mẹo học thuộc cho tất cả các đề Part 5
+    const mnemonicBox = createMnemonicBoxForExam(data);
+    if (mnemonicBox) {
         paragraphsEl.appendChild(mnemonicBox);
     }
     
