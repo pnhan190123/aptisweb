@@ -3685,17 +3685,15 @@ function createListeningQuestionCard(question, examKey) {
         });
         buttonContainer.appendChild(singleCheckBtn);
         
-        // Add reset button if question is checked
-        if (questionChecked) {
-            const resetBtn = document.createElement('button');
-            resetBtn.className = 'btn btn-secondary';
-            resetBtn.textContent = 'Làm lại';
-            resetBtn.style.cssText = 'flex: 1; padding: 12px; font-weight: 700; background: #718096; color: white;';
-            resetBtn.addEventListener('click', function() {
-                resetSingleListeningQuestion(examKey, question.number);
-            });
-            buttonContainer.appendChild(resetBtn);
-        }
+        // Always show reset button
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'btn btn-secondary';
+        resetBtn.textContent = 'Làm lại';
+        resetBtn.style.cssText = 'flex: 1; padding: 12px; font-weight: 700; background: #718096; color: white;';
+        resetBtn.addEventListener('click', function() {
+            resetSingleListeningQuestion(examKey, question.number);
+        });
+        buttonContainer.appendChild(resetBtn);
         
         card.appendChild(buttonContainer);
     }
