@@ -221,14 +221,24 @@
                         <button class="btn btn-home" onclick="showHome()" title="Về trang chủ">🏠 Home</button>
                         <h1>Listening</h1>
                     </div>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <select id="listening-exam-selector" style="padding: 10px 20px; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; color: #2d3748; border: 2px solid rgba(255,255,255,0.3); cursor: pointer;">
+                            <option value="exam11">Đề 11 - TRỘN 11</option>
+                            <option value="exam12">Đề 12 - TRỘN 12</option>
+                            <option value="exam13">Đề 13 - THURSDAY 13TH</option>
+                            <option value="exam14">Đề 14 - TRỘN 1.50 POUND</option>
+                            <option value="exam15">Đề 15 - TRỘN 24</option>
+                            <option value="exam16">Đề 16 - TRỘN 250 POUNDS</option>
+                        </select>
+                        <label style="color: white; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 10px 15px; background: rgba(255,255,255,0.2); border-radius: 6px;">
+                            <input type="checkbox" id="listening-practice-mode" style="width: 18px; height: 18px; cursor: pointer;">
+                            📝 Chế độ luyện tập
+                        </label>
+                    </div>
                 </div>
             </header>
             <div class="question-section">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">🎧</div>
-                    <h2>Listening Practice</h2>
-                    <p>Tính năng đang được phát triển. Sẽ sớm có mặt!</p>
-                </div>
+                <div id="listening-content"></div>
             </div>
         </div>
     </div>

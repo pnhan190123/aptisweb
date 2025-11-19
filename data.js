@@ -1119,3 +1119,1768 @@ const exams = [
     }
 ];
 
+// Listening data structure
+const listeningData = {
+    exam11: {
+        title: "LISTENING : TRỘN 11",
+        questions: [
+            {
+                number: 1,
+                question: "tại sao cô ấy trở thành nhà khoa học?",
+                options: [
+                    { letter: "A", text: "A large stone", explanation: "Đúng vì trong bài nghe đề cập đến việc cô ấy tìm thấy một hòn đá lớn khi còn nhỏ, điều này đã khơi dậy niềm đam mê khoa học địa chất" },
+                    { letter: "B", text: "A beautiful flower", explanation: "Sai vì không có đề cập đến hoa trong bài nghe" },
+                    { letter: "C", text: "A science teacher", explanation: "Sai vì giáo viên khoa học không phải lý do cô ấy trở thành nhà khoa học" },
+                    { letter: "D", text: "A family tradition", explanation: "Sai vì không có đề cập đến truyền thống gia đình" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = A large stone (hòn đá lớn)",
+                explanation: "Đáp án đúng là A (A large stone) vì trong đoạn nghe, cô ấy kể lại rằng khi còn nhỏ, việc tìm thấy một hòn đá lớn đã khơi dậy niềm đam mê và tò mò về khoa học địa chất, dẫn đến quyết định trở thành nhà khoa học."
+            },
+            {
+                number: 2,
+                question: "khi nào được chơi đá bóng ở trường học?",
+                options: [
+                    { letter: "A", text: "Monday morning", explanation: "Sai vì không phải sáng thứ Hai" },
+                    { letter: "B", text: "Wednesday afternoon", explanation: "Đúng vì trong bài nghe nói rõ là chiều thứ Tư" },
+                    { letter: "C", text: "Friday evening", explanation: "Sai vì không phải tối thứ Sáu" },
+                    { letter: "D", text: "Saturday morning", explanation: "Sai vì không phải sáng thứ Bảy" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Wednesday afternoon (chiều thứ Tư)",
+                explanation: "Đáp án đúng là B (Wednesday afternoon) vì trong đoạn nghe, thầy giáo thông báo rõ ràng rằng học sinh có thể chơi đá bóng vào chiều thứ Tư hàng tuần."
+            },
+            {
+                number: 3,
+                question: "thị trấn sẽ xây bao nhiêu tòa nhà?",
+                options: [
+                    { letter: "A", text: "1000", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "B", text: "1500", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "C", text: "2000", explanation: "Đúng vì trong bài nghe nói rõ là 2000 tòa nhà" },
+                    { letter: "D", text: "2500", explanation: "Sai vì số lượng không đúng" }
+                ],
+                answer: "C",
+                tip: "Nhớ số: C = 2000 (hai nghìn)",
+                explanation: "Đáp án đúng là C (2000) vì trong đoạn nghe, người phát ngôn của thị trấn công bố kế hoạch xây dựng 2000 tòa nhà mới trong năm tới."
+            },
+            {
+                number: 4,
+                question: "nhà văn này làm nghề gì trước đó?",
+                options: [
+                    { letter: "A", text: "Teacher", explanation: "Đúng vì trong bài nghe nói rõ nhà văn từng là giáo viên" },
+                    { letter: "B", text: "Doctor", explanation: "Sai vì không phải bác sĩ" },
+                    { letter: "C", text: "Engineer", explanation: "Sai vì không phải kỹ sư" },
+                    { letter: "D", text: "Lawyer", explanation: "Sai vì không phải luật sư" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Teacher (giáo viên)",
+                explanation: "Đáp án đúng là A (Teacher) vì trong đoạn nghe, nhà văn chia sẻ rằng trước khi bắt đầu sự nghiệp viết lách, cô đã từng là giáo viên trong nhiều năm."
+            },
+            {
+                number: 5,
+                question: "cô ấy chụp ảnh cho ai?",
+                options: [
+                    { letter: "A", text: "The boy's team", explanation: "Sai vì không phải đội nam" },
+                    { letter: "B", text: "The girl's team", explanation: "Đúng vì trong bài nghe nói rõ là đội nữ" },
+                    { letter: "C", text: "The school", explanation: "Sai vì không phải cho trường học" },
+                    { letter: "D", text: "Her family", explanation: "Sai vì không phải cho gia đình" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = The girl's team (đội nữ)",
+                explanation: "Đáp án đúng là B (The girl's team) vì trong đoạn nghe, cô ấy nói rằng cô được mời chụp ảnh cho đội bóng đá nữ của trường."
+            },
+            {
+                number: 6,
+                question: "gia đình này làm gì hầu hết các cuối tuần?",
+                options: [
+                    { letter: "A", text: "Goes for a walk", explanation: "Đúng vì trong bài nghe nói rõ gia đình thường đi dạo vào cuối tuần" },
+                    { letter: "B", text: "Goes shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Stays at home", explanation: "Sai vì không phải ở nhà" },
+                    { letter: "D", text: "Visits friends", explanation: "Sai vì không phải thăm bạn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Goes for a walk (đi dạo)",
+                explanation: "Đáp án đúng là A (Goes for a walk) vì trong đoạn nghe, người nói kể lại rằng hầu hết các cuối tuần, gia đình họ đều dành thời gian đi dạo cùng nhau ở công viên gần nhà."
+            },
+            {
+                number: 7,
+                question: "cô ấy muốn cái váy nào?",
+                options: [
+                    { letter: "A", text: "Short and blue", explanation: "Sai vì không phải ngắn và xanh" },
+                    { letter: "B", text: "Long and red", explanation: "Đúng vì trong bài nghe nói rõ là dài và đỏ" },
+                    { letter: "C", text: "Long and blue", explanation: "Sai vì không phải màu xanh" },
+                    { letter: "D", text: "Short and red", explanation: "Sai vì không phải ngắn" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Long and red (dài và đỏ)",
+                explanation: "Đáp án đúng là B (Long and red) vì trong đoạn nghe, cô ấy mô tả rõ ràng rằng cô muốn một chiếc váy dài màu đỏ, không phải các màu sắc hay kiểu dáng khác."
+            },
+            {
+                number: 8,
+                question: "mẹ gọi con gái nhờ mua gì?",
+                options: [
+                    { letter: "A", text: "Eggs", explanation: "Đúng vì trong bài nghe mẹ nhờ mua trứng" },
+                    { letter: "B", text: "Milk", explanation: "Sai vì không phải sữa" },
+                    { letter: "C", text: "Bread", explanation: "Sai vì không phải bánh mì" },
+                    { letter: "D", text: "Fruits", explanation: "Sai vì không phải trái cây" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Eggs (trứng)",
+                explanation: "Đáp án đúng là A (Eggs) vì trong đoạn nghe, người mẹ gọi điện cho con gái và yêu cầu mua trứng trên đường về nhà."
+            },
+            {
+                number: 9,
+                question: "hẹn nhau lúc mấy giờ?",
+                options: [
+                    { letter: "A", text: "9h00'", explanation: "Sai vì không phải 9 giờ" },
+                    { letter: "B", text: "10h00'", explanation: "Đúng vì trong bài nghe nói rõ là 10 giờ" },
+                    { letter: "C", text: "11h00'", explanation: "Sai vì không phải 11 giờ" },
+                    { letter: "D", text: "12h00'", explanation: "Sai vì không phải 12 giờ" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = 10h00' (10 giờ)",
+                explanation: "Đáp án đúng là B (10h00') vì trong đoạn nghe, cả hai người đồng ý gặp nhau lúc 10 giờ sáng tại quán cà phê."
+            },
+            {
+                number: 10,
+                question: "cô ấy bận gì mà không đón con được?",
+                options: [
+                    { letter: "A", text: "Stay late at the office", explanation: "Đúng vì trong bài nghe nói rõ cô phải ở lại văn phòng muộn" },
+                    { letter: "B", text: "Go to a meeting", explanation: "Sai vì không phải đi họp" },
+                    { letter: "C", text: "Visit a client", explanation: "Sai vì không phải thăm khách hàng" },
+                    { letter: "D", text: "Attend a conference", explanation: "Sai vì không phải tham dự hội nghị" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Stay late at the office (ở lại văn phòng muộn)",
+                explanation: "Đáp án đúng là A (Stay late at the office) vì trong đoạn nghe, cô ấy giải thích rằng cô phải ở lại văn phòng làm việc muộn để hoàn thành dự án quan trọng, nên không thể đón con đúng giờ."
+            },
+            {
+                number: 11,
+                question: "cô ấy khuyên nên xem phim gì?",
+                options: [
+                    { letter: "A", text: "Action film", explanation: "Đúng vì trong bài nghe cô khuyên xem phim hành động" },
+                    { letter: "B", text: "Romance film", explanation: "Sai vì không phải phim tình cảm" },
+                    { letter: "C", text: "Comedy film", explanation: "Sai vì không phải phim hài" },
+                    { letter: "D", text: "Horror film", explanation: "Sai vì không phải phim kinh dị" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Action film (phim hành động)",
+                explanation: "Đáp án đúng là A (Action film) vì trong đoạn nghe, cô ấy nhiệt tình giới thiệu một bộ phim hành động mới và khuyên bạn nên đi xem."
+            },
+            {
+                number: 12,
+                question: "anh ấy đang ở đâu?",
+                options: [
+                    { letter: "A", text: "The town hall", explanation: "Đúng vì trong bài nghe nói rõ anh đang ở tòa thị chính" },
+                    { letter: "B", text: "The library", explanation: "Sai vì không phải thư viện" },
+                    { letter: "C", text: "The museum", explanation: "Sai vì không phải bảo tàng" },
+                    { letter: "D", text: "The park", explanation: "Sai vì không phải công viên" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The town hall (tòa thị chính)",
+                explanation: "Đáp án đúng là A (The town hall) vì trong đoạn nghe, anh ấy nói rõ rằng hiện tại anh đang ở tòa thị chính để làm một số thủ tục hành chính."
+            },
+            {
+                number: 13,
+                question: "đi làm bằng phương tiện gì?",
+                options: [
+                    { letter: "A", text: "By car", explanation: "Sai vì không phải bằng xe hơi" },
+                    { letter: "B", text: "By bus", explanation: "Đúng vì trong bài nghe nói rõ là đi bằng xe buýt" },
+                    { letter: "C", text: "By bike", explanation: "Sai vì không phải bằng xe đạp" },
+                    { letter: "D", text: "On foot", explanation: "Sai vì không phải đi bộ" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = By bus (bằng xe buýt)",
+                explanation: "Đáp án đúng là B (By bus) vì trong đoạn nghe, người nói rõ ràng đề cập đến việc sử dụng xe buýt làm phương tiện đi lại hàng ngày đến nơi làm việc."
+            },
+            {
+                number: 14,
+                topic: "Travel to work",
+                question: "đi làm như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "walk with a friend", 
+                        vietnamese: "đi bộ với 1 người bạn",
+                        explanation: "Sai vì trong bài nghe không đề cập đến việc đi bộ với bạn"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "drive to work", 
+                        vietnamese: "lái xe đi làm",
+                        explanation: "Sai vì người nói không lái xe đi làm"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "walk alone", 
+                        vietnamese: "đi bộ 1 mình",
+                        explanation: "Sai vì không phải đi bộ một mình"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "travel by bus", 
+                        vietnamese: "đi bằng xe buýt",
+                        explanation: "Đúng vì trong bài nghe có đề cập đến việc đi bằng xe buýt"
+                    }
+                ],
+                answer: "D",
+                tip: "Nhớ: D = travel by bus (đi bằng xe buýt)",
+                explanation: "Đáp án đúng là D (travel by bus) vì trong đoạn nghe, người nói đề cập rõ ràng đến việc sử dụng xe buýt làm phương tiện đi lại đến nơi làm việc."
+            },
+            {
+                number: 15,
+                topic: "Building community",
+                question: "Chọn B, W, hoặc M cho từng câu",
+                mnemonic: "B-W-M-M",
+                mnemonicPhrase: "Bạn - W - Mình - Mình",
+                matchingType: true,
+                persons: [
+                    { letter: "B", label: "Both (Cả hai)" },
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Community design can influence people's behavior.",
+                        answer: "B",
+                        explanation: "Đáp án đúng là B (Both - Cả hai) vì cả nam và nữ đều đề cập đến việc thiết kế cộng đồng ảnh hưởng đến hành vi."
+                    },
+                    {
+                        text: "Creating a community can take time.",
+                        answer: "W",
+                        explanation: "Đáp án đúng là W (Women - Nữ) vì chỉ người nữ đề cập đến việc xây dựng cộng đồng cần thời gian."
+                    },
+                    {
+                        text: "Work communities and social communities are the same.",
+                        answer: "M",
+                        isCorrect: false,
+                        explanation: "Đáp án đúng là M (Man - Nam), nhưng câu này SAI vì cộng đồng công việc và cộng đồng xã hội khác nhau. Chỉ người nam nói câu này."
+                    },
+                    {
+                        text: "Technology has changed how community forms.",
+                        answer: "M",
+                        explanation: "Đáp án đúng là M (Man - Nam) vì chỉ người nam đề cập đến việc công nghệ thay đổi cách hình thành cộng đồng."
+                    }
+                ],
+                tip: "MẸO NHỚ: B-W-M-M = Bạn W Mình Mình. Câu 1 = B, Câu 2 = W, Câu 3 = M (sai), Câu 4 = M",
+                explanation: "Đáp án: Câu 1 = B, Câu 2 = W, Câu 3 = M (sai), Câu 4 = M. Cộng đồng công việc và cộng đồng xã hội có mục đích và đặc điểm khác nhau, không thể coi là giống nhau."
+            },
+            {
+                number: 16,
+                topic: "Regional development plan",
+                question: "kế hoạch phát triển vùng có vấn đề gì?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "It doesn't do enough to promote alternatives to driving", 
+                        explanation: "Đúng vì đây là một trong những vấn đề được đề cập trong bài nghe"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "The plan is not making efficient use of existing land", 
+                        explanation: "Đúng vì đây là vấn đề thứ hai được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "The plan lacks funding", 
+                        explanation: "Sai vì không có đề cập đến vấn đề tài chính"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "The plan is too expensive", 
+                        explanation: "Sai vì không có đề cập đến chi phí"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = không khuyến khích phương tiện thay thế",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Kế hoạch có hai vấn đề chính: không khuyến khích đủ các phương tiện thay thế cho việc lái xe, và không sử dụng đất hiện có một cách hiệu quả."
+            },
+            {
+                number: 17,
+                topic: "Work from home",
+                question: "làm việc tại nhà như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "It wasn't as good as she had expected", 
+                        vietnamese: "Nó không tốt như cô ấy kỳ vọng",
+                        explanation: "Đúng vì đây là một trong những nhận xét về làm việc tại nhà"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "It depends on your situation and personality", 
+                        vietnamese: "Nó phụ thuộc vào tình huống và tính cách",
+                        explanation: "Đúng vì đây là nhận xét thứ hai về làm việc tại nhà"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "It is always better than office work", 
+                        explanation: "Sai vì không phải lúc nào cũng tốt hơn"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "It requires expensive equipment", 
+                        explanation: "Sai vì không có đề cập đến thiết bị đắt tiền"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - không tốt như kỳ vọng, phụ thuộc vào tình huống",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Làm việc tại nhà có thể không tốt như kỳ vọng ban đầu, và hiệu quả của nó phụ thuộc vào tình huống cá nhân và tính cách của mỗi người."
+            }
+        ]
+    },
+    exam12: {
+        title: "LISTENING : TRỘN 12",
+        questions: [
+            {
+                number: 1,
+                question: "bán được bao nhiêu bản copies?",
+                options: [
+                    { letter: "A", text: "Over 200000 copies", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "B", text: "Over 300000 copies", explanation: "Đúng vì trong bài nghe nói rõ là hơn 300000 bản" },
+                    { letter: "C", text: "Over 400000 copies", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "D", text: "Over 500000 copies", explanation: "Sai vì số lượng không đúng" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Over 300000 copies (hơn 300 nghìn bản)",
+                explanation: "Đáp án đúng là B (Over 300000 copies) vì trong đoạn nghe, người nói công bố rằng cuốn sách đã bán được hơn 300000 bản."
+            },
+            {
+                number: 2,
+                question: "2 người hẹn nhau lúc mấy giờ?",
+                options: [
+                    { letter: "A", text: "Quarter to seven", explanation: "Sai vì không phải 7 giờ kém 15" },
+                    { letter: "B", text: "Quarter to eight", explanation: "Đúng vì trong bài nghe nói rõ là 8 giờ kém 15" },
+                    { letter: "C", text: "Quarter past eight", explanation: "Sai vì không phải 8 giờ 15" },
+                    { letter: "D", text: "Half past eight", explanation: "Sai vì không phải 8 giờ rưỡi" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Quarter to eight (8 giờ kém 15)",
+                explanation: "Đáp án đúng là B (Quarter to eight) vì trong đoạn nghe, cả hai người đồng ý gặp nhau lúc 7 giờ 45 phút (quarter to eight)."
+            },
+            {
+                number: 3,
+                question: "cô ấy muốn cái váy nào?",
+                options: [
+                    { letter: "A", text: "Short and blue", explanation: "Sai vì không phải ngắn và xanh" },
+                    { letter: "B", text: "Long and red", explanation: "Đúng vì trong bài nghe nói rõ là dài và đỏ" },
+                    { letter: "C", text: "Long and blue", explanation: "Sai vì không phải màu xanh" },
+                    { letter: "D", text: "Short and red", explanation: "Sai vì không phải ngắn" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Long and red (dài và đỏ)",
+                explanation: "Đáp án đúng là B (Long and red) vì trong đoạn nghe, cô ấy mô tả rõ ràng rằng cô muốn một chiếc váy dài màu đỏ."
+            },
+            {
+                number: 4,
+                question: "cô ấy làm mất cái gì?",
+                options: [
+                    { letter: "A", text: "Phone", explanation: "Đúng vì trong bài nghe nói rõ cô làm mất điện thoại" },
+                    { letter: "B", text: "Wallet", explanation: "Sai vì không phải ví" },
+                    { letter: "C", text: "Keys", explanation: "Sai vì không phải chìa khóa" },
+                    { letter: "D", text: "Bag", explanation: "Sai vì không phải túi" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Phone (điện thoại)",
+                explanation: "Đáp án đúng là A (Phone) vì trong đoạn nghe, cô ấy nói rằng cô đã làm mất điện thoại của mình ở đâu đó."
+            },
+            {
+                number: 5,
+                question: "hẹn gặp ở đâu để đi bus về nhà?",
+                options: [
+                    { letter: "A", text: "Marketplace", explanation: "Đúng vì trong bài nghe nói rõ là hẹn ở chợ" },
+                    { letter: "B", text: "Bus station", explanation: "Sai vì không phải trạm xe buýt" },
+                    { letter: "C", text: "School", explanation: "Sai vì không phải trường học" },
+                    { letter: "D", text: "Park", explanation: "Sai vì không phải công viên" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Marketplace (chợ)",
+                explanation: "Đáp án đúng là A (Marketplace) vì trong đoạn nghe, họ đồng ý gặp nhau ở chợ để cùng đi xe buýt về nhà."
+            },
+            {
+                number: 6,
+                question: "người đàn ông uống nước gì?",
+                options: [
+                    { letter: "A", text: "Iced tea", explanation: "Đúng vì trong bài nghe nói rõ là trà đá" },
+                    { letter: "B", text: "Coffee", explanation: "Sai vì không phải cà phê" },
+                    { letter: "C", text: "Water", explanation: "Sai vì không phải nước lọc" },
+                    { letter: "D", text: "Juice", explanation: "Sai vì không phải nước ép" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Iced tea (trà đá)",
+                explanation: "Đáp án đúng là A (Iced tea) vì trong đoạn nghe, người đàn ông gọi một ly trà đá."
+            },
+            {
+                number: 7,
+                question: "cô ấy sẽ đi đâu?",
+                options: [
+                    { letter: "A", text: "The mountains", explanation: "Đúng vì trong bài nghe nói rõ cô sẽ đi núi" },
+                    { letter: "B", text: "The beach", explanation: "Sai vì không phải bãi biển" },
+                    { letter: "C", text: "The city", explanation: "Sai vì không phải thành phố" },
+                    { letter: "D", text: "The countryside", explanation: "Sai vì không phải nông thôn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The mountains (núi)",
+                explanation: "Đáp án đúng là A (The mountains) vì trong đoạn nghe, cô ấy nói rằng cô sẽ đi leo núi vào cuối tuần này."
+            },
+            {
+                number: 8,
+                question: "năm ngoái họ đi đâu?",
+                options: [
+                    { letter: "A", text: "Camping", explanation: "Đúng vì trong bài nghe nói rõ năm ngoái họ đi cắm trại" },
+                    { letter: "B", text: "Swimming", explanation: "Sai vì không phải đi bơi" },
+                    { letter: "C", text: "Shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "D", text: "Traveling", explanation: "Sai vì không cụ thể" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Camping (cắm trại)",
+                explanation: "Đáp án đúng là A (Camping) vì trong đoạn nghe, họ nhắc lại rằng năm ngoái họ đã đi cắm trại cùng nhau."
+            },
+            {
+                number: 9,
+                question: "cô ấy làm gì cuối tuần trước?",
+                options: [
+                    { letter: "A", text: "Stayed at home", explanation: "Đúng vì trong bài nghe nói rõ cô ở nhà" },
+                    { letter: "B", text: "Went out", explanation: "Sai vì không phải đi chơi" },
+                    { letter: "C", text: "Visited friends", explanation: "Sai vì không phải thăm bạn" },
+                    { letter: "D", text: "Went shopping", explanation: "Sai vì không phải đi mua sắm" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Stayed at home (ở nhà)",
+                explanation: "Đáp án đúng là A (Stayed at home) vì trong đoạn nghe, cô ấy nói rằng cuối tuần trước cô đã ở nhà để nghỉ ngơi."
+            },
+            {
+                number: 10,
+                question: "họ cần mua gì cho phòng khách?",
+                options: [
+                    { letter: "A", text: "Where to buy a new table", explanation: "Đúng vì trong bài nghe họ cần mua bàn mới" },
+                    { letter: "B", text: "Where to buy a new chair", explanation: "Sai vì không phải ghế" },
+                    { letter: "C", text: "Where to buy a new sofa", explanation: "Sai vì không phải ghế sofa" },
+                    { letter: "D", text: "Where to buy a new TV", explanation: "Sai vì không phải TV" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Where to buy a new table (nơi mua bàn mới)",
+                explanation: "Đáp án đúng là A (Where to buy a new table) vì trong đoạn nghe, họ đang thảo luận về việc cần mua một chiếc bàn mới cho phòng khách."
+            },
+            {
+                number: 11,
+                question: "tại sao chuyến bay bị huỷ?",
+                options: [
+                    { letter: "A", text: "Poor weather conditions", explanation: "Đúng vì trong bài nghe nói rõ do thời tiết xấu" },
+                    { letter: "B", text: "Technical problems", explanation: "Sai vì không phải vấn đề kỹ thuật" },
+                    { letter: "C", text: "Staff shortage", explanation: "Sai vì không phải thiếu nhân viên" },
+                    { letter: "D", text: "Airport closure", explanation: "Sai vì không phải đóng cửa sân bay" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Poor weather conditions (thời tiết xấu)",
+                explanation: "Đáp án đúng là A (Poor weather conditions) vì trong đoạn nghe, hãng hàng không thông báo rằng chuyến bay bị hủy do điều kiện thời tiết xấu."
+            },
+            {
+                number: 12,
+                question: "phòng nào to nhất?",
+                options: [
+                    { letter: "A", text: "Kitchen", explanation: "Đúng vì trong bài nghe nói rõ nhà bếp là phòng to nhất" },
+                    { letter: "B", text: "Living room", explanation: "Sai vì không phải phòng khách" },
+                    { letter: "C", text: "Bedroom", explanation: "Sai vì không phải phòng ngủ" },
+                    { letter: "D", text: "Bathroom", explanation: "Sai vì không phải phòng tắm" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Kitchen (nhà bếp)",
+                explanation: "Đáp án đúng là A (Kitchen) vì trong đoạn nghe, người nói mô tả rằng nhà bếp là phòng lớn nhất trong căn nhà."
+            },
+            {
+                number: 13,
+                question: "nhà văn này làm nghề gì trước đó?",
+                options: [
+                    { letter: "A", text: "Teacher", explanation: "Đúng vì trong bài nghe nói rõ nhà văn từng là giáo viên" },
+                    { letter: "B", text: "Doctor", explanation: "Sai vì không phải bác sĩ" },
+                    { letter: "C", text: "Engineer", explanation: "Sai vì không phải kỹ sư" },
+                    { letter: "D", text: "Lawyer", explanation: "Sai vì không phải luật sư" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Teacher (giáo viên)",
+                explanation: "Đáp án đúng là A (Teacher) vì trong đoạn nghe, nhà văn chia sẻ rằng trước khi bắt đầu sự nghiệp viết lách, cô đã từng là giáo viên trong nhiều năm."
+            },
+            {
+                number: 14,
+                topic: "Online shopping",
+                question: "mua sắm trực tuyến có ưu điểm gì?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "There are more choices", 
+                        explanation: "Đúng vì đây là một trong những ưu điểm của mua sắm trực tuyến"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "It saves time", 
+                        explanation: "Đúng vì mua sắm trực tuyến tiết kiệm thời gian"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "It is cheaper", 
+                        explanation: "Đúng vì thường rẻ hơn so với mua tại cửa hàng"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "The products are delivered", 
+                        explanation: "Đúng vì sản phẩm được giao tận nhà"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = There are more choices (có nhiều lựa chọn hơn)",
+                explanation: "Đáp án đúng là A (There are more choices) vì trong đoạn nghe, người nói đề cập rằng mua sắm trực tuyến cung cấp nhiều lựa chọn hơn so với mua sắm tại cửa hàng truyền thống."
+            },
+            {
+                number: 15,
+                topic: "Information and technology",
+                question: "Chọn đúng/sai cho các câu (tráo giọng nam-nữ)",
+                mnemonic: "M-W-W-B",
+                mnemonicPhrase: "M - W - W - B",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "The future generation will fail to cope with new information", 
+                        isCorrect: false,
+                        explanation: "Sai vì thế hệ tương lai sẽ có khả năng xử lý thông tin mới"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "The information revolution will be good for the economy", 
+                        isCorrect: true,
+                        explanation: "Đúng vì cuộc cách mạng thông tin sẽ tốt cho nền kinh tế"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "No computer is superior to the human brain", 
+                        isCorrect: true,
+                        explanation: "Đúng vì không có máy tính nào vượt trội hơn bộ não con người"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "More should be done to protect individual privacy", 
+                        isCorrect: true,
+                        explanation: "Đúng vì cần làm nhiều hơn để bảo vệ quyền riêng tư cá nhân"
+                    }
+                ],
+                tip: "MẸO NHỚ: M-W-W-B. A sai, B đúng, C đúng, D đúng",
+                explanation: "Đáp án: A (Sai), B (Đúng), C (Đúng), D (Đúng). Thế hệ tương lai sẽ có khả năng thích ứng với thông tin mới, cuộc cách mạng thông tin có lợi cho kinh tế, máy tính không thể vượt trội bộ não con người, và cần bảo vệ quyền riêng tư tốt hơn."
+            },
+            {
+                number: 16,
+                topic: "A critic reviews a book",
+                question: "nhà phê bình đánh giá cuốn sách như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "It uses simple language to describe complex ideas", 
+                        explanation: "Đúng vì đây là một trong những nhận xét về cuốn sách"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "It is similar to the previous book about the scientist", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai về cuốn sách"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "It is too difficult to understand", 
+                        explanation: "Sai vì không có đề cập đến việc khó hiểu"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "It lacks interesting content", 
+                        explanation: "Sai vì không có đề cập đến nội dung không thú vị"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - dùng ngôn ngữ đơn giản, tương tự cuốn sách trước",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Nhà phê bình nhận xét rằng cuốn sách sử dụng ngôn ngữ đơn giản để mô tả những ý tưởng phức tạp, và nó tương tự như cuốn sách trước đó về nhà khoa học."
+            },
+            {
+                number: 17,
+                topic: "A musician's life",
+                question: "cuộc sống của nhạc sĩ như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "He will probably retire from singing", 
+                        explanation: "Đúng vì đây là một trong những thông tin về nhạc sĩ"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "He could have been more successful", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai về nhạc sĩ"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "He is planning a world tour", 
+                        explanation: "Sai vì không có đề cập đến tour thế giới"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "He is starting a new band", 
+                        explanation: "Sai vì không có đề cập đến việc thành lập ban nhạc mới"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - có thể nghỉ hưu, có thể thành công hơn",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Nhạc sĩ có thể sẽ nghỉ hưu khỏi việc ca hát, và anh ấy có thể đã thành công hơn nếu có những quyết định khác trong sự nghiệp."
+            }
+        ]
+    },
+    exam13: {
+        title: "LISTENING : THURSDAY 13TH",
+        questions: [
+            {
+                number: 1,
+                question: "buổi hẹn mới vào ngày bao nhiêu?",
+                options: [
+                    { letter: "A", text: "Thursday 13th", explanation: "Đúng vì trong bài nghe nói rõ là thứ Năm ngày 13" },
+                    { letter: "B", text: "Friday 13th", explanation: "Sai vì không phải thứ Sáu" },
+                    { letter: "C", text: "Wednesday 13th", explanation: "Sai vì không phải thứ Tư" },
+                    { letter: "D", text: "Saturday 13th", explanation: "Sai vì không phải thứ Bảy" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Thursday 13th (thứ Năm ngày 13)",
+                explanation: "Đáp án đúng là A (Thursday 13th) vì trong đoạn nghe, họ đồng ý đổi lịch hẹn sang thứ Năm ngày 13."
+            },
+            {
+                number: 2,
+                question: "người đàn ông uống nước gì?",
+                options: [
+                    { letter: "A", text: "Iced tea", explanation: "Đúng vì trong bài nghe nói rõ là trà đá" },
+                    { letter: "B", text: "Coffee", explanation: "Sai vì không phải cà phê" },
+                    { letter: "C", text: "Water", explanation: "Sai vì không phải nước lọc" },
+                    { letter: "D", text: "Juice", explanation: "Sai vì không phải nước ép" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Iced tea (trà đá)",
+                explanation: "Đáp án đúng là A (Iced tea) vì trong đoạn nghe, người đàn ông gọi một ly trà đá."
+            },
+            {
+                number: 3,
+                question: "cô ấy thường viết vào thời gian nào?",
+                options: [
+                    { letter: "A", text: "In the mornings", explanation: "Sai vì không phải buổi sáng" },
+                    { letter: "B", text: "In the afternoons", explanation: "Đúng vì trong bài nghe nói rõ là buổi chiều" },
+                    { letter: "C", text: "In the evenings", explanation: "Sai vì không phải buổi tối" },
+                    { letter: "D", text: "At night", explanation: "Sai vì không phải ban đêm" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = In the afternoons (buổi chiều)",
+                explanation: "Đáp án đúng là B (In the afternoons) vì trong đoạn nghe, cô ấy chia sẻ rằng cô thường viết vào buổi chiều khi có nhiều năng lượng sáng tạo nhất."
+            },
+            {
+                number: 4,
+                question: "cô ấy làm mất cái gì?",
+                options: [
+                    { letter: "A", text: "Phone", explanation: "Đúng vì trong bài nghe nói rõ cô làm mất điện thoại" },
+                    { letter: "B", text: "Wallet", explanation: "Sai vì không phải ví" },
+                    { letter: "C", text: "Keys", explanation: "Sai vì không phải chìa khóa" },
+                    { letter: "D", text: "Bag", explanation: "Sai vì không phải túi" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Phone (điện thoại)",
+                explanation: "Đáp án đúng là A (Phone) vì trong đoạn nghe, cô ấy nói rằng cô đã làm mất điện thoại của mình ở đâu đó."
+            },
+            {
+                number: 5,
+                question: "2 người hẹn nhau lúc mấy giờ?",
+                options: [
+                    { letter: "A", text: "Quarter to seven", explanation: "Sai vì không phải 7 giờ kém 15" },
+                    { letter: "B", text: "Quarter to eight", explanation: "Đúng vì trong bài nghe nói rõ là 8 giờ kém 15" },
+                    { letter: "C", text: "Quarter past eight", explanation: "Sai vì không phải 8 giờ 15" },
+                    { letter: "D", text: "Half past eight", explanation: "Sai vì không phải 8 giờ rưỡi" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Quarter to eight (8 giờ kém 15)",
+                explanation: "Đáp án đúng là B (Quarter to eight) vì trong đoạn nghe, cả hai người đồng ý gặp nhau lúc 7 giờ 45 phút (quarter to eight)."
+            },
+            {
+                number: 6,
+                question: "anh ấy đi bằng phương tiện gì?",
+                options: [
+                    { letter: "A", text: "By car", explanation: "Sai vì không phải bằng xe hơi" },
+                    { letter: "B", text: "By train", explanation: "Đúng vì trong bài nghe nói rõ là đi bằng tàu" },
+                    { letter: "C", text: "By bus", explanation: "Sai vì không phải bằng xe buýt" },
+                    { letter: "D", text: "By bike", explanation: "Sai vì không phải bằng xe đạp" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = By train (bằng tàu)",
+                explanation: "Đáp án đúng là B (By train) vì trong đoạn nghe, anh ấy nói rằng anh thường đi làm bằng tàu hỏa."
+            },
+            {
+                number: 7,
+                question: "cô ấy làm gì vào thứ bảy?",
+                options: [
+                    { letter: "A", text: "Sees her family", explanation: "Đúng vì trong bài nghe nói rõ cô gặp gia đình vào thứ Bảy" },
+                    { letter: "B", text: "Goes shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Visits friends", explanation: "Sai vì không phải thăm bạn" },
+                    { letter: "D", text: "Stays at home", explanation: "Sai vì không phải ở nhà" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Sees her family (gặp gia đình)",
+                explanation: "Đáp án đúng là A (Sees her family) vì trong đoạn nghe, cô ấy nói rằng vào thứ Bảy hàng tuần, cô thường dành thời gian gặp gỡ gia đình."
+            },
+            {
+                number: 8,
+                question: "vợ anh ấy thích làm gì?",
+                options: [
+                    { letter: "A", text: "Photography", explanation: "Đúng vì trong bài nghe nói rõ vợ anh thích nhiếp ảnh" },
+                    { letter: "B", text: "Painting", explanation: "Sai vì không phải vẽ tranh" },
+                    { letter: "C", text: "Reading", explanation: "Sai vì không phải đọc sách" },
+                    { letter: "D", text: "Cooking", explanation: "Sai vì không phải nấu ăn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Photography (nhiếp ảnh)",
+                explanation: "Đáp án đúng là A (Photography) vì trong đoạn nghe, anh ấy nói rằng vợ anh rất đam mê nhiếp ảnh và thường dành thời gian chụp ảnh."
+            },
+            {
+                number: 9,
+                question: "tại sao cô ấy trở thành nhà khoa học?",
+                options: [
+                    { letter: "A", text: "A large stone", explanation: "Đúng vì trong bài nghe đề cập đến việc cô ấy tìm thấy một hòn đá lớn khi còn nhỏ, điều này đã khơi dậy niềm đam mê khoa học địa chất" },
+                    { letter: "B", text: "A beautiful flower", explanation: "Sai vì không có đề cập đến hoa trong bài nghe" },
+                    { letter: "C", text: "A science teacher", explanation: "Sai vì giáo viên khoa học không phải lý do cô ấy trở thành nhà khoa học" },
+                    { letter: "D", text: "A family tradition", explanation: "Sai vì không có đề cập đến truyền thống gia đình" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = A large stone (hòn đá lớn)",
+                explanation: "Đáp án đúng là A (A large stone) vì trong đoạn nghe, cô ấy kể lại rằng khi còn nhỏ, việc tìm thấy một hòn đá lớn đã khơi dậy niềm đam mê và tò mò về khoa học địa chất, dẫn đến quyết định trở thành nhà khoa học."
+            },
+            {
+                number: 10,
+                question: "cô ấy sẽ đi đâu?",
+                options: [
+                    { letter: "A", text: "The mountains", explanation: "Đúng vì trong bài nghe nói rõ cô sẽ đi núi" },
+                    { letter: "B", text: "The beach", explanation: "Sai vì không phải bãi biển" },
+                    { letter: "C", text: "The city", explanation: "Sai vì không phải thành phố" },
+                    { letter: "D", text: "The countryside", explanation: "Sai vì không phải nông thôn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The mountains (núi)",
+                explanation: "Đáp án đúng là A (The mountains) vì trong đoạn nghe, cô ấy nói rằng cô sẽ đi leo núi vào cuối tuần này."
+            },
+            {
+                number: 11,
+                question: "hẹn nhau ở đâu để đi xe bus?",
+                options: [
+                    { letter: "A", text: "By the hotel's main entrance", explanation: "Đúng vì trong bài nghe nói rõ là hẹn ở lối vào chính của khách sạn" },
+                    { letter: "B", text: "At the bus station", explanation: "Sai vì không phải trạm xe buýt" },
+                    { letter: "C", text: "At the park", explanation: "Sai vì không phải công viên" },
+                    { letter: "D", text: "At the market", explanation: "Sai vì không phải chợ" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = By the hotel's main entrance (lối vào chính khách sạn)",
+                explanation: "Đáp án đúng là A (By the hotel's main entrance) vì trong đoạn nghe, họ đồng ý gặp nhau ở lối vào chính của khách sạn để cùng đi xe buýt."
+            },
+            {
+                number: 12,
+                question: "trà được phục vụ ở đâu?",
+                options: [
+                    { letter: "A", text: "The river boat", explanation: "Đúng vì trong bài nghe nói rõ trà được phục vụ trên thuyền sông" },
+                    { letter: "B", text: "The restaurant", explanation: "Sai vì không phải nhà hàng" },
+                    { letter: "C", text: "The café", explanation: "Sai vì không phải quán cà phê" },
+                    { letter: "D", text: "The hotel", explanation: "Sai vì không phải khách sạn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The river boat (thuyền sông)",
+                explanation: "Đáp án đúng là A (The river boat) vì trong đoạn nghe, người nói mô tả rằng trà được phục vụ trên một chiếc thuyền đi dọc sông."
+            },
+            {
+                number: 13,
+                question: "ở cuối buổi hoà nhạc có điều gì?",
+                options: [
+                    { letter: "A", text: "The city's favorite group", explanation: "Đúng vì trong bài nghe nói rõ là nhóm nhạc yêu thích của thành phố biểu diễn" },
+                    { letter: "B", text: "A fireworks display", explanation: "Sai vì không phải pháo hoa" },
+                    { letter: "C", text: "A dance performance", explanation: "Sai vì không phải biểu diễn múa" },
+                    { letter: "D", text: "A speech", explanation: "Sai vì không phải bài phát biểu" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The city's favorite group (nhóm nhạc yêu thích của thành phố)",
+                explanation: "Đáp án đúng là A (The city's favorite group) vì trong đoạn nghe, người nói đề cập rằng ở cuối buổi hòa nhạc, nhóm nhạc yêu thích của thành phố sẽ biểu diễn."
+            },
+            {
+                number: 14,
+                topic: "Outdoor activities",
+                question: "hoạt động ngoài trời nào được đề cập?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "Horse riding", 
+                        explanation: "Đúng vì đây là một trong những hoạt động ngoài trời được đề cập"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "Going for a run", 
+                        explanation: "Đúng vì chạy bộ cũng là hoạt động ngoài trời được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "Climbing", 
+                        explanation: "Đúng vì leo núi là hoạt động ngoài trời được đề cập"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "Mountain biking", 
+                        explanation: "Đúng vì đạp xe leo núi là hoạt động ngoài trời được đề cập"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Horse riding (cưỡi ngựa)",
+                explanation: "Đáp án đúng là A (Horse riding) vì trong đoạn nghe, người nói đề cập rằng cưỡi ngựa là một trong những hoạt động ngoài trời phổ biến ở khu vực này."
+            },
+            {
+                number: 15,
+                topic: "Music",
+                question: "Chọn đúng/sai cho các câu (tráo giọng nam-nữ)",
+                mnemonic: "M-B-W-B",
+                mnemonicPhrase: "M - B - W - B",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "Singers play a good role for young people", 
+                        isCorrect: true,
+                        explanation: "Đúng vì ca sĩ đóng vai trò tốt cho giới trẻ"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "Taste in music is a highly personal thing", 
+                        isCorrect: true,
+                        explanation: "Đúng vì sở thích âm nhạc là điều rất cá nhân"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "Music is a universal language", 
+                        isCorrect: true,
+                        explanation: "Đúng vì âm nhạc là ngôn ngữ chung của nhân loại"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "Music can manipulate people's feelings", 
+                        isCorrect: true,
+                        explanation: "Đúng vì âm nhạc có thể điều khiển cảm xúc con người"
+                    }
+                ],
+                tip: "MẸO NHỚ: M-B-W-B. A đúng, B đúng, C đúng, D đúng",
+                explanation: "Đáp án: A (Đúng), B (Đúng), C (Đúng), D (Đúng). Tất cả các câu đều đúng: ca sĩ có vai trò tích cực với giới trẻ, sở thích âm nhạc là cá nhân, âm nhạc là ngôn ngữ chung, và âm nhạc có thể ảnh hưởng đến cảm xúc."
+            },
+            {
+                number: 16,
+                topic: "A musician's life",
+                question: "cuộc sống của nhạc sĩ như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "He will probably retire from singing", 
+                        explanation: "Đúng vì đây là một trong những thông tin về nhạc sĩ"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "He could have been more successful", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai về nhạc sĩ"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "He is planning a world tour", 
+                        explanation: "Sai vì không có đề cập đến tour thế giới"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "He is starting a new band", 
+                        explanation: "Sai vì không có đề cập đến việc thành lập ban nhạc mới"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - có thể nghỉ hưu, có thể thành công hơn",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Nhạc sĩ có thể sẽ nghỉ hưu khỏi việc ca hát, và anh ấy có thể đã thành công hơn nếu có những quyết định khác trong sự nghiệp."
+            },
+            {
+                number: 17,
+                topic: "A new guide",
+                question: "hướng dẫn mới như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "It creates a sense of adventure", 
+                        explanation: "Đúng vì đây là một trong những đặc điểm của hướng dẫn mới"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "It is only suitable for a particular generation", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai về hướng dẫn mới"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "It is too expensive", 
+                        explanation: "Sai vì không có đề cập đến giá cả"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "It lacks detailed information", 
+                        explanation: "Sai vì không có đề cập đến thiếu thông tin chi tiết"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - tạo cảm giác phiêu lưu, chỉ phù hợp một thế hệ",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Hướng dẫn mới tạo ra cảm giác phiêu lưu và thú vị, nhưng nó chỉ phù hợp với một thế hệ cụ thể."
+            }
+        ]
+    },
+    exam14: {
+        title: "LISTENING : TRỘN 1.50 POUND",
+        questions: [
+            {
+                number: 1,
+                question: "trứng bao nhiêu tiền?",
+                options: [
+                    { letter: "A", text: "1.00", explanation: "Sai vì không phải 1.00" },
+                    { letter: "B", text: "1.50", explanation: "Đúng vì trong bài nghe nói rõ là 1.50 pound" },
+                    { letter: "C", text: "2.00", explanation: "Sai vì không phải 2.00" },
+                    { letter: "D", text: "2.50", explanation: "Sai vì không phải 2.50" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = 1.50 (một phẩy năm mươi)",
+                explanation: "Đáp án đúng là B (1.50) vì trong đoạn nghe, người nói đề cập rõ ràng rằng giá trứng là 1.50 pound."
+            },
+            {
+                number: 2,
+                question: "tàu chạy lúc mấy giờ?",
+                options: [
+                    { letter: "A", text: "9.00", explanation: "Sai vì không phải 9 giờ" },
+                    { letter: "B", text: "9.15", explanation: "Đúng vì trong bài nghe nói rõ là 9 giờ 15 phút" },
+                    { letter: "C", text: "9.30", explanation: "Sai vì không phải 9 giờ 30" },
+                    { letter: "D", text: "9.45", explanation: "Sai vì không phải 9 giờ 45" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = 9.15 (chín giờ mười lăm)",
+                explanation: "Đáp án đúng là B (9.15) vì trong đoạn nghe, lịch trình tàu được thông báo là 9 giờ 15 phút."
+            },
+            {
+                number: 3,
+                question: "cô ấy đi phương tiện gì tới chỗ làm?",
+                options: [
+                    { letter: "A", text: "She walks", explanation: "Đúng vì trong bài nghe nói rõ cô đi bộ" },
+                    { letter: "B", text: "She drives", explanation: "Sai vì không phải lái xe" },
+                    { letter: "C", text: "She takes the bus", explanation: "Sai vì không phải đi xe buýt" },
+                    { letter: "D", text: "She cycles", explanation: "Sai vì không phải đi xe đạp" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = She walks (cô đi bộ)",
+                explanation: "Đáp án đúng là A (She walks) vì trong đoạn nghe, cô ấy nói rằng cô đi bộ đến nơi làm việc."
+            },
+            {
+                number: 4,
+                question: "mấy giờ có bữa trưa?",
+                options: [
+                    { letter: "A", text: "12pm", explanation: "Sai vì không phải 12 giờ trưa" },
+                    { letter: "B", text: "1pm", explanation: "Sai vì không phải 1 giờ chiều" },
+                    { letter: "C", text: "2pm", explanation: "Đúng vì trong bài nghe nói rõ là 2 giờ chiều" },
+                    { letter: "D", text: "3pm", explanation: "Sai vì không phải 3 giờ chiều" }
+                ],
+                answer: "C",
+                tip: "Nhớ: C = 2pm (hai giờ chiều)",
+                explanation: "Đáp án đúng là C (2pm) vì trong đoạn nghe, bữa trưa được phục vụ lúc 2 giờ chiều."
+            },
+            {
+                number: 5,
+                question: "thường làm gì?",
+                options: [
+                    { letter: "A", text: "Go for a walk", explanation: "Đúng vì trong bài nghe nói rõ là đi dạo" },
+                    { letter: "B", text: "Go shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Stay at home", explanation: "Sai vì không phải ở nhà" },
+                    { letter: "D", text: "Visit friends", explanation: "Sai vì không phải thăm bạn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Go for a walk (đi dạo)",
+                explanation: "Đáp án đúng là A (Go for a walk) vì trong đoạn nghe, người nói chia sẻ rằng họ thường đi dạo vào buổi chiều."
+            },
+            {
+                number: 6,
+                question: "hẹn gặp nhau ở đâu?",
+                options: [
+                    { letter: "A", text: "At the park", explanation: "Đúng vì trong bài nghe nói rõ là hẹn ở công viên" },
+                    { letter: "B", text: "At the café", explanation: "Sai vì không phải quán cà phê" },
+                    { letter: "C", text: "At the library", explanation: "Sai vì không phải thư viện" },
+                    { letter: "D", text: "At the station", explanation: "Sai vì không phải trạm" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = At the park (ở công viên)",
+                explanation: "Đáp án đúng là A (At the park) vì trong đoạn nghe, họ đồng ý gặp nhau ở công viên."
+            },
+            {
+                number: 7,
+                question: "gia đình này thường làm gì vào các cuối tuần?",
+                options: [
+                    { letter: "A", text: "Goes for a walk", explanation: "Đúng vì trong bài nghe nói rõ gia đình thường đi dạo vào cuối tuần" },
+                    { letter: "B", text: "Goes shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Stays at home", explanation: "Sai vì không phải ở nhà" },
+                    { letter: "D", text: "Visits relatives", explanation: "Sai vì không phải thăm họ hàng" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Goes for a walk (đi dạo)",
+                explanation: "Đáp án đúng là A (Goes for a walk) vì trong đoạn nghe, gia đình thường dành thời gian đi dạo cùng nhau vào cuối tuần."
+            },
+            {
+                number: 8,
+                question: "thứ mấy gặp nhau?",
+                options: [
+                    { letter: "A", text: "Monday", explanation: "Sai vì không phải thứ Hai" },
+                    { letter: "B", text: "Tuesday", explanation: "Đúng vì trong bài nghe nói rõ là thứ Ba" },
+                    { letter: "C", text: "Wednesday", explanation: "Sai vì không phải thứ Tư" },
+                    { letter: "D", text: "Thursday", explanation: "Sai vì không phải thứ Năm" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Tuesday (thứ Ba)",
+                explanation: "Đáp án đúng là B (Tuesday) vì trong đoạn nghe, họ đồng ý gặp nhau vào thứ Ba hàng tuần."
+            },
+            {
+                number: 9,
+                question: "tương lai làm gì?",
+                options: [
+                    { letter: "A", text: "To work in business", explanation: "Đúng vì trong bài nghe nói rõ là làm việc trong lĩnh vực kinh doanh" },
+                    { letter: "B", text: "To become a teacher", explanation: "Sai vì không phải trở thành giáo viên" },
+                    { letter: "C", text: "To study more", explanation: "Sai vì không phải học thêm" },
+                    { letter: "D", text: "To travel", explanation: "Sai vì không phải đi du lịch" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = To work in business (làm việc trong kinh doanh)",
+                explanation: "Đáp án đúng là A (To work in business) vì trong đoạn nghe, người nói chia sẻ kế hoạch tương lai là làm việc trong lĩnh vực kinh doanh."
+            },
+            {
+                number: 10,
+                question: "học khóa học về cái gì?",
+                options: [
+                    { letter: "A", text: "Computer", explanation: "Đúng vì trong bài nghe nói rõ là học về máy tính" },
+                    { letter: "B", text: "English", explanation: "Sai vì không phải tiếng Anh" },
+                    { letter: "C", text: "Math", explanation: "Sai vì không phải toán" },
+                    { letter: "D", text: "Science", explanation: "Sai vì không phải khoa học" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Computer (máy tính)",
+                explanation: "Đáp án đúng là A (Computer) vì trong đoạn nghe, người nói đang tham gia một khóa học về máy tính."
+            },
+            {
+                number: 11,
+                question: "làm nhà văn thì có gì khác với các nghề khác?",
+                options: [
+                    { letter: "A", text: "Irregular time", explanation: "Đúng vì trong bài nghe nói rõ là thời gian không đều đặn" },
+                    { letter: "B", text: "Low income", explanation: "Sai vì không phải thu nhập thấp" },
+                    { letter: "C", text: "No benefits", explanation: "Sai vì không phải không có phúc lợi" },
+                    { letter: "D", text: "Long hours", explanation: "Sai vì không phải giờ làm dài" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Irregular time (thời gian không đều đặn)",
+                explanation: "Đáp án đúng là A (Irregular time) vì trong đoạn nghe, nhà văn giải thích rằng điểm khác biệt của nghề này là thời gian làm việc không đều đặn, không giống các nghề khác."
+            },
+            {
+                number: 12,
+                question: "mua đồ ăn ở đâu?",
+                options: [
+                    { letter: "A", text: "At a new shopping centre", explanation: "Đúng vì trong bài nghe nói rõ là ở trung tâm mua sắm mới" },
+                    { letter: "B", text: "At the market", explanation: "Sai vì không phải chợ" },
+                    { letter: "C", text: "At the supermarket", explanation: "Sai vì không phải siêu thị" },
+                    { letter: "D", text: "At a restaurant", explanation: "Sai vì không phải nhà hàng" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = At a new shopping centre (ở trung tâm mua sắm mới)",
+                explanation: "Đáp án đúng là A (At a new shopping centre) vì trong đoạn nghe, người nói đề cập đến việc mua đồ ăn ở một trung tâm mua sắm mới."
+            },
+            {
+                number: 13,
+                question: "tại sao ô nhiễm không khí?",
+                options: [
+                    { letter: "A", text: "Fire from the countryside", explanation: "Đúng vì trong bài nghe nói rõ là do lửa từ nông thôn" },
+                    { letter: "B", text: "Car emissions", explanation: "Sai vì không phải khí thải xe hơi" },
+                    { letter: "C", text: "Factory smoke", explanation: "Sai vì không phải khói nhà máy" },
+                    { letter: "D", text: "Construction dust", explanation: "Sai vì không phải bụi xây dựng" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Fire from the countryside (lửa từ nông thôn)",
+                explanation: "Đáp án đúng là A (Fire from the countryside) vì trong đoạn nghe, người nói giải thích rằng ô nhiễm không khí là do lửa từ các vùng nông thôn."
+            },
+            {
+                number: 14,
+                topic: "Do exercise",
+                question: "tập thể dục như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "Hate exercising", 
+                        explanation: "Sai vì không có đề cập đến việc ghét tập thể dục"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "Help improve work performance", 
+                        explanation: "Đúng vì đây là một trong những lợi ích của tập thể dục được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "Find exercise tiring", 
+                        explanation: "Sai vì không có đề cập đến việc thấy mệt mỏi"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "Has fun when exercising with friends", 
+                        explanation: "Đúng vì đây là một trong những trải nghiệm được đề cập"
+                    }
+                ],
+                answer: "B",
+                tip: "Nhớ: B và D đều đúng - cải thiện hiệu suất công việc, vui khi tập với bạn",
+                explanation: "Đáp án đúng là B và D (cả hai đều đúng). Tập thể dục giúp cải thiện hiệu suất công việc, và người nói cảm thấy vui vẻ khi tập thể dục cùng bạn bè."
+            },
+            {
+                number: 15,
+                topic: "University and technology",
+                question: "Chọn B, W, hoặc M cho từng câu",
+                mnemonic: "B-W-M-W",
+                mnemonicPhrase: "B - W - M - W",
+                matchingType: true,
+                persons: [
+                    { letter: "B", label: "Both (Cả hai)" },
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Technology helps make education more accessible",
+                        answer: "B",
+                        explanation: "Đáp án đúng là B (Both - Cả hai) vì cả nam và nữ đều đề cập đến việc công nghệ giúp giáo dục dễ tiếp cận hơn."
+                    },
+                    {
+                        text: "Social interaction is important",
+                        answer: "W",
+                        explanation: "Đáp án đúng là W (Women - Nữ) vì chỉ người nữ đề cập đến tầm quan trọng của tương tác xã hội."
+                    },
+                    {
+                        text: "The diverse curriculum is not an advantage",
+                        answer: "M",
+                        explanation: "Đáp án đúng là M (Man - Nam) vì chỉ người nam đề cập đến việc chương trình học đa dạng không phải là lợi thế."
+                    },
+                    {
+                        text: "University competition should be encouraged",
+                        answer: "W",
+                        explanation: "Đáp án đúng là W (Women - Nữ) vì chỉ người nữ đề cập đến việc nên khuyến khích cạnh tranh ở đại học."
+                    }
+                ],
+                tip: "MẸO NHỚ: B-W-M-W. Câu 1 = B, Câu 2 = W, Câu 3 = M, Câu 4 = W",
+                explanation: "Đáp án: Câu 1 = B (Both), Câu 2 = W (Women), Câu 3 = M (Man), Câu 4 = W (Women). Công nghệ giúp giáo dục dễ tiếp cận (cả hai), tương tác xã hội quan trọng (nữ), chương trình đa dạng không phải lợi thế (nam), nên khuyến khích cạnh tranh (nữ)."
+            },
+            {
+                number: 16,
+                topic: "Script production",
+                question: "sản xuất kịch bản như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "The characters' background are not adequately explored", 
+                        explanation: "Đúng vì đây là một trong những vấn đề được đề cập"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "The new industry demands are negatively influencing script production", 
+                        explanation: "Đúng vì đây là vấn đề thứ hai được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "The scripts are too expensive to produce", 
+                        explanation: "Sai vì không có đề cập đến chi phí"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "The scripts lack creativity", 
+                        explanation: "Sai vì không có đề cập đến thiếu sáng tạo"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - không khám phá đủ nhân vật, yêu cầu ngành ảnh hưởng tiêu cực",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Sản xuất kịch bản có hai vấn đề: không khám phá đủ nền tảng của nhân vật, và các yêu cầu mới của ngành đang ảnh hưởng tiêu cực đến sản xuất kịch bản."
+            },
+            {
+                number: 17,
+                topic: "Transport",
+                question: "giao thông có vấn đề gì?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "It doesn't do enough to promote alternatives to drive", 
+                        explanation: "Đúng vì đây là một trong những vấn đề được đề cập"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "They are not making the efficient use of existing land", 
+                        explanation: "Đúng vì đây là vấn đề thứ hai được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "The transport system lacks funding", 
+                        explanation: "Sai vì không có đề cập đến thiếu tài chính"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "The transport is too expensive", 
+                        explanation: "Sai vì không có đề cập đến giá cả"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - không khuyến khích phương tiện thay thế, không sử dụng đất hiệu quả",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Hệ thống giao thông có hai vấn đề: không khuyến khích đủ các phương tiện thay thế cho việc lái xe, và không sử dụng đất hiện có một cách hiệu quả."
+            }
+        ]
+    },
+    exam15: {
+        title: "LISTENING : TRỘN 24",
+        questions: [
+            {
+                number: 1,
+                question: "anh ấy gọi điện để nói gì?",
+                options: [
+                    { letter: "A", text: "To say thank you", explanation: "Đúng vì trong bài nghe nói rõ anh gọi để nói cảm ơn" },
+                    { letter: "B", text: "To say sorry", explanation: "Sai vì không phải xin lỗi" },
+                    { letter: "C", text: "To say goodbye", explanation: "Sai vì không phải chào tạm biệt" },
+                    { letter: "D", text: "To say hello", explanation: "Sai vì không phải chào hỏi" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = To say thank you (để nói cảm ơn)",
+                explanation: "Đáp án đúng là A (To say thank you) vì trong đoạn nghe, anh ấy gọi điện để nói lời cảm ơn."
+            },
+            {
+                number: 2,
+                question: "bán được bao nhiêu bản copies?",
+                options: [
+                    { letter: "A", text: "Over 200000 copies", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "B", text: "Over 300000 copies", explanation: "Đúng vì trong bài nghe nói rõ là hơn 300000 bản" },
+                    { letter: "C", text: "Over 400000 copies", explanation: "Sai vì số lượng không đúng" },
+                    { letter: "D", text: "Over 500000 copies", explanation: "Sai vì số lượng không đúng" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Over 300000 copies (hơn 300 nghìn bản)",
+                explanation: "Đáp án đúng là B (Over 300000 copies) vì trong đoạn nghe, người nói công bố rằng cuốn sách đã bán được hơn 300000 bản."
+            },
+            {
+                number: 3,
+                question: "hẹn gặp ở đâu để đi bus về nhà?",
+                options: [
+                    { letter: "A", text: "Marketplace", explanation: "Đúng vì trong bài nghe nói rõ là hẹn ở chợ" },
+                    { letter: "B", text: "Bus station", explanation: "Sai vì không phải trạm xe buýt" },
+                    { letter: "C", text: "School", explanation: "Sai vì không phải trường học" },
+                    { letter: "D", text: "Park", explanation: "Sai vì không phải công viên" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Marketplace (chợ)",
+                explanation: "Đáp án đúng là A (Marketplace) vì trong đoạn nghe, họ đồng ý gặp nhau ở chợ để cùng đi xe buýt về nhà."
+            },
+            {
+                number: 4,
+                question: "anh ấy để quên cái gì?",
+                options: [
+                    { letter: "A", text: "Glasses", explanation: "Đúng vì trong bài nghe nói rõ anh để quên kính" },
+                    { letter: "B", text: "Phone", explanation: "Sai vì không phải điện thoại" },
+                    { letter: "C", text: "Keys", explanation: "Sai vì không phải chìa khóa" },
+                    { letter: "D", text: "Wallet", explanation: "Sai vì không phải ví" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Glasses (kính)",
+                explanation: "Đáp án đúng là A (Glasses) vì trong đoạn nghe, anh ấy nhận ra rằng mình đã để quên kính ở đâu đó."
+            },
+            {
+                number: 5,
+                question: "anh ấy phải thuyết trình bao nhiêu phút?",
+                options: [
+                    { letter: "A", text: "10", explanation: "Sai vì không phải 10 phút" },
+                    { letter: "B", text: "15", explanation: "Đúng vì trong bài nghe nói rõ là 15 phút" },
+                    { letter: "C", text: "20", explanation: "Sai vì không phải 20 phút" },
+                    { letter: "D", text: "25", explanation: "Sai vì không phải 25 phút" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = 15 (mười lăm phút)",
+                explanation: "Đáp án đúng là B (15) vì trong đoạn nghe, anh ấy được yêu cầu thuyết trình trong 15 phút."
+            },
+            {
+                number: 6,
+                question: "cô ấy chụp ảnh cho ai?",
+                options: [
+                    { letter: "A", text: "The boy's team", explanation: "Sai vì không phải đội nam" },
+                    { letter: "B", text: "The girl's team", explanation: "Đúng vì trong bài nghe nói rõ là đội nữ" },
+                    { letter: "C", text: "The school", explanation: "Sai vì không phải cho trường học" },
+                    { letter: "D", text: "Her family", explanation: "Sai vì không phải cho gia đình" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = The girl's team (đội nữ)",
+                explanation: "Đáp án đúng là B (The girl's team) vì trong đoạn nghe, cô ấy nói rằng cô được mời chụp ảnh cho đội bóng đá nữ của trường."
+            },
+            {
+                number: 7,
+                question: "gia đình này làm gì hầu hết các cuối tuần?",
+                options: [
+                    { letter: "A", text: "Goes for a walk", explanation: "Đúng vì trong bài nghe nói rõ gia đình thường đi dạo vào cuối tuần" },
+                    { letter: "B", text: "Goes shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Stays at home", explanation: "Sai vì không phải ở nhà" },
+                    { letter: "D", text: "Visits friends", explanation: "Sai vì không phải thăm bạn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Goes for a walk (đi dạo)",
+                explanation: "Đáp án đúng là A (Goes for a walk) vì trong đoạn nghe, người nói kể lại rằng hầu hết các cuối tuần, gia đình họ đều dành thời gian đi dạo cùng nhau ở công viên gần nhà."
+            },
+            {
+                number: 8,
+                question: "cô ấy muốn cái váy nào?",
+                options: [
+                    { letter: "A", text: "Short and blue", explanation: "Sai vì không phải ngắn và xanh" },
+                    { letter: "B", text: "Long and red", explanation: "Đúng vì trong bài nghe nói rõ là dài và đỏ" },
+                    { letter: "C", text: "Long and blue", explanation: "Sai vì không phải màu xanh" },
+                    { letter: "D", text: "Short and red", explanation: "Sai vì không phải ngắn" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Long and red (dài và đỏ)",
+                explanation: "Đáp án đúng là B (Long and red) vì trong đoạn nghe, cô ấy mô tả rõ ràng rằng cô muốn một chiếc váy dài màu đỏ."
+            },
+            {
+                number: 9,
+                question: "phòng nào cô ấy thích nhất?",
+                options: [
+                    { letter: "A", text: "Bathroom", explanation: "Đúng vì trong bài nghe nói rõ cô thích phòng tắm nhất" },
+                    { letter: "B", text: "Kitchen", explanation: "Sai vì không phải nhà bếp" },
+                    { letter: "C", text: "Bedroom", explanation: "Sai vì không phải phòng ngủ" },
+                    { letter: "D", text: "Living room", explanation: "Sai vì không phải phòng khách" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Bathroom (phòng tắm)",
+                explanation: "Đáp án đúng là A (Bathroom) vì trong đoạn nghe, cô ấy nói rằng phòng tắm là phòng cô thích nhất trong căn nhà."
+            },
+            {
+                number: 10,
+                question: "cô ấy làm gì cuối tuần trước?",
+                options: [
+                    { letter: "A", text: "Stayed at home", explanation: "Đúng vì trong bài nghe nói rõ cô ở nhà" },
+                    { letter: "B", text: "Went out", explanation: "Sai vì không phải đi chơi" },
+                    { letter: "C", text: "Visited friends", explanation: "Sai vì không phải thăm bạn" },
+                    { letter: "D", text: "Went shopping", explanation: "Sai vì không phải đi mua sắm" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Stayed at home (ở nhà)",
+                explanation: "Đáp án đúng là A (Stayed at home) vì trong đoạn nghe, cô ấy nói rằng cuối tuần trước cô đã ở nhà để nghỉ ngơi."
+            },
+            {
+                number: 11,
+                question: "phòng nào to nhất?",
+                options: [
+                    { letter: "A", text: "Kitchen", explanation: "Đúng vì trong bài nghe nói rõ nhà bếp là phòng to nhất" },
+                    { letter: "B", text: "Living room", explanation: "Sai vì không phải phòng khách" },
+                    { letter: "C", text: "Bedroom", explanation: "Sai vì không phải phòng ngủ" },
+                    { letter: "D", text: "Bathroom", explanation: "Sai vì không phải phòng tắm" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Kitchen (nhà bếp)",
+                explanation: "Đáp án đúng là A (Kitchen) vì trong đoạn nghe, người nói mô tả rằng nhà bếp là phòng lớn nhất trong căn nhà."
+            },
+            {
+                number: 12,
+                question: "điều gì gây ô nhiễm môi trường?",
+                options: [
+                    { letter: "A", text: "Fire from the countryside", explanation: "Đúng vì trong bài nghe nói rõ là do lửa từ nông thôn" },
+                    { letter: "B", text: "Car emissions", explanation: "Sai vì không phải khí thải xe hơi" },
+                    { letter: "C", text: "Factory smoke", explanation: "Sai vì không phải khói nhà máy" },
+                    { letter: "D", text: "Construction dust", explanation: "Sai vì không phải bụi xây dựng" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Fire from the countryside (lửa từ nông thôn)",
+                explanation: "Đáp án đúng là A (Fire from the countryside) vì trong đoạn nghe, người nói giải thích rằng ô nhiễm môi trường là do lửa từ các vùng nông thôn."
+            },
+            {
+                number: 13,
+                question: "tại sao chuyến bay bị huỷ?",
+                options: [
+                    { letter: "A", text: "Poor weather conditions", explanation: "Đúng vì trong bài nghe nói rõ do thời tiết xấu" },
+                    { letter: "B", text: "Technical problems", explanation: "Sai vì không phải vấn đề kỹ thuật" },
+                    { letter: "C", text: "Staff shortage", explanation: "Sai vì không phải thiếu nhân viên" },
+                    { letter: "D", text: "Airport closure", explanation: "Sai vì không phải đóng cửa sân bay" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Poor weather conditions (thời tiết xấu)",
+                explanation: "Đáp án đúng là A (Poor weather conditions) vì trong đoạn nghe, hãng hàng không thông báo rằng chuyến bay bị hủy do điều kiện thời tiết xấu."
+            },
+            {
+                number: 14,
+                topic: "The place to run",
+                question: "nơi nào để chạy?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "In the fitness centre", 
+                        explanation: "Sai vì không phải trung tâm thể dục"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "At the seaside", 
+                        explanation: "Sai vì không phải bờ biển"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "In the street", 
+                        explanation: "Sai vì không phải trên đường phố"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "On the running track", 
+                        explanation: "Đúng vì trong bài nghe nói rõ là trên đường chạy"
+                    }
+                ],
+                answer: "D",
+                tip: "Nhớ: D = On the running track (trên đường chạy)",
+                explanation: "Đáp án đúng là D (On the running track) vì trong đoạn nghe, người nói đề cập rằng họ thích chạy trên đường chạy chuyên dụng."
+            },
+            {
+                number: 15,
+                topic: "Arts",
+                question: "Chọn W, M, hoặc B cho từng câu (tráo giọng nam-nữ so với phiên bản trước đó)",
+                mnemonic: "W-M-B-M",
+                mnemonicPhrase: "W - M - B - M",
+                matchingType: true,
+                persons: [
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Art is only suitable for the privileged few",
+                        answer: "W",
+                        explanation: "Đáp án đúng là W (Women - Nữ) vì chỉ người nữ đề cập đến việc nghệ thuật chỉ phù hợp với số ít người có đặc quyền."
+                    },
+                    {
+                        text: "The government should invest more in arts",
+                        answer: "M",
+                        explanation: "Đáp án đúng là M (Man - Nam) vì chỉ người nam đề cập đến việc chính phủ nên đầu tư nhiều hơn vào nghệ thuật."
+                    },
+                    {
+                        text: "Children should be exposed to art early",
+                        answer: "B",
+                        explanation: "Đáp án đúng là B (Both - Cả hai) vì cả nam và nữ đều đề cập đến việc trẻ em nên được tiếp xúc với nghệ thuật từ sớm."
+                    },
+                    {
+                        text: "In the future, art will become more accessible",
+                        answer: "M",
+                        explanation: "Đáp án đúng là M (Man - Nam) vì chỉ người nam đề cập đến việc trong tương lai, nghệ thuật sẽ trở nên dễ tiếp cận hơn."
+                    }
+                ],
+                tip: "MẸO NHỚ: W-M-B-M. Câu 1 = W, Câu 2 = M, Câu 3 = B, Câu 4 = M",
+                explanation: "Đáp án: Câu 1 = W (Women), Câu 2 = M (Man), Câu 3 = B (Both), Câu 4 = M (Man). Nghệ thuật chỉ cho số ít (nữ), chính phủ nên đầu tư (nam), trẻ em nên tiếp xúc sớm (cả hai), tương lai dễ tiếp cận hơn (nam)."
+            },
+            {
+                number: 16,
+                topic: "Professionalism at work",
+                question: "chuyên nghiệp tại nơi làm việc như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "Maintain the positive attitude", 
+                        explanation: "Đúng vì đây là một trong những yếu tố được đề cập"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "Change its definition", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai được đề cập"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "Avoid conflicts", 
+                        explanation: "Sai vì không có đề cập đến tránh xung đột"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "Work longer hours", 
+                        explanation: "Sai vì không có đề cập đến làm việc giờ dài hơn"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - duy trì thái độ tích cực, thay đổi định nghĩa",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Chuyên nghiệp tại nơi làm việc bao gồm duy trì thái độ tích cực, và định nghĩa về chuyên nghiệp đang thay đổi."
+            },
+            {
+                number: 17,
+                topic: "Criticism of the new novel",
+                question: "phê bình cuốn tiểu thuyết mới như thế nào?",
+                options: [
+                    { 
+                        letter: "A", 
+                        text: "The characters were interesting", 
+                        explanation: "Đúng vì đây là một trong những nhận xét về cuốn tiểu thuyết"
+                    },
+                    { 
+                        letter: "B", 
+                        text: "It will establish the author's popularity", 
+                        explanation: "Đúng vì đây là nhận xét thứ hai về cuốn tiểu thuyết"
+                    },
+                    { 
+                        letter: "C", 
+                        text: "The plot was confusing", 
+                        explanation: "Sai vì không có đề cập đến cốt truyện khó hiểu"
+                    },
+                    { 
+                        letter: "D", 
+                        text: "The ending was disappointing", 
+                        explanation: "Sai vì không có đề cập đến kết thúc đáng thất vọng"
+                    }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng - nhân vật thú vị, sẽ thiết lập danh tiếng tác giả",
+                explanation: "Đáp án đúng là A và B (cả hai đều đúng). Phê bình về cuốn tiểu thuyết mới: các nhân vật rất thú vị, và cuốn sách sẽ thiết lập danh tiếng cho tác giả."
+            }
+        ]
+    },
+    exam16: {
+        title: "LISTENING : TRỘN 250 POUNDS",
+        questions: [
+            {
+                number: 1,
+                question: "anh ấy trả bao nhiêu để mua máy tính?",
+                options: [
+                    { letter: "A", text: "150 pounds", explanation: "Sai vì không phải 150" },
+                    { letter: "B", text: "200 pounds", explanation: "Sai vì không phải 200" },
+                    { letter: "C", text: "250 pounds", explanation: "Đúng vì trong bài nghe nói rõ số tiền là 250 pounds" },
+                    { letter: "D", text: "300 pounds", explanation: "Sai vì không phải 300" }
+                ],
+                answer: "C",
+                tip: "Nhớ: C = 250 pounds",
+                explanation: "Đáp án đúng là C (250 pounds) vì trong đoạn nghe, người đàn ông nói đã trả 250 pounds cho chiếc máy tính."
+            },
+            {
+                number: 2,
+                question: "số lượng dân cư ở 1 vùng quê?",
+                options: [
+                    { letter: "A", text: "5.000", explanation: "Sai vì không phải 5.000" },
+                    { letter: "B", text: "8.000", explanation: "Sai vì không phải 8.000" },
+                    { letter: "C", text: "10.000", explanation: "Đúng vì trong bài nghe nói rõ là 10.000" },
+                    { letter: "D", text: "12.000", explanation: "Sai vì không phải 12.000" }
+                ],
+                answer: "C",
+                tip: "Nhớ: C = 10.000 người",
+                explanation: "Đáp án đúng là C (10.000) vì người dẫn chương trình nhắc đến con số 10.000 dân cư tại vùng quê."
+            },
+            {
+                number: 3,
+                question: "anh ấy muốn đi đâu vào ngày mai?",
+                options: [
+                    { letter: "A", text: "The town hall", explanation: "Đúng vì trong bài nghe nói rõ là đến tòa thị chính" },
+                    { letter: "B", text: "The library", explanation: "Sai vì không phải thư viện" },
+                    { letter: "C", text: "The museum", explanation: "Sai vì không phải bảo tàng" },
+                    { letter: "D", text: "The cinema", explanation: "Sai vì không phải rạp chiếu phim" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The town hall",
+                explanation: "Đáp án đúng là A vì nhân vật dự định đi đến tòa thị chính vào ngày mai."
+            },
+            {
+                number: 4,
+                question: "trận bóng đá lúc mấy giờ?",
+                options: [
+                    { letter: "A", text: "11am", explanation: "Sai vì không phải 11 giờ" },
+                    { letter: "B", text: "12pm", explanation: "Sai vì không phải 12 giờ" },
+                    { letter: "C", text: "1pm", explanation: "Đúng vì trong bài nghe nói rõ là 1 giờ chiều" },
+                    { letter: "D", text: "3pm", explanation: "Sai vì không phải 3 giờ" }
+                ],
+                answer: "C",
+                tip: "Nhớ: C = 1pm",
+                explanation: "Đáp án đúng là C (1pm) vì lịch trận bóng đá được nhắc rõ là 1 giờ chiều."
+            },
+            {
+                number: 5,
+                question: "cô ấy phải làm gì khi phát biểu tại hội nghị?",
+                options: [
+                    { letter: "A", text: "Speaking at the conference", explanation: "Đúng vì nhiệm vụ chính là phát biểu" },
+                    { letter: "B", text: "Prepare refreshments", explanation: "Sai vì không phải chuẩn bị nước" },
+                    { letter: "C", text: "Manage registration", explanation: "Sai vì không phải quản lý đăng ký" },
+                    { letter: "D", text: "Take photographs", explanation: "Sai vì không phải chụp ảnh" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Speaking at the conference",
+                explanation: "Đáp án đúng là A vì công việc của cô ấy là phát biểu tại hội nghị."
+            },
+            {
+                number: 6,
+                question: "khi nào được chơi đá bóng ở trường học?",
+                options: [
+                    { letter: "A", text: "Monday afternoon", explanation: "Sai vì không phải thứ Hai" },
+                    { letter: "B", text: "Wednesday afternoon", explanation: "Đúng vì trong bài nghe nói rõ là chiều thứ Tư" },
+                    { letter: "C", text: "Friday morning", explanation: "Sai vì không phải sáng thứ Sáu" },
+                    { letter: "D", text: "Sunday evening", explanation: "Sai vì không phải Chủ nhật" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Wednesday afternoon",
+                explanation: "Đáp án đúng là B vì lịch đá bóng trong trường diễn ra chiều thứ Tư."
+            },
+            {
+                number: 7,
+                question: "chị gái cô ấy trông như thế nào?",
+                options: [
+                    { letter: "A", text: "Tall with long hair", explanation: "Sai vì không đúng mô tả" },
+                    { letter: "B", text: "Short with dark hair", explanation: "Đúng vì trong bài nghe nói rõ như vậy" },
+                    { letter: "C", text: "Tall with blonde hair", explanation: "Sai vì không phải tóc vàng" },
+                    { letter: "D", text: "Short with red hair", explanation: "Sai vì không phải tóc đỏ" }
+                ],
+                answer: "B",
+                tip: "Nhớ: B = Short với tóc đen",
+                explanation: "Đáp án đúng là B vì mô tả của chị gái là thấp và tóc đen."
+            },
+            {
+                number: 8,
+                question: "môn thể thao nào cô ấy giỏi nhất?",
+                options: [
+                    { letter: "A", text: "Football", explanation: "Đúng vì trong bài nghe nói rõ cô ấy giỏi bóng đá" },
+                    { letter: "B", text: "Tennis", explanation: "Sai vì không phải tennis" },
+                    { letter: "C", text: "Basketball", explanation: "Sai vì không phải bóng rổ" },
+                    { letter: "D", text: "Badminton", explanation: "Sai vì không phải cầu lông" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Football",
+                explanation: "Đáp án đúng là A vì môn thể thao sở trường là bóng đá."
+            },
+            {
+                number: 9,
+                question: "2 người hẹn gặp nhau ở đâu?",
+                options: [
+                    { letter: "A", text: "At the park", explanation: "Đúng vì trong bài nghe nói rõ họ gặp ở công viên" },
+                    { letter: "B", text: "At the café", explanation: "Sai vì không phải quán cà phê" },
+                    { letter: "C", text: "At the cinema", explanation: "Sai vì không phải rạp chiếu phim" },
+                    { letter: "D", text: "At the station", explanation: "Sai vì không phải nhà ga" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = At the park",
+                explanation: "Đáp án đúng là A vì điểm hẹn của họ là công viên."
+            },
+            {
+                number: 10,
+                question: "điều gì thu hút cô ấy nhất ở bộ phim?",
+                options: [
+                    { letter: "A", text: "The mountain scenes", explanation: "Đúng vì cô ấy thích nhất các cảnh núi" },
+                    { letter: "B", text: "The music", explanation: "Sai vì không phải âm nhạc" },
+                    { letter: "C", text: "The costumes", explanation: "Sai vì không phải trang phục" },
+                    { letter: "D", text: "The acting", explanation: "Sai vì không phải diễn xuất" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = The mountain scenes",
+                explanation: "Đáp án đúng là A vì cô ấy nói rõ cảnh núi là điều thu hút nhất."
+            },
+            {
+                number: 11,
+                question: "động lực gì khiến cô ấy nghiên cứu khoa học?",
+                options: [
+                    { letter: "A", text: "A large stone", explanation: "Đúng vì trong bài nghe nói rõ là một hòn đá lớn" },
+                    { letter: "B", text: "A teacher", explanation: "Sai vì không phải giáo viên" },
+                    { letter: "C", text: "A book", explanation: "Sai vì không phải cuốn sách" },
+                    { letter: "D", text: "A TV show", explanation: "Sai vì không phải chương trình TV" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = A large stone",
+                explanation: "Đáp án đúng là A vì hòn đá lớn đã khơi dậy niềm đam mê nghiên cứu khoa học."
+            },
+            {
+                number: 12,
+                question: "lời khuyên dành cho người thiếu động lực trong công việc?",
+                options: [
+                    { letter: "A", text: "Request a transfer", explanation: "Đúng vì lời khuyên là xin chuyển bộ phận" },
+                    { letter: "B", text: "Take a vacation", explanation: "Sai vì không phải nghỉ phép" },
+                    { letter: "C", text: "Change career", explanation: "Sai vì không phải đổi nghề" },
+                    { letter: "D", text: "Work overtime", explanation: "Sai vì không phải làm thêm giờ" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Request a transfer",
+                explanation: "Đáp án đúng là A vì lời khuyên cụ thể là xin chuyển sang vị trí khác để tìm động lực."
+            },
+            {
+                number: 13,
+                question: "Cô ấy sẽ làm gì?",
+                options: [
+                    { letter: "A", text: "Go coffee", explanation: "Đúng vì trong bài nghe nói rõ cô sẽ đi uống cà phê" },
+                    { letter: "B", text: "Go shopping", explanation: "Sai vì không phải đi mua sắm" },
+                    { letter: "C", text: "Go jogging", explanation: "Sai vì không phải chạy bộ" },
+                    { letter: "D", text: "Cook dinner", explanation: "Sai vì không phải nấu ăn" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A = Go coffee",
+                explanation: "Đáp án đúng là A vì kế hoạch của cô là đi uống cà phê."
+            },
+            {
+                number: 14,
+                topic: "Environmental problem",
+                question: "cách giải quyết vấn đề môi trường?",
+                options: [
+                    { letter: "A", text: "Buy environmentally friendly products", explanation: "Đúng vì đây là lời khuyên đầu tiên" },
+                    { letter: "B", text: "Give away used items", explanation: "Đúng vì đây là lời khuyên thứ hai" },
+                    { letter: "C", text: "Does not use commercial cleaning products", explanation: "Đúng vì đây là lời khuyên thứ ba" },
+                    { letter: "D", text: "Reuse containers for storing food", explanation: "Đúng vì đây là lời khuyên thứ tư" }
+                ],
+                answer: "A",
+                tip: "Nhớ: cả 4 hành động đều tốt - tập trung vào sản phẩm thân thiện",
+                explanation: "Đáp án đúng là cả A, B, C, D (tất cả đều đúng). Các biện pháp gồm mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa thương mại và tái sử dụng hộp đựng."
+            },
+            {
+                number: 15,
+                topic: "Actors",
+                question: "Chọn M, W, B cho từng câu",
+                mnemonic: "M-W-B-B",
+                mnemonicPhrase: "M - W - B - B",
+                matchingType: true,
+                persons: [
+                    { letter: "M", label: "Man (Nam)" },
+                    { letter: "W", label: "Women (Nữ)" },
+                    { letter: "B", label: "Both (Cả hai)" }
+                ],
+                subQuestions: [
+                    {
+                        text: "Auditions are the most important part of casting",
+                        answer: "M",
+                        explanation: "Đáp án đúng là M (Nam) vì chỉ người nam nhấn mạnh tầm quan trọng của buổi thử vai."
+                    },
+                    {
+                        text: "Actors respond best to a strong script",
+                        answer: "W",
+                        explanation: "Đáp án đúng là W (Nữ) vì chỉ người nữ cho rằng kịch bản mạnh giúp diễn viên thể hiện tốt."
+                    },
+                    {
+                        text: "Theatre acting and movie acting require different skills",
+                        answer: "B",
+                        explanation: "Đáp án đúng là B (Cả hai) vì cả nam và nữ đều nói sân khấu và điện ảnh cần kỹ năng khác nhau."
+                    },
+                    {
+                        text: "Actors need to be praised",
+                        answer: "B",
+                        explanation: "Đáp án đúng là B (Cả hai) vì cả hai người đều nhấn mạnh diễn viên cần được khen ngợi."
+                    }
+                ],
+                tip: "Nhớ: M-W-B-B",
+                explanation: "Câu 1 = M, Câu 2 = W, Câu 3-4 = B."
+            },
+            {
+                number: 16,
+                topic: "A promotion campaign for a product",
+                question: "chiến dịch quảng cáo có vấn đề gì?",
+                options: [
+                    { letter: "A", text: "It is making exaggerated claims", explanation: "Đúng vì quảng cáo bị phóng đại" },
+                    { letter: "B", text: "It costs too much to make to be profitable", explanation: "Đúng vì chi phí quá cao" },
+                    { letter: "C", text: "It lacks visual appeal", explanation: "Sai vì không đề cập" },
+                    { letter: "D", text: "It targets the wrong audience", explanation: "Sai vì không đề cập" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng",
+                explanation: "Đáp án đúng là A và B (cả hai). Chiến dịch bị chê là phóng đại và chi phí cao nên khó có lãi."
+            },
+            {
+                number: 17,
+                topic: "Managing financial spending",
+                question: "lời khuyên quản lý chi tiêu?",
+                options: [
+                    { letter: "A", text: "Monitor your spending for a weekly plan", explanation: "Đúng vì lời khuyên đầu tiên là lập kế hoạch tuần và theo dõi chi tiêu" },
+                    { letter: "B", text: "Seek advice from someone who have experience", explanation: "Đúng vì lời khuyên thứ hai là hỏi người có kinh nghiệm" },
+                    { letter: "C", text: "Invest in risky stocks", explanation: "Sai vì không đề cập" },
+                    { letter: "D", text: "Only use cash", explanation: "Sai vì không đề cập" }
+                ],
+                answer: "A",
+                tip: "Nhớ: A và B đều đúng",
+                explanation: "Đáp án đúng là A và B. Hãy theo dõi chi tiêu hàng tuần và xin lời khuyên của người có kinh nghiệm."
+            }
+        ]
+    }
+};
+

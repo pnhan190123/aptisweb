@@ -234,6 +234,11 @@ function showSkill(skill) {
             loadExam(1);
             readingInitialized = true;
         }
+        
+        // Initialize Listening page
+        if (skill === 'listening') {
+            loadListening();
+        }
     }
 }
 
@@ -3144,6 +3149,660 @@ function restart() {
     userAnswers = {};
     document.getElementById('result-modal').classList.remove('active');
     loadPart(currentPart);
+}
+
+// Listening functions
+let listeningPracticeMode = false;
+let listeningUserAnswers = {};
+let listeningChecked = false; // Track if answers have been checked
+
+function loadListening() {
+    const examSelector = document.getElementById('listening-exam-selector');
+    const practiceModeToggle = document.getElementById('listening-practice-mode');
+    const contentDiv = document.getElementById('listening-content');
+    
+    if (!examSelector || !contentDiv) return;
+    
+    // Setup exam selector
+    examSelector.addEventListener('change', function() {
+        listeningChecked = false; // Reset when changing exam
+        loadListeningExam(this.value);
+    });
+    
+    // Setup practice mode toggle
+    if (practiceModeToggle) {
+        practiceModeToggle.addEventListener('change', function() {
+            listeningPracticeMode = this.checked;
+            listeningChecked = false; // Reset checked state when toggling
+            loadListeningExam(examSelector.value);
+        });
+    }
+    
+    // Load initial exam
+    loadListeningExam(examSelector.value);
+}
+
+function loadListeningExam(examKey) {
+    const contentDiv = document.getElementById('listening-content');
+    if (!contentDiv || !listeningData[examKey]) return;
+    
+    const exam = listeningData[examKey];
+    contentDiv.innerHTML = '';
+    
+    // Initialize userAnswers for this exam if not exists
+    if (!listeningUserAnswers[examKey]) {
+        listeningUserAnswers[examKey] = {};
+    }
+    
+    // Don't reset checked state when reloading (only reset when explicitly requested)
+    
+    // Create title
+    const titleDiv = document.createElement('div');
+    titleDiv.style.cssText = 'margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;';
+    titleDiv.innerHTML = `
+        <h2 style="margin: 0; font-size: 24px;">${exam.title}</h2>
+        <div style="margin-top: 10px; font-size: 16px; opacity: 0.9;">
+            ${listeningPracticeMode ? '📝 Chế độ luyện tập - Chọn đáp án và check kết quả' : '🧠 Chế độ xem mẹo - Học thuộc nhanh'}
+        </div>
+    `;
+    contentDiv.appendChild(titleDiv);
+    
+    // Create questions container
+    const questionsContainer = document.createElement('div');
+    questionsContainer.style.cssText = 'display: flex; flex-direction: column; gap: 20px;';
+    
+    exam.questions.forEach(q => {
+        const questionCard = createListeningQuestionCard(q, examKey);
+        questionsContainer.appendChild(questionCard);
+    });
+    
+    contentDiv.appendChild(questionsContainer);
+    
+    // Add check button and reset button if in practice mode
+    if (listeningPracticeMode) {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.cssText = 'margin-top: 30px; display: flex; gap: 15px;';
+        
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'btn btn-check';
+        checkBtn.textContent = listeningChecked ? 'Xem lại kết quả' : 'Check đáp án';
+        checkBtn.style.cssText = 'flex: 1; padding: 15px; font-size: 18px; font-weight: 700;';
+        checkBtn.disabled = listeningChecked;
+        
+        checkBtn.addEventListener('click', function() {
+            checkListeningAnswers(examKey, exam);
+        });
+        
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'btn btn-secondary';
+        resetBtn.textContent = 'Làm lại';
+        resetBtn.style.cssText = 'flex: 1; padding: 15px; font-size: 18px; font-weight: 700;';
+        resetBtn.style.background = '#718096';
+        resetBtn.style.color = 'white';
+        
+        resetBtn.addEventListener('click', function() {
+            listeningUserAnswers[examKey] = {};
+            listeningChecked = false;
+            loadListeningExam(examKey);
+        });
+        
+        buttonContainer.appendChild(checkBtn);
+        if (listeningChecked) {
+            buttonContainer.appendChild(resetBtn);
+        }
+        contentDiv.appendChild(buttonContainer);
+    }
+}
+
+function createListeningQuestionCard(question, examKey) {
+    const card = document.createElement('div');
+    card.style.cssText = 'background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);';
+    card.dataset.questionNumber = question.number;
+    
+    // Question number and header
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #e2e8f0;';
+    
+    const numberBadge = document.createElement('div');
+    numberBadge.style.cssText = 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;';
+    numberBadge.textContent = question.number;
+    header.appendChild(numberBadge);
+    
+    const questionInfo = document.createElement('div');
+    questionInfo.style.cssText = 'flex: 1;';
+    
+    if (question.topic) {
+        const topicDiv = document.createElement('div');
+        topicDiv.style.cssText = 'font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 5px;';
+        topicDiv.textContent = `Topic: ${question.topic}`;
+        questionInfo.appendChild(topicDiv);
+    }
+    
+    const questionText = document.createElement('div');
+    questionText.style.cssText = 'font-size: 16px; color: #4a5568;';
+    questionText.textContent = question.question;
+    questionInfo.appendChild(questionText);
+    
+    header.appendChild(questionInfo);
+    card.appendChild(header);
+    
+    // Matching type questions (B, W, M selection)
+    if (question.matchingType && question.subQuestions) {
+        const matchingDiv = document.createElement('div');
+        matchingDiv.style.cssText = 'margin-bottom: 15px;';
+        
+        // Show persons info
+        if (question.persons) {
+            const personsInfo = document.createElement('div');
+            personsInfo.style.cssText = 'background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #667eea;';
+            personsInfo.innerHTML = `
+                <div style="font-weight: 600; color: #2d3748; margin-bottom: 10px;">Chọn người nói cho mỗi câu:</div>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    ${question.persons.map(p => `
+                        <div style="font-weight: 700; color: #667eea; font-size: 16px;">${p.letter} = ${p.label}</div>
+                    `).join('')}
+                </div>
+            `;
+            matchingDiv.appendChild(personsInfo);
+        }
+        
+        // Create sub-questions
+        question.subQuestions.forEach((subQ, idx) => {
+            const subQDiv = document.createElement('div');
+            subQDiv.style.cssText = 'margin-bottom: 15px; padding: 15px; background: #f7fafc; border-radius: 8px; border-left: 4px solid #667eea;';
+            
+            const subQText = document.createElement('div');
+            subQText.style.cssText = 'font-weight: 600; color: #2d3748; margin-bottom: 10px;';
+            subQText.textContent = `${idx + 1}. ${subQ.text}`;
+            subQDiv.appendChild(subQText);
+            
+            if (listeningPracticeMode) {
+                const select = document.createElement('select');
+                select.style.cssText = 'width: 100%; padding: 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; cursor: pointer;';
+                select.dataset.questionNumber = question.number;
+                select.dataset.subQuestionIndex = idx;
+                select.disabled = listeningChecked;
+                
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '-- Chọn B, W, hoặc M --';
+                select.appendChild(defaultOption);
+                
+                question.persons.forEach(person => {
+                    const option = document.createElement('option');
+                    option.value = person.letter;
+                    option.textContent = `${person.letter} - ${person.label}`;
+                    select.appendChild(option);
+                });
+                
+                // Load saved answer
+                const answerKey = `${question.number}_${idx}`;
+                const savedAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][answerKey];
+                if (savedAnswer) {
+                    select.value = savedAnswer;
+                }
+                
+                select.addEventListener('change', function() {
+                    if (!listeningUserAnswers[examKey]) listeningUserAnswers[examKey] = {};
+                    listeningUserAnswers[examKey][answerKey] = this.value;
+                });
+                
+                subQDiv.appendChild(select);
+                
+                // Show result after check
+                if (listeningChecked) {
+                    const isCorrect = savedAnswer === subQ.answer;
+                    const resultDiv = document.createElement('div');
+                    resultDiv.style.cssText = `margin-top: 10px; padding: 10px; border-radius: 6px; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; border-left: 3px solid ${isCorrect ? '#48bb78' : '#fc8181'};`;
+                    resultDiv.innerHTML = `
+                        <div style="font-size: 14px; color: ${isCorrect ? '#2d5016' : '#742a2a'}; line-height: 1.6;">
+                            <strong>${isCorrect ? '✓' : '✗'}</strong> ${subQ.explanation}
+                        </div>
+                    `;
+                    subQDiv.appendChild(resultDiv);
+                }
+            } else {
+                // View mode: show answer
+                const answerDiv = document.createElement('div');
+                answerDiv.style.cssText = 'margin-top: 10px; padding: 10px; background: #f0fff4; border-radius: 6px; border-left: 3px solid #48bb78;';
+                answerDiv.innerHTML = `
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 5px;">Đáp án: <span style="color: #48bb78; font-size: 18px;">${subQ.answer}</span></div>
+                    <div style="font-size: 14px; color: #2d5016; line-height: 1.6; margin-top: 5px;">${subQ.explanation}</div>
+                `;
+                subQDiv.appendChild(answerDiv);
+            }
+            
+            matchingDiv.appendChild(subQDiv);
+        });
+        
+        card.appendChild(matchingDiv);
+    }
+    
+    // Options (for multiple choice) - All questions are now multiple choice
+    if (!question.options && !question.matchingType) {
+        // If no options and not matching type, skip this question (should not happen)
+        console.warn(`Question ${question.number} has no options`);
+        return card;
+    }
+    
+    if (question.options) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.style.cssText = 'margin-bottom: 15px;';
+        
+        question.options.forEach(opt => {
+            const optDiv = document.createElement('div');
+            
+            if (listeningPracticeMode) {
+                // Practice mode: clickable options (disabled after check)
+                const savedAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][question.number];
+                const isSelected = savedAnswer === opt.letter;
+                
+                // Check if this is a True/False question (has isCorrect property)
+                const isTrueFalseQuestion = question.options && question.options.some(o => o.isCorrect !== undefined);
+                let isCorrect = false;
+                
+                if (isTrueFalseQuestion) {
+                    // For True/False questions, check isCorrect property
+                    isCorrect = opt.isCorrect === true;
+                } else {
+                    // For regular multiple choice, check against answer
+                    isCorrect = opt.letter === question.answer;
+                }
+                
+                const isUserCorrect = isSelected && isCorrect;
+                
+                if (listeningChecked) {
+                    // After check: show result
+                    if (isCorrect) {
+                        optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f0fff4; border: 2px solid #48bb78;';
+                    } else if (isSelected) {
+                        optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #fff5f5; border: 2px solid #fc8181;';
+                    } else {
+                        optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f7fafc; border: 2px solid #e2e8f0; opacity: 0.6;';
+                    }
+                } else {
+                    // Before check: clickable
+                    optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f7fafc; border: 2px solid #d1d5db; cursor: pointer; transition: all 0.2s;';
+                    optDiv.classList.add('listening-option');
+                    optDiv.dataset.letter = opt.letter;
+                    optDiv.dataset.questionNumber = question.number;
+                    
+                    if (isSelected) {
+                        optDiv.style.borderColor = '#667eea';
+                        optDiv.style.background = '#edf2f7';
+                    }
+                    
+                    optDiv.addEventListener('click', function() {
+                        // Remove selection from other options
+                        optionsDiv.querySelectorAll('.listening-option').forEach(o => {
+                            o.style.borderColor = '#d1d5db';
+                            o.style.background = '#f7fafc';
+                        });
+                        
+                        // Select this option
+                        this.style.borderColor = '#667eea';
+                        this.style.background = '#edf2f7';
+                        
+                        // Save answer
+                        if (!listeningUserAnswers[examKey]) listeningUserAnswers[examKey] = {};
+                        listeningUserAnswers[examKey][question.number] = opt.letter;
+                    });
+                }
+            } else {
+                // View mode: show correct answer
+                optDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f7fafc; border: 2px solid ' + (opt.letter === question.answer ? '#48bb78' : '#e2e8f0') + ';';
+                
+                if (opt.isCorrect !== undefined) {
+                    optDiv.style.borderColor = opt.isCorrect ? '#48bb78' : '#fc8181';
+                    optDiv.style.background = opt.isCorrect ? '#f0fff4' : '#fff5f5';
+                }
+            }
+            
+            const savedAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][question.number];
+            const isSelected = savedAnswer === opt.letter;
+            
+            // Check if this is a True/False question
+            const isTrueFalseQuestion = question.options && question.options.some(o => o.isCorrect !== undefined);
+            let isCorrect = false;
+            
+            if (isTrueFalseQuestion) {
+                isCorrect = opt.isCorrect === true;
+            } else {
+                isCorrect = opt.letter === question.answer;
+            }
+            
+            const showCheckmark = listeningPracticeMode && listeningChecked && (isCorrect || (isSelected && !isCorrect));
+            
+            const showExplanation = listeningPracticeMode && listeningChecked && opt.explanation;
+            
+            optDiv.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-weight: 700; color: ${(listeningPracticeMode && listeningChecked && isCorrect) ? '#48bb78' : (!listeningPracticeMode && (opt.letter === question.answer || opt.isCorrect)) ? '#48bb78' : '#4a5568'}; min-width: 30px;">${opt.letter}.</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #2d3748;">${opt.text}</div>
+                        ${opt.vietnamese ? `<div style="font-size: 14px; color: #718096; margin-top: 4px;">${opt.vietnamese}</div>` : ''}
+                        ${showExplanation ? `
+                            <div style="margin-top: 8px; padding: 8px; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; border-radius: 4px; border-left: 3px solid ${isCorrect ? '#48bb78' : '#fc8181'};">
+                                <div style="font-size: 13px; color: ${isCorrect ? '#2d5016' : '#742a2a'}; line-height: 1.5;">
+                                    <strong>${isCorrect ? '✓' : '✗'}</strong> ${opt.explanation}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${showCheckmark ? `<span style="color: ${isCorrect ? '#48bb78' : '#fc8181'}; font-weight: 700; font-size: 20px;">${isCorrect ? '✓' : '✗'}</span>` : ''}
+                    ${(!listeningPracticeMode && opt.isCorrect !== undefined) ? `<span style="color: ${opt.isCorrect ? '#48bb78' : '#fc8181'}; font-weight: 700;">${opt.isCorrect ? '✓' : '✗'}</span>` : ''}
+                </div>
+            `;
+            optionsDiv.appendChild(optDiv);
+        });
+        
+        card.appendChild(optionsDiv);
+    }
+    
+    // Statements (for topic questions)
+    if (question.statements) {
+        const statementsDiv = document.createElement('div');
+        statementsDiv.style.cssText = 'margin-bottom: 15px;';
+        
+        question.statements.forEach((stmt, idx) => {
+            const stmtDiv = document.createElement('div');
+            stmtDiv.style.cssText = 'padding: 12px; margin-bottom: 8px; border-radius: 6px; background: #f7fafc; border-left: 4px solid #667eea;';
+            
+            if (typeof stmt === 'string') {
+                stmtDiv.textContent = stmt;
+            } else {
+                stmtDiv.innerHTML = `
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 5px;">${stmt.text}</div>
+                    ${stmt.vietnamese ? `<div style="font-size: 14px; color: #718096;">${stmt.vietnamese}</div>` : ''}
+                `;
+            }
+            
+            statementsDiv.appendChild(stmtDiv);
+        });
+        
+        card.appendChild(statementsDiv);
+    }
+    
+    // Mnemonic box (for special questions like Building community) - only in view mode
+    if (question.mnemonic && !listeningPracticeMode) {
+        const mnemonicBox = createListeningMnemonicBox(question);
+        card.appendChild(mnemonicBox);
+    }
+    
+    // Tip section - only in view mode
+    if (question.tip && !listeningPracticeMode) {
+        const tipDiv = document.createElement('div');
+        tipDiv.style.cssText = 'background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); border-radius: 8px; padding: 15px; margin-top: 15px; color: white;';
+        tipDiv.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 8px; font-size: 16px;">💡 MẸO NHỚ:</div>
+            <div style="font-size: 15px; line-height: 1.6;">${question.tip}</div>
+        `;
+        card.appendChild(tipDiv);
+    }
+    
+    // Result feedback area (hidden initially)
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'listening-result';
+    resultDiv.style.cssText = 'display: none; margin-top: 15px; padding: 15px; border-radius: 8px;';
+    card.appendChild(resultDiv);
+    
+    // Explanation section (only show after check in practice mode)
+    if (listeningPracticeMode && listeningChecked && question.explanation) {
+        const explanationDiv = document.createElement('div');
+        explanationDiv.style.cssText = 'background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%); border-radius: 8px; padding: 15px; margin-top: 15px; border-left: 4px solid #667eea;';
+        explanationDiv.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 10px; font-size: 16px; color: #2d3748; display: flex; align-items: center; gap: 8px;">
+                <span>📚</span>
+                <span>Giải thích đáp án:</span>
+            </div>
+            <div style="font-size: 15px; line-height: 1.7; color: #2d3748;">
+                ${question.explanation}
+            </div>
+        `;
+        card.appendChild(explanationDiv);
+    }
+    
+    return card;
+}
+
+function checkListeningAnswers(examKey, exam) {
+    listeningChecked = true;
+    
+    // Disable all inputs and options
+    document.querySelectorAll('#listening-content input').forEach(input => {
+        input.disabled = true;
+    });
+    document.querySelectorAll('#listening-content select').forEach(select => {
+        select.disabled = true;
+    });
+    document.querySelectorAll('#listening-content .listening-option').forEach(opt => {
+        opt.style.cursor = 'default';
+        opt.style.pointerEvents = 'none';
+    });
+    
+    // Reload to show correct answers
+    loadListeningExam(examKey);
+    
+    let results = [];
+    let correctCount = 0;
+    let totalCount = 0;
+    
+    exam.questions.forEach(q => {
+        // Handle matching type questions
+        if (q.matchingType && q.subQuestions) {
+            let subCorrectCount = 0;
+            const subResults = [];
+            
+            q.subQuestions.forEach((subQ, idx) => {
+                const answerKey = `${q.number}_${idx}`;
+                const userAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][answerKey];
+                const isCorrect = userAnswer === subQ.answer;
+                
+                if (isCorrect) subCorrectCount++;
+                
+                subResults.push({
+                    text: subQ.text,
+                    userAnswer: userAnswer || 'Chưa trả lời',
+                    correctAnswer: subQ.answer,
+                    isCorrect: isCorrect
+                });
+            });
+            
+            totalCount++;
+            const allCorrect = subCorrectCount === q.subQuestions.length;
+            if (allCorrect) correctCount++;
+            
+            results.push({
+                questionNumber: q.number,
+                question: q.question,
+                userAnswer: `${subCorrectCount}/${q.subQuestions.length} đúng`,
+                correctAnswer: q.subQuestions.map(sq => sq.answer).join(', '),
+                isCorrect: allCorrect,
+                subResults: subResults
+            });
+            return;
+        }
+        
+        const userAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][q.number];
+        let isCorrect = false;
+        let correctAnswer = '';
+        
+        if (q.answer) {
+            // Multiple choice question (single answer)
+            correctAnswer = q.answer;
+            isCorrect = userAnswer === q.answer;
+        } else if (q.options && q.options.some(opt => opt.isCorrect !== undefined)) {
+            // True/False questions (multiple correct answers)
+            // For these questions, we check if user selected all correct options
+            const correctOptions = q.options.filter(opt => opt.isCorrect).map(opt => opt.letter);
+            const userSelected = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][q.number];
+            
+            // For True/False, we'll just show which are correct
+            correctAnswer = correctOptions.join(', ');
+            // Skip detailed checking for now, just show results
+            return;
+        }
+        
+        if (correctAnswer) {
+            totalCount++;
+            if (isCorrect) correctCount++;
+            
+            results.push({
+                questionNumber: q.number,
+                question: q.question,
+                userAnswer: userAnswer || 'Chưa trả lời',
+                correctAnswer: correctAnswer,
+                isCorrect: isCorrect
+            });
+            
+            // Show feedback on card
+            const card = document.querySelector(`[data-question-number="${q.number}"]`);
+            if (card) {
+                const resultDiv = card.querySelector('.listening-result');
+                if (resultDiv) {
+                    resultDiv.style.display = 'block';
+                    resultDiv.style.background = isCorrect ? '#f0fff4' : '#fff5f5';
+                    resultDiv.style.border = `2px solid ${isCorrect ? '#48bb78' : '#fc8181'}`;
+                    resultDiv.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <span style="font-size: 24px;">${isCorrect ? '✓' : '✗'}</span>
+                            <span style="font-weight: 700; font-size: 18px; color: ${isCorrect ? '#48bb78' : '#fc8181'};">
+                                ${isCorrect ? 'Đúng!' : 'Sai!'}
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 5px;">
+                            <strong>Đáp án của bạn:</strong> <span style="color: #4a5568;">${userAnswer || 'Chưa trả lời'}</span>
+                        </div>
+                        <div>
+                            <strong>Đáp án đúng:</strong> <span style="color: #48bb78; font-weight: 700;">${correctAnswer}</span>
+                        </div>
+                    `;
+                }
+            }
+        }
+    });
+    
+    // Show summary modal
+    showListeningResults(correctCount, totalCount, results);
+}
+
+function showListeningResults(correctCount, totalCount, results) {
+    const modal = document.getElementById('result-modal');
+    const resultContent = document.getElementById('result-content');
+    
+    if (!modal || !resultContent) return;
+    
+    const percentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+    
+    let grade = '';
+    let gradeColor = '';
+    if (percentage >= 90) {
+        grade = 'Excellent!';
+        gradeColor = '#48bb78';
+    } else if (percentage >= 80) {
+        grade = 'Very Good!';
+        gradeColor = '#38a169';
+    } else if (percentage >= 70) {
+        grade = 'Good!';
+        gradeColor = '#667eea';
+    } else if (percentage >= 60) {
+        grade = 'Fair';
+        gradeColor = '#f6ad55';
+    } else {
+        grade = 'Need Improvement';
+        gradeColor = '#fc8181';
+    }
+    
+    resultContent.innerHTML = `
+        <h2 style="margin-bottom: 20px; color: #2d3748;">Kết quả Listening</h2>
+        <div class="score-container">
+            <div class="score-main">
+                <div class="score-number">${correctCount} / ${totalCount}</div>
+                <div class="score-percentage">${percentage}%</div>
+                <div class="score-grade" style="color: ${gradeColor}">${grade}</div>
+            </div>
+        </div>
+        <div class="results-detail">
+            <h3>Chi tiết kết quả:</h3>
+            <div class="results-list">
+                ${results.map(result => `
+                    <div class="result-item ${result.isCorrect ? 'correct' : 'incorrect'}">
+                        <div class="result-header">
+                            <span class="result-part">Câu ${result.questionNumber}</span>
+                            <span class="result-status ${result.isCorrect ? 'correct-icon' : 'incorrect-icon'}">
+                                ${result.isCorrect ? '✓' : '✗'}
+                            </span>
+                        </div>
+                        <div class="result-question">${result.question}</div>
+                        <div class="result-answers">
+                            <div class="result-answer">
+                                <strong>Đáp án của bạn:</strong> ${result.userAnswer}
+                            </div>
+                            ${!result.isCorrect ? `
+                                <div class="result-answer correct-answer">
+                                    <strong>Đáp án đúng:</strong> ${result.correctAnswer}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+}
+
+function createListeningMnemonicBox(question) {
+    const mnemonicBox = document.createElement('div');
+    mnemonicBox.style.cssText = 'background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); border-radius: 12px; padding: 20px; margin-bottom: 15px; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+    
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size: 20px; font-weight: 700; margin-bottom: 15px; text-align: center;';
+    title.textContent = '🧠 MẸO HỌC THUỘC NHANH';
+    mnemonicBox.appendChild(title);
+    
+    const mnemonicContent = document.createElement('div');
+    mnemonicContent.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;';
+    
+    const mnemonicPhrase = document.createElement('div');
+    mnemonicPhrase.style.cssText = 'font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 15px; line-height: 1.6;';
+    mnemonicPhrase.innerHTML = `
+        <div style="margin-bottom: 10px;">📝 <strong>MẸO NHỚ:</strong></div>
+        <div style="font-size: 24px; letter-spacing: 3px; margin: 10px 0;">${question.mnemonic}</div>
+        ${question.mnemonicPhrase ? `
+        <div style="font-size: 16px; margin-top: 10px; font-style: italic;">
+            "${question.mnemonicPhrase}"
+        </div>
+        ` : ''}
+    `;
+    mnemonicContent.appendChild(mnemonicPhrase);
+    
+    const detailsList = document.createElement('div');
+    detailsList.style.cssText = 'font-size: 14px; line-height: 2;';
+    
+    question.options.forEach(opt => {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 6px;';
+        itemDiv.innerHTML = `
+            <span style="font-weight: 700; font-size: 20px; min-width: 30px; text-align: center; background: rgba(255,255,255,0.3); padding: 4px 8px; border-radius: 4px;">${opt.letter}</span>
+            <span style="flex: 1; font-weight: 600; font-size: 13px;">${opt.text}</span>
+            <span style="color: ${opt.isCorrect ? '#48bb78' : '#fc8181'}; font-weight: 700; font-size: 18px;">${opt.isCorrect ? '✓' : '✗'}</span>
+        `;
+        detailsList.appendChild(itemDiv);
+    });
+    
+    mnemonicContent.appendChild(detailsList);
+    mnemonicBox.appendChild(mnemonicContent);
+    
+    const tipBox = document.createElement('div');
+    tipBox.style.cssText = 'background: rgba(255,255,255,0.2); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.6;';
+    tipBox.innerHTML = `
+        <strong>💡 Gợi ý:</strong> ${question.tip || 'Nhớ chuỗi chữ cái để nhớ thứ tự các đáp án!'}
+    `;
+    mnemonicBox.appendChild(tipBox);
+    
+    return mnemonicBox;
 }
 
 // Force reload Tue Nov 18 11:53:57 +07 2025
