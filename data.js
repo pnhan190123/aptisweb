@@ -1296,36 +1296,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "Travel to work",
-                question: "đi làm như thế nào?",
+                question: "đi làm như thế nào? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "walk with a friend", 
-                        vietnamese: "đi bộ với 1 người bạn",
+                    { letter: "A", text: "walk with a friend", vietnamese: "đi bộ với 1 người bạn" },
+                    { letter: "B", text: "drive to work", vietnamese: "lái xe đi làm" },
+                    { letter: "C", text: "walk alone", vietnamese: "đi bộ 1 mình" },
+                    { letter: "D", text: "travel by bus", vietnamese: "đi bằng xe buýt" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: false,
                         explanation: "Sai vì trong bài nghe không đề cập đến việc đi bộ với bạn"
                     },
-                    { 
-                        letter: "B", 
-                        text: "drive to work", 
-                        vietnamese: "lái xe đi làm",
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: false,
                         explanation: "Sai vì người nói không lái xe đi làm"
                     },
-                    { 
-                        letter: "C", 
-                        text: "walk alone", 
-                        vietnamese: "đi bộ 1 mình",
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: false,
                         explanation: "Sai vì không phải đi bộ một mình"
                     },
-                    { 
-                        letter: "D", 
-                        text: "travel by bus", 
-                        vietnamese: "đi bằng xe buýt",
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
                         explanation: "Đúng vì trong bài nghe có đề cập đến việc đi bằng xe buýt"
                     }
                 ],
-                answer: "D",
-                tip: "Nhớ: D = travel by bus (đi bằng xe buýt)",
-                explanation: "Đáp án đúng là D (travel by bus) vì trong đoạn nghe, người nói đề cập rõ ràng đến việc sử dụng xe buýt làm phương tiện đi lại đến nơi làm việc."
+                tip: "Nhớ: D = travel by bus (đi bằng xe buýt) là đúng, các câu khác đều sai",
+                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Sai, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Trong đoạn nghe, người nói đề cập rõ ràng đến việc sử dụng xe buýt làm phương tiện đi lại đến nơi làm việc."
             },
             {
                 number: 15,
@@ -1604,32 +1610,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "Online shopping",
-                question: "mua sắm trực tuyến có ưu điểm gì?",
+                question: "mua sắm trực tuyến có ưu điểm gì? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "There are more choices", 
+                    { letter: "A", text: "There are more choices", vietnamese: "có nhiều lựa chọn hơn" },
+                    { letter: "B", text: "It saves time", vietnamese: "tiết kiệm thời gian" },
+                    { letter: "C", text: "It is cheaper", vietnamese: "rẻ hơn" },
+                    { letter: "D", text: "The products are delivered", vietnamese: "sản phẩm được giao tận nhà" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: true,
                         explanation: "Đúng vì đây là một trong những ưu điểm của mua sắm trực tuyến"
                     },
-                    { 
-                        letter: "B", 
-                        text: "It saves time", 
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: true,
                         explanation: "Đúng vì mua sắm trực tuyến tiết kiệm thời gian"
                     },
-                    { 
-                        letter: "C", 
-                        text: "It is cheaper", 
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: true,
                         explanation: "Đúng vì thường rẻ hơn so với mua tại cửa hàng"
                     },
-                    { 
-                        letter: "D", 
-                        text: "The products are delivered", 
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
                         explanation: "Đúng vì sản phẩm được giao tận nhà"
                     }
                 ],
-                answer: "A",
-                tip: "Nhớ: A = There are more choices (có nhiều lựa chọn hơn)",
-                explanation: "Đáp án đúng là A (There are more choices) vì trong đoạn nghe, người nói đề cập rằng mua sắm trực tuyến cung cấp nhiều lựa chọn hơn so với mua sắm tại cửa hàng truyền thống."
+                tip: "Nhớ: Tất cả A, B, C, D đều đúng - nhiều lựa chọn, tiết kiệm thời gian, rẻ hơn, giao hàng",
+                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các ưu điểm đều được đề cập trong bài nghe."
             },
             {
                 number: 15,
@@ -1637,34 +1653,41 @@ const listeningData = {
                 question: "Chọn đúng/sai cho các câu (tráo giọng nam-nữ)",
                 mnemonic: "M-W-W-B",
                 mnemonicPhrase: "M - W - W - B",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "The future generation will fail to cope with new information", 
+                    { letter: "A", text: "The future generation will fail to cope with new information", vietnamese: "thế hệ tương lai sẽ thất bại trong việc xử lý thông tin mới" },
+                    { letter: "B", text: "The information revolution will be good for the economy", vietnamese: "cách mạng thông tin sẽ tốt cho nền kinh tế" },
+                    { letter: "C", text: "No computer is superior to the human brain", vietnamese: "không có máy tính nào vượt trội hơn bộ não con người" },
+                    { letter: "D", text: "More should be done to protect individual privacy", vietnamese: "cần làm nhiều hơn để bảo vệ quyền riêng tư cá nhân" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
                         isCorrect: false,
                         explanation: "Sai vì thế hệ tương lai sẽ có khả năng xử lý thông tin mới"
                     },
-                    { 
-                        letter: "B", 
-                        text: "The information revolution will be good for the economy", 
+                    {
+                        text: "B",
+                        answer: "B",
                         isCorrect: true,
                         explanation: "Đúng vì cuộc cách mạng thông tin sẽ tốt cho nền kinh tế"
                     },
-                    { 
-                        letter: "C", 
-                        text: "No computer is superior to the human brain", 
+                    {
+                        text: "C",
+                        answer: "C",
                         isCorrect: true,
                         explanation: "Đúng vì không có máy tính nào vượt trội hơn bộ não con người"
                     },
-                    { 
-                        letter: "D", 
-                        text: "More should be done to protect individual privacy", 
+                    {
+                        text: "D",
+                        answer: "D",
                         isCorrect: true,
                         explanation: "Đúng vì cần làm nhiều hơn để bảo vệ quyền riêng tư cá nhân"
                     }
                 ],
                 tip: "MẸO NHỚ: M-W-W-B. A sai, B đúng, C đúng, D đúng",
-                explanation: "Đáp án: A (Sai), B (Đúng), C (Đúng), D (Đúng). Thế hệ tương lai sẽ có khả năng thích ứng với thông tin mới, cuộc cách mạng thông tin có lợi cho kinh tế, máy tính không thể vượt trội bộ não con người, và cần bảo vệ quyền riêng tư tốt hơn."
+                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Thế hệ tương lai sẽ có khả năng thích ứng với thông tin mới, cuộc cách mạng thông tin có lợi cho kinh tế, máy tính không thể vượt trội bộ não con người, và cần bảo vệ quyền riêng tư tốt hơn."
             },
             {
                 number: 16,
@@ -1903,32 +1926,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "Outdoor activities",
-                question: "hoạt động ngoài trời nào được đề cập?",
+                question: "hoạt động ngoài trời nào được đề cập? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "Horse riding", 
+                    { letter: "A", text: "Horse riding", vietnamese: "cưỡi ngựa" },
+                    { letter: "B", text: "Going for a run", vietnamese: "chạy bộ" },
+                    { letter: "C", text: "Climbing", vietnamese: "leo núi" },
+                    { letter: "D", text: "Mountain biking", vietnamese: "đạp xe leo núi" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: true,
                         explanation: "Đúng vì đây là một trong những hoạt động ngoài trời được đề cập"
                     },
-                    { 
-                        letter: "B", 
-                        text: "Going for a run", 
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: true,
                         explanation: "Đúng vì chạy bộ cũng là hoạt động ngoài trời được đề cập"
                     },
-                    { 
-                        letter: "C", 
-                        text: "Climbing", 
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: true,
                         explanation: "Đúng vì leo núi là hoạt động ngoài trời được đề cập"
                     },
-                    { 
-                        letter: "D", 
-                        text: "Mountain biking", 
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
                         explanation: "Đúng vì đạp xe leo núi là hoạt động ngoài trời được đề cập"
                     }
                 ],
-                answer: "A",
-                tip: "Nhớ: A = Horse riding (cưỡi ngựa)",
-                explanation: "Đáp án đúng là A (Horse riding) vì trong đoạn nghe, người nói đề cập rằng cưỡi ngựa là một trong những hoạt động ngoài trời phổ biến ở khu vực này."
+                tip: "Nhớ: Tất cả A, B, C, D đều đúng - cưỡi ngựa, chạy bộ, leo núi, đạp xe leo núi",
+                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các hoạt động ngoài trời đều được đề cập trong bài nghe."
             },
             {
                 number: 15,
@@ -1936,34 +1969,41 @@ const listeningData = {
                 question: "Chọn đúng/sai cho các câu (tráo giọng nam-nữ)",
                 mnemonic: "M-B-W-B",
                 mnemonicPhrase: "M - B - W - B",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "Singers play a good role for young people", 
+                    { letter: "A", text: "Singers play a good role for young people", vietnamese: "ca sĩ đóng vai trò tốt cho giới trẻ" },
+                    { letter: "B", text: "Taste in music is a highly personal thing", vietnamese: "sở thích âm nhạc là điều rất cá nhân" },
+                    { letter: "C", text: "Music is a universal language", vietnamese: "âm nhạc là ngôn ngữ chung của nhân loại" },
+                    { letter: "D", text: "Music can manipulate people's feelings", vietnamese: "âm nhạc có thể điều khiển cảm xúc con người" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
                         isCorrect: true,
                         explanation: "Đúng vì ca sĩ đóng vai trò tốt cho giới trẻ"
                     },
-                    { 
-                        letter: "B", 
-                        text: "Taste in music is a highly personal thing", 
+                    {
+                        text: "B",
+                        answer: "B",
                         isCorrect: true,
                         explanation: "Đúng vì sở thích âm nhạc là điều rất cá nhân"
                     },
-                    { 
-                        letter: "C", 
-                        text: "Music is a universal language", 
+                    {
+                        text: "C",
+                        answer: "C",
                         isCorrect: true,
                         explanation: "Đúng vì âm nhạc là ngôn ngữ chung của nhân loại"
                     },
-                    { 
-                        letter: "D", 
-                        text: "Music can manipulate people's feelings", 
+                    {
+                        text: "D",
+                        answer: "D",
                         isCorrect: true,
                         explanation: "Đúng vì âm nhạc có thể điều khiển cảm xúc con người"
                     }
                 ],
                 tip: "MẸO NHỚ: M-B-W-B. A đúng, B đúng, C đúng, D đúng",
-                explanation: "Đáp án: A (Đúng), B (Đúng), C (Đúng), D (Đúng). Tất cả các câu đều đúng: ca sĩ có vai trò tích cực với giới trẻ, sở thích âm nhạc là cá nhân, âm nhạc là ngôn ngữ chung, và âm nhạc có thể ảnh hưởng đến cảm xúc."
+                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các câu đều đúng: ca sĩ có vai trò tích cực với giới trẻ, sở thích âm nhạc là cá nhân, âm nhạc là ngôn ngữ chung, và âm nhạc có thể ảnh hưởng đến cảm xúc."
             },
             {
                 number: 16,
@@ -2202,32 +2242,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "Do exercise",
-                question: "tập thể dục như thế nào?",
+                question: "tập thể dục như thế nào? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "Hate exercising", 
+                    { letter: "A", text: "Hate exercising", vietnamese: "ghét tập thể dục" },
+                    { letter: "B", text: "Help improve work performance", vietnamese: "giúp cải thiện hiệu suất công việc" },
+                    { letter: "C", text: "Find exercise tiring", vietnamese: "thấy tập thể dục mệt mỏi" },
+                    { letter: "D", text: "Has fun when exercising with friends", vietnamese: "vui khi tập thể dục với bạn bè" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: false,
                         explanation: "Sai vì không có đề cập đến việc ghét tập thể dục"
                     },
-                    { 
-                        letter: "B", 
-                        text: "Help improve work performance", 
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: true,
                         explanation: "Đúng vì đây là một trong những lợi ích của tập thể dục được đề cập"
                     },
-                    { 
-                        letter: "C", 
-                        text: "Find exercise tiring", 
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: false,
                         explanation: "Sai vì không có đề cập đến việc thấy mệt mỏi"
                     },
-                    { 
-                        letter: "D", 
-                        text: "Has fun when exercising with friends", 
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
                         explanation: "Đúng vì đây là một trong những trải nghiệm được đề cập"
                     }
                 ],
-                answer: "B",
                 tip: "Nhớ: B và D đều đúng - cải thiện hiệu suất công việc, vui khi tập với bạn",
-                explanation: "Đáp án đúng là B và D (cả hai đều đúng). Tập thể dục giúp cải thiện hiệu suất công việc, và người nói cảm thấy vui vẻ khi tập thể dục cùng bạn bè."
+                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Đúng, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Tập thể dục giúp cải thiện hiệu suất công việc, và người nói cảm thấy vui vẻ khi tập thể dục cùng bạn bè."
             },
             {
                 number: 15,
@@ -2503,32 +2553,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "The place to run",
-                question: "nơi nào để chạy?",
+                question: "nơi nào để chạy? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { 
-                        letter: "A", 
-                        text: "In the fitness centre", 
+                    { letter: "A", text: "In the fitness centre", vietnamese: "trong trung tâm thể dục" },
+                    { letter: "B", text: "At the seaside", vietnamese: "ở bờ biển" },
+                    { letter: "C", text: "In the street", vietnamese: "trên đường phố" },
+                    { letter: "D", text: "On the running track", vietnamese: "trên đường chạy" }
+                ],
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: false,
                         explanation: "Sai vì không phải trung tâm thể dục"
                     },
-                    { 
-                        letter: "B", 
-                        text: "At the seaside", 
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: false,
                         explanation: "Sai vì không phải bờ biển"
                     },
-                    { 
-                        letter: "C", 
-                        text: "In the street", 
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: false,
                         explanation: "Sai vì không phải trên đường phố"
                     },
-                    { 
-                        letter: "D", 
-                        text: "On the running track", 
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
                         explanation: "Đúng vì trong bài nghe nói rõ là trên đường chạy"
                     }
                 ],
-                answer: "D",
-                tip: "Nhớ: D = On the running track (trên đường chạy)",
-                explanation: "Đáp án đúng là D (On the running track) vì trong đoạn nghe, người nói đề cập rằng họ thích chạy trên đường chạy chuyên dụng."
+                tip: "Nhớ: D = On the running track (trên đường chạy) là đúng, các câu khác đều sai",
+                explanation: "Đáp án: Câu 1 (A) = Sai, Câu 2 (B) = Sai, Câu 3 (C) = Sai, Câu 4 (D) = Đúng. Trong đoạn nghe, người nói đề cập rằng họ thích chạy trên đường chạy chuyên dụng."
             },
             {
                 number: 15,
@@ -2804,16 +2864,42 @@ const listeningData = {
             {
                 number: 14,
                 topic: "Environmental problem",
-                question: "cách giải quyết vấn đề môi trường?",
+                question: "cách giải quyết vấn đề môi trường? Chọn đúng/sai cho từng câu",
+                multiChoiceSubType: true,
                 options: [
-                    { letter: "A", text: "Buy environmentally friendly products", explanation: "Đúng vì đây là lời khuyên đầu tiên" },
-                    { letter: "B", text: "Give away used items", explanation: "Đúng vì đây là lời khuyên thứ hai" },
-                    { letter: "C", text: "Does not use commercial cleaning products", explanation: "Đúng vì đây là lời khuyên thứ ba" },
-                    { letter: "D", text: "Reuse containers for storing food", explanation: "Đúng vì đây là lời khuyên thứ tư" }
+                    { letter: "A", text: "Buy environmentally friendly products", vietnamese: "mua sản phẩm thân thiện môi trường" },
+                    { letter: "B", text: "Give away used items", vietnamese: "tặng đồ dùng đã qua sử dụng" },
+                    { letter: "C", text: "Does not use commercial cleaning products", vietnamese: "không sử dụng sản phẩm tẩy rửa thương mại" },
+                    { letter: "D", text: "Reuse containers for storing food", vietnamese: "tái sử dụng hộp đựng thức ăn" }
                 ],
-                answer: "A",
-                tip: "Nhớ: cả 4 hành động đều tốt - tập trung vào sản phẩm thân thiện",
-                explanation: "Đáp án đúng là cả A, B, C, D (tất cả đều đúng). Các biện pháp gồm mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa thương mại và tái sử dụng hộp đựng."
+                subQuestions: [
+                    {
+                        text: "A",
+                        answer: "A",
+                        isCorrect: true,
+                        explanation: "Đúng vì đây là lời khuyên đầu tiên"
+                    },
+                    {
+                        text: "B",
+                        answer: "B",
+                        isCorrect: true,
+                        explanation: "Đúng vì đây là lời khuyên thứ hai"
+                    },
+                    {
+                        text: "C",
+                        answer: "C",
+                        isCorrect: true,
+                        explanation: "Đúng vì đây là lời khuyên thứ ba"
+                    },
+                    {
+                        text: "D",
+                        answer: "D",
+                        isCorrect: true,
+                        explanation: "Đúng vì đây là lời khuyên thứ tư"
+                    }
+                ],
+                tip: "Nhớ: Tất cả A, B, C, D đều đúng - mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa, tái sử dụng hộp",
+                explanation: "Đáp án: Câu 1 (A) = Đúng, Câu 2 (B) = Đúng, Câu 3 (C) = Đúng, Câu 4 (D) = Đúng. Tất cả các biện pháp đều đúng: mua sản phẩm thân thiện, tặng đồ dùng, tránh chất tẩy rửa thương mại và tái sử dụng hộp đựng."
             },
             {
                 number: 15,

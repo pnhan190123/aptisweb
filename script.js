@@ -3286,6 +3286,97 @@ function createListeningQuestionCard(question, examKey) {
     header.appendChild(questionInfo);
     card.appendChild(header);
     
+    // Multi-choice sub-questions type (A, B, C, D selection for each sub-question)
+    if (question.multiChoiceSubType && question.subQuestions) {
+        const multiChoiceDiv = document.createElement('div');
+        multiChoiceDiv.style.cssText = 'margin-bottom: 15px;';
+        
+        // Create sub-questions
+        question.subQuestions.forEach((subQ, idx) => {
+            const subQDiv = document.createElement('div');
+            subQDiv.style.cssText = 'margin-bottom: 15px; padding: 15px; background: #f7fafc; border-radius: 8px; border-left: 4px solid #667eea;';
+            
+            const subQText = document.createElement('div');
+            subQText.style.cssText = 'font-weight: 600; color: #2d3748; margin-bottom: 10px;';
+            subQText.textContent = `${idx + 1}. ${subQ.text}`;
+            subQDiv.appendChild(subQText);
+            
+            // Always show combobox
+            const select = document.createElement('select');
+            select.style.cssText = 'width: 100%; padding: 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 16px; font-weight: 600; background: white; cursor: pointer;';
+            select.dataset.questionNumber = question.number;
+            select.dataset.subQuestionIndex = idx;
+            
+            // Disable if checked or not in practice mode
+            if (!listeningPracticeMode || listeningChecked) {
+                select.disabled = true;
+            }
+            
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = '-- Chọn --';
+            select.appendChild(defaultOption);
+            
+            // Add options with full text (from question.options if available)
+            if (question.options) {
+                question.options.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.letter;
+                    option.textContent = `${opt.letter}. ${opt.text}${opt.vietnamese ? ` (${opt.vietnamese})` : ''}`;
+                    select.appendChild(option);
+                });
+            } else {
+                // Fallback: just A, B, C, D
+                ['A', 'B', 'C', 'D'].forEach(letter => {
+                    const option = document.createElement('option');
+                    option.value = letter;
+                    option.textContent = letter;
+                    select.appendChild(option);
+                });
+            }
+            
+            // Load saved answer or show correct answer
+            const answerKey = `${question.number}_${idx}`;
+            const savedAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][answerKey];
+            
+            if (listeningPracticeMode) {
+                // Practice mode: load saved answer
+                if (savedAnswer) {
+                    select.value = savedAnswer;
+                }
+                
+                select.addEventListener('change', function() {
+                    if (!listeningChecked) {
+                        if (!listeningUserAnswers[examKey]) listeningUserAnswers[examKey] = {};
+                        listeningUserAnswers[examKey][answerKey] = this.value;
+                    }
+                });
+            } else {
+                // View mode: show correct answer
+                select.value = subQ.answer;
+            }
+            
+            subQDiv.appendChild(select);
+            
+            // Show result after check (practice mode) or always show (view mode)
+            if ((listeningPracticeMode && listeningChecked) || !listeningPracticeMode) {
+                const isCorrect = listeningPracticeMode ? (savedAnswer === subQ.answer) : true;
+                const resultDiv = document.createElement('div');
+                resultDiv.style.cssText = `margin-top: 10px; padding: 10px; border-radius: 6px; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; border-left: 3px solid ${isCorrect ? '#48bb78' : '#fc8181'};`;
+                resultDiv.innerHTML = `
+                    <div style="font-size: 14px; color: ${isCorrect ? '#2d5016' : '#742a2a'}; line-height: 1.6;">
+                        <strong>${isCorrect ? '✓' : '✗'}</strong> ${subQ.explanation}
+                    </div>
+                `;
+                subQDiv.appendChild(resultDiv);
+            }
+            
+            multiChoiceDiv.appendChild(subQDiv);
+        });
+        
+        card.appendChild(multiChoiceDiv);
+    }
+    
     // Matching type questions (B, W, M selection)
     if (question.matchingType && question.subQuestions) {
         const matchingDiv = document.createElement('div');
@@ -3379,13 +3470,16 @@ function createListeningQuestionCard(question, examKey) {
     }
     
     // Options (for multiple choice) - All questions are now multiple choice
-    if (!question.options && !question.matchingType) {
-        // If no options and not matching type, skip this question (should not happen)
+    // Skip if already handled by multiChoiceSubType or matchingType
+    if (question.multiChoiceSubType || question.matchingType) {
+        // Already handled above, skip regular options rendering
+    } else if (!question.options) {
+        // If no options and not matching type and not multi-choice sub type, skip this question (should not happen)
         console.warn(`Question ${question.number} has no options`);
         return card;
     }
     
-    if (question.options) {
+    if (question.options && !question.multiChoiceSubType && !question.matchingType) {
         const optionsDiv = document.createElement('div');
         optionsDiv.style.cssText = 'margin-bottom: 15px;';
         
@@ -3588,6 +3682,41 @@ function checkListeningAnswers(examKey, exam) {
     let totalCount = 0;
     
     exam.questions.forEach(q => {
+        // Handle multi-choice sub-questions type
+        if (q.multiChoiceSubType && q.subQuestions) {
+            let subCorrectCount = 0;
+            const subResults = [];
+            
+            q.subQuestions.forEach((subQ, idx) => {
+                const answerKey = `${q.number}_${idx}`;
+                const userAnswer = listeningUserAnswers[examKey] && listeningUserAnswers[examKey][answerKey];
+                const isCorrect = userAnswer === subQ.answer;
+                
+                if (isCorrect) subCorrectCount++;
+                
+                subResults.push({
+                    text: subQ.text,
+                    userAnswer: userAnswer || 'Chưa trả lời',
+                    correctAnswer: subQ.answer,
+                    isCorrect: isCorrect
+                });
+            });
+            
+            totalCount++;
+            const allCorrect = subCorrectCount === q.subQuestions.length;
+            if (allCorrect) correctCount++;
+            
+            results.push({
+                questionNumber: q.number,
+                question: q.question,
+                userAnswer: `${subCorrectCount}/${q.subQuestions.length} đúng`,
+                correctAnswer: q.subQuestions.map(sq => sq.answer).join(', '),
+                isCorrect: allCorrect,
+                subResults: subResults
+            });
+            return;
+        }
+        
         // Handle matching type questions
         if (q.matchingType && q.subQuestions) {
             let subCorrectCount = 0;
