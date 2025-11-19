@@ -3335,16 +3335,30 @@ function createListeningQuestionCard(question, examKey) {
             select.appendChild(defaultOption);
             
             // Add options with full text (from question.options if available)
+            // Shuffle options to increase difficulty
             if (question.options) {
-                question.options.forEach(opt => {
+                // Create a shuffled copy of options
+                const shuffledOptions = [...question.options];
+                // Fisher-Yates shuffle algorithm
+                for (let i = shuffledOptions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+                }
+                
+                shuffledOptions.forEach(opt => {
                     const option = document.createElement('option');
                     option.value = opt.letter;
                     option.textContent = `${opt.text}${opt.vietnamese ? ` (${opt.vietnamese})` : ''}`;
                     select.appendChild(option);
                 });
             } else {
-                // Fallback: just A, B, C, D
-                ['A', 'B', 'C', 'D'].forEach(letter => {
+                // Fallback: just A, B, C, D - also shuffle
+                const letters = ['A', 'B', 'C', 'D'];
+                for (let i = letters.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [letters[i], letters[j]] = [letters[j], letters[i]];
+                }
+                letters.forEach(letter => {
                     const option = document.createElement('option');
                     option.value = letter;
                     option.textContent = letter;
@@ -3658,15 +3672,32 @@ function createListeningQuestionCard(question, examKey) {
     card.appendChild(resultDiv);
     
     if (listeningPracticeMode && !listeningChecked && shouldShowPerQuestionCheck(examKey)) {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.cssText = 'margin-top: 15px; display: flex; gap: 10px;';
+        
         const singleCheckBtn = document.createElement('button');
         singleCheckBtn.className = 'btn btn-check';
         singleCheckBtn.textContent = questionChecked ? 'Đã check câu này' : 'Check đáp án câu này';
-        singleCheckBtn.style.cssText = 'margin-top: 15px; width: 100%; padding: 12px; font-weight: 700;';
+        singleCheckBtn.style.cssText = 'flex: 1; padding: 12px; font-weight: 700;';
         singleCheckBtn.disabled = questionChecked;
         singleCheckBtn.addEventListener('click', function() {
             checkSingleListeningQuestion(examKey, question.number);
         });
-        card.appendChild(singleCheckBtn);
+        buttonContainer.appendChild(singleCheckBtn);
+        
+        // Add reset button if question is checked
+        if (questionChecked) {
+            const resetBtn = document.createElement('button');
+            resetBtn.className = 'btn btn-secondary';
+            resetBtn.textContent = 'Làm lại';
+            resetBtn.style.cssText = 'flex: 1; padding: 12px; font-weight: 700; background: #718096; color: white;';
+            resetBtn.addEventListener('click', function() {
+                resetSingleListeningQuestion(examKey, question.number);
+            });
+            buttonContainer.appendChild(resetBtn);
+        }
+        
+        card.appendChild(buttonContainer);
     }
     
     // Explanation section (only show after check in practice mode)
@@ -3691,6 +3722,26 @@ function createListeningQuestionCard(question, examKey) {
 function checkSingleListeningQuestion(examKey, questionNumber) {
     if (!listeningQuestionChecked[examKey]) listeningQuestionChecked[examKey] = {};
     listeningQuestionChecked[examKey][questionNumber] = true;
+    loadListeningExam(examKey);
+}
+
+function resetSingleListeningQuestion(examKey, questionNumber) {
+    // Reset checked state for this question
+    if (listeningQuestionChecked[examKey]) {
+        delete listeningQuestionChecked[examKey][questionNumber];
+    }
+    
+    // Remove answers for this question
+    if (listeningUserAnswers[examKey]) {
+        // Remove all answers for this question (including sub-questions)
+        Object.keys(listeningUserAnswers[examKey]).forEach(key => {
+            if (key.startsWith(`${questionNumber}_`) || key === String(questionNumber)) {
+                delete listeningUserAnswers[examKey][key];
+            }
+        });
+    }
+    
+    // Reload to show fresh question
     loadListeningExam(examKey);
 }
 
