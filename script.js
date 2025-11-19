@@ -4018,4 +4018,284 @@ function createListeningMnemonicBox(question) {
     return mnemonicBox;
 }
 
+// Writing functions
+function loadWritingPart(partNumber) {
+    const contentDiv = document.getElementById('writing-content');
+    if (!contentDiv) return;
+    
+    // Update active button
+    document.querySelectorAll('.writing-part-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`.writing-part-btn[data-part="${partNumber}"]`).classList.add('active');
+    
+    contentDiv.innerHTML = '';
+    
+    if (partNumber === 1) {
+        loadWritingPart1(contentDiv);
+    } else if (partNumber === 2) {
+        loadWritingPart2(contentDiv);
+    } else if (partNumber === 3) {
+        loadWritingPart3(contentDiv);
+    } else if (partNumber === 4) {
+        loadWritingPart4(contentDiv);
+    }
+}
+
+function loadWritingPart1(container) {
+    const html = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; color: white; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Part 1: Expressing Likes (C1 Level)</h2>
+            <p style="margin-top: 10px; opacity: 0.9;">Các cách diễn đạt "I like" ở mức C1</p>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">📝 Các mẫu câu cơ bản:</h3>
+            <div style="display: grid; gap: 15px;">
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I am into + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I am into learning languages.</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I am keen on + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I am keen on traveling.</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I am fond of + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I am fond of reading books.</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I am a big/massive fan of + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I am a massive fan of playing football.</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I have a great passion for + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I have a great passion for cooking.</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 8px;">I am passionate about + V-ing</div>
+                    <div style="color: #4a5568; font-size: 14px;">Ví dụ: I am passionate about photography.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); border-radius: 12px; padding: 20px; color: white;">
+            <h3 style="margin-bottom: 15px;">🌟 Mẫu câu C1 nâng cao:</h3>
+            <div style="display: grid; gap: 15px;">
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I'm deeply passionate about + V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi cực kỳ đam mê…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I'm deeply passionate about learning languages.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I'm particularly drawn to + V-ing/Noun</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi đặc biệt bị thu hút bởi…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I'm particularly drawn to painting abstract art.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I find great joy in + V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi tìm thấy niềm vui lớn trong việc…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I find great joy in helping others.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I genuinely enjoy + V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi thực sự yêu thích việc…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I genuinely enjoy exploring new cultures.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I derive immense satisfaction from + V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi cảm thấy rất thỏa mãn với việc…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I derive immense satisfaction from solving complex problems.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">What truly captivates me is + N/V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Điều thực sự cuốn hút tôi là…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: What truly captivates me is playing the piano.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">One of my greatest pleasures is + V-ing</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Một trong những sở thích lớn nhất của tôi là…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: One of my greatest pleasures is hiking in the mountains.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">Engaging in + N/V-ing is incredibly fulfilling to me</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tham gia vào việc … khiến tôi cảm thấy mãn nguyện</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: Engaging in volunteer work is incredibly fulfilling to me.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">I have a strong appreciation for + N</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Tôi có sự đánh giá cao với…</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: I have a strong appreciation for contemporary art.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">Spending time on + V-ing is something I truly value</div>
+                    <div style="opacity: 0.9; font-size: 14px;">Dành thời gian cho việc … là điều tôi rất trân trọng</div>
+                    <div style="margin-top: 8px; font-style: italic;">Ví dụ: Spending time on creative writing is something I truly value.</div>
+                </div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+function loadWritingPart2(container) {
+    const html = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; color: white; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Part 2: Describing Interests</h2>
+            <p style="margin-top: 10px; opacity: 0.9;">Cấu trúc trả lời về sở thích</p>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">📝 Cấu trúc cơ bản:</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea; margin-bottom: 15px;">
+                <div style="font-weight: 700; color: #2d3748; margin-bottom: 10px;">C1: To be honest, I AM A REAL SUCKER FOR + V-ing (Sở thích 1)</div>
+                <div style="font-weight: 700; color: #2d3748; margin-bottom: 10px;">C2: Therefore I often spend my leisure time enjoying + hoạt động</div>
+                <div style="font-weight: 700; color: #2d3748;">C3: Besides, I am also a MASSIVE fan of + V-ing (Sở thích 2)</div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); border-radius: 12px; padding: 20px; color: white;">
+            <h3 style="margin-bottom: 15px;">🌟 Cấu trúc nâng cao (C1):</h3>
+            <div style="display: grid; gap: 15px;">
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">C1: To be perfectly honest, I'm particularly drawn to + V-ing, as it allows me to unwind and feel truly fulfilled.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">C2: In fact, I often dedicate my leisure time to + V-ing, which helps me recharge mentally.</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">C3: Moreover, I also derive great satisfaction from + V-ing, as it fuels my creativity and personal growth.</div>
+                </div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+function loadWritingPart3(container) {
+    const html = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; color: white; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Part 3: Agreeing/Disagreeing</h2>
+            <p style="margin-top: 10px; opacity: 0.9;">Chiến lược trả lời đồng ý/không đồng ý</p>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">📝 Cấu trúc trả lời:</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea; margin-bottom: 15px;">
+                <div style="font-weight: 700; color: #2d3748; margin-bottom: 10px;">C1: Honestly, I strongly believe each person has their own point of view.</div>
+            </div>
+        </div>
+        
+        <div style="background: #f0fff4; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #48bb78;">
+            <h3 style="color: #2d5016; margin-bottom: 15px;">✅ ĐỒNG Ý:</h3>
+            <div style="display: grid; gap: 10px;">
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 5px;">PERSONALLY, I TOTALLY AGREE WITH YOUR VIEW</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 5px;">I SEE EYE TO EYE WITH YOU</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #2d3748; margin-bottom: 5px;">IN MY POINT OF VIEW, I CAST NO DOUBT ABOUT YOUR OPINION</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #fff5f5; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #fc8181;">
+            <h3 style="color: #742a2a; margin-bottom: 15px;">❌ KHÔNG ĐỒNG Ý:</h3>
+            <div style="background: white; padding: 15px; border-radius: 8px;">
+                <div style="font-weight: 700; color: #2d3748;">UNFORTUNATELY / UNLUCKILY, I COMPLETELY DISAGREE WITH YOU</div>
+            </div>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">💡 C3: BECAUSE (LÝ DO) => ADJ KHEN/CHÊ</h3>
+            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                <div style="color: #4a5568;">Sau khi nêu quan điểm, giải thích lý do và dùng tính từ để khen hoặc chê.</div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+function loadWritingPart4(container) {
+    const html = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; color: white; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Part 4: Email Writing</h2>
+            <p style="margin-top: 10px; opacity: 0.9;">Mẫu viết email gửi bạn và quản lý</p>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">📧 Email gửi bạn (Thân mật):</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea; font-family: monospace; font-size: 14px; line-height: 1.8;">
+                <div style="margin-bottom: 10px;"><strong>Dear [A],</strong></div>
+                
+                <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0;">
+                    <div style="color: #667eea; font-weight: 700; margin-bottom: 8px;">MỞ ĐẦU MỘT LÁ THƯ THÂN MẬT:</div>
+                    <div>• We have not contacted each other for a while.</div>
+                    <div>• How are you these days?</div>
+                    <div>• Hope everything goes well with you!</div>
+                    <div>• I hope you and your beloved family are doing well.</div>
+                    <div>• I apologize for not writing for so long, because I've been really busy ____</div>
+                    <div>• It's been a long time since we saw each other.</div>
+                    <div>• Have you received the notice from the X club?</div>
+                </div>
+                
+                <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0;">
+                    <div style="color: #667eea; font-weight: 700; margin-bottom: 8px;">NỘI DUNG THƯ:</div>
+                    <div>• They are organizing a concert in the evening, so the neighbors are complaining.</div>
+                    <div>• What do you think about this announcement/ plan?</div>
+                    <div>• Can you give some ideas/ suggestions/ recommendations to improve our plan?</div>
+                </div>
+                
+                <div style="margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #e2e8f0;">
+                    <div style="color: #667eea; font-weight: 700; margin-bottom: 8px;">KẾT THÚC MỘT LÁ THƯ THÂN MẬT:</div>
+                    <div>• Tell me soon! / Drop me a line soon. / Write back soon!</div>
+                    <div>• I have to get back to work/ study now.</div>
+                    <div>• Take care / Bye for now / See you at the weekend!</div>
+                    <div>• Love / Hug / Best wishes / All the best / Keep in touch!</div>
+                </div>
+                
+                <div style="margin-top: 15px;"><strong>Ký tên</strong></div>
+            </div>
+        </div>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">📧 Email gửi quản lý (Trang trọng):</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea; font-family: monospace; font-size: 14px; line-height: 1.8;">
+                <div style="margin-bottom: 10px;"><strong>Dear Sir/Madam,</strong></div>
+                
+                <div style="margin-bottom: 10px;">My name is <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(đầy đủ họ tên)</span> and I have been a member of the X Club for <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">X month(s)</span>. I am writing this email to express my feelings and suggestions about the announcement that I have just received from our club.</div>
+                
+                <div style="margin-bottom: 10px;">According to the news, our club <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">[dự định]</span>. To be honest, I think the plan/ problem is <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(meaningful + USEFUL / serious)</span> and I felt <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(adj cảm xúc)</span> when I heard about it.</div>
+                
+                <div style="margin-bottom: 15px; padding: 15px; background: #f7fafc; border-radius: 6px;">
+                    <div style="color: #667eea; font-weight: 700; margin-bottom: 8px;">ĐỀ:</div>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Tích cực (khen):</strong> vui = delighted, happy = over the moon = on cloud nine = on top of the world = walking on air = in the cherry mood
+                    </div>
+                    <div>
+                        <strong>Tiêu cực (chê):</strong> buồn/thất vọng = disappointed = down in the dumps = in the black mood = blue
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 10px;">In my opinion, there are some appropriate steps to <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(tackle/ improve)</span> these <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(problems/ plans)</span>. We should + <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(ĐỀ XUẤT 1)</span>. Because <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(GIẢI THÍCH 1)</span>. Besides, we need to + <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(ĐỀ XUẤT 2)</span>. + <span style="background: #fff5f5; padding: 2px 6px; border-radius: 4px;">(GIẢI THÍCH 2)</span>.</div>
+                
+                <div style="margin-bottom: 10px;">I am looking forward to hearing from you if my recommendations are acceptable.</div>
+                
+                <div style="margin-top: 15px;"><strong>Best regards,</strong></div>
+                <div><strong>Ký đầy đủ họ tên</strong></div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+// Load Writing Part 1 by default when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('writing-content')) {
+        loadWritingPart(1);
+    }
+});
+
 // Force reload Tue Nov 18 11:53:57 +07 2025

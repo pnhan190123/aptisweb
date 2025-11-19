@@ -181,12 +181,14 @@
                     </div>
                 </div>
             </header>
-            <div class="question-section">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">✍️</div>
-                    <h2>Writing Practice</h2>
-                    <p>Tính năng đang được phát triển. Sẽ sớm có mặt!</p>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <button class="writing-part-btn active" data-part="1" onclick="loadWritingPart(1)">Part 1 - Expressing Likes</button>
+                    <button class="writing-part-btn" data-part="2" onclick="loadWritingPart(2)">Part 2 - Describing Interests</button>
+                    <button class="writing-part-btn" data-part="3" onclick="loadWritingPart(3)">Part 3 - Agreeing/Disagreeing</button>
+                    <button class="writing-part-btn" data-part="4" onclick="loadWritingPart(4)">Part 4 - Email Writing</button>
                 </div>
+                <div id="writing-content"></div>
             </div>
         </div>
     </div>
